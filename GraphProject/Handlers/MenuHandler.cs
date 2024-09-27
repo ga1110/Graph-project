@@ -229,7 +229,7 @@ namespace Handlers
         // Приватный метод для отображения списка смежности графа
         private void DisplayGraph()
         {
-            graphManager.DisplayAdjacencyList();
+            GraphPrinter.DisplayAdjacencyList(graph);
         }
 
         // Приватный метод для сохранения графа в файл
@@ -245,7 +245,7 @@ namespace Handlers
         {
             Console.Write("Введите название вершины для сравнения полустепени исхода: ");
             string vertexName = Console.ReadLine();
-            graphManager.DisplayVerticesWithGreaterOutDegree(vertexName);
+            GraphPrinter.DisplayVerticesWithGreaterOutDegree(vertexName, graphManager, graph);
         }
     }
 }

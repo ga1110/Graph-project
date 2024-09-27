@@ -144,130 +144,6 @@ namespace Handlers
                     Console.WriteLine($"Ребро от '{destination.Name}' к '{source.Name}' не найдено (неориентированный граф).");
             }
         }
-
-        // Метод для отображения списка смежности графа
-        public void DisplayAdjacencyList()
-        {
-            // Вывод заголовка списка смежности
-            Console.WriteLine("\nСписок смежности графа:");
-
-            // Проходим по каждому элементу списка смежности
-            foreach (var adjacencyElement in graph.adjacencyList)
-            {
-                // Получаем исходную вершину и список ее ребер
-                var sourceVertex = adjacencyElement.Key;
-                var connectedEdges = adjacencyElement.Value;
-
-                // Выводим имя исходной вершины и двоеточие
-                Console.Write($"{sourceVertex.Name}: ");
-
-                // Если у вершины нет исходящих ребер
-                if (connectedEdges.Count == 0)
-                {
-                    // Выводим сообщение об отсутствии ребер
-                    Console.WriteLine("нет рёбер.");
-                }
-                else
-                {
-                    // Создаем список строк для представления ребер
-                    List<string> edgeDescriptions = new List<string>();
-
-                    // Проходим по каждому ребру
-                    foreach (var edge in connectedEdges)
-                    {
-                        // Инициализируем строку с именем вершины назначения
-                        string edgeDescription = "(" + edge.Destination.Name;
-
-                        // Если у ребра задан вес
-                        if (edge.Weight.HasValue)
-                        {
-                            // Добавляем информацию о весе к строке
-                            edgeDescription += ", Вес: " + edge.Weight.Value;
-                        }
-
-                        // Закрываем скобку в строке
-                        edgeDescription += ")";
-
-                        // Добавляем строку в список описаний ребер
-                        edgeDescriptions.Add(edgeDescription);
-                    }
-
-                    // Выводим объединенные через пробел описания ребер
-                    Console.WriteLine(string.Join(" ", edgeDescriptions));
-                }
-            }
-
-            // Вывод пустой строки для разделения выводов
-            Console.WriteLine();
-        }
-        // Метод для вывода вершин, полустепень исхода которых больше, чем у заданной вершины
-        public void DisplayVerticesWithGreaterOutDegree(string vertexName)
-        {
-            // Получаем вершину по ее имени
-            Vertex givenVertex = GetVertexByName(vertexName);
-
-            // Проверяем, что вершина существует
-            if (givenVertex == null)
-            {
-                Console.WriteLine($"Вершина '{vertexName}' не найдена в графе.");
-                return;
-            }
-
-            // Получаем полустепень исхода заданной вершины
-            int givenVertexOutDegree = GetOutDegree(givenVertex);
-
-            // Список вершин с большей полустепенью исхода
-            List<Vertex> verticesWithGreaterOutDegree = new List<Vertex>();
-
-            // Проходим по всем вершинам в графе
-            foreach (var vertex in graph.adjacencyList.Keys)
-            {
-                // Пропускаем заданную вершину
-                if (vertex.Equals(givenVertex))
-                {
-                    continue;
-                }
-
-                // Получаем полустепень исхода текущей вершины
-                int currentVertexOutDegree = GetOutDegree(vertex);
-
-                // Если полустепень исхода больше, добавляем в список
-                if (currentVertexOutDegree > givenVertexOutDegree)
-                {
-                    verticesWithGreaterOutDegree.Add(vertex);
-                }
-            }
-
-            // Вывод результата
-            if (verticesWithGreaterOutDegree.Count > 0)
-            {
-                Console.WriteLine($"Вершины, полустепень исхода которых больше, чем у вершины '{vertexName}' (исходящая степень {givenVertexOutDegree}):");
-                foreach (var vertex in verticesWithGreaterOutDegree)
-                {
-                    int outDegree = GetOutDegree(vertex);
-                    Console.WriteLine($"- {vertex.Name} (исходящая степень {outDegree})");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"Нет вершин с полустепенью исхода, большей чем у вершины '{vertexName}' (исходящая степень {givenVertexOutDegree}).");
-            }
-        }
-
-        // Вспомогательный метод для получения полустепени исхода вершины
-        private int GetOutDegree(Vertex vertex)
-        {
-            // Проверяем, содержит ли граф данную вершину
-            if (graph.adjacencyList.ContainsKey(vertex))
-            {
-                // Возвращаем количество исходящих ребер
-                return graph.adjacencyList[vertex].Count;
-            }
-            else
-            {
-                return 0;
-            }
-        }
         // Метод для получения вершины по ее имени
         public Vertex GetVertexByName(string name)
         {
@@ -285,5 +161,7 @@ namespace Handlers
             // Если вершина не найдена, возвращаем null
             return null;
         }
+        
+
     }
 }
