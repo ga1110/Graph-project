@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphfilehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphfilehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\menuhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\menuhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphfilehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphfilehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\structures\\graph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\structures\\graph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\structures\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\structures\\vertex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\structures\\vertex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,42 +42,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "GraphManager.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphManager.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphManager.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphManager.cs",
               "RelativeToolTip": "GraphProject\\Handlers\\GraphManager.cs",
-              "ViewState": "AgIAAP4AAAAAAAAAAAAAAOIAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAIwNkAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T09:56:02.379Z"
+              "WhenOpened": "2024-09-27T09:56:02.379Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "GraphPrinter.cs",
+              "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphPrinter.cs",
+              "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphPrinter.cs",
+              "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphPrinter.cs",
+              "RelativeToolTip": "GraphProject\\Handlers\\GraphPrinter.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAowF0AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T10:56:32.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "GraphFileHandler.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphFileHandler.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphFileHandler.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphFileHandler.cs",
               "RelativeToolTip": "GraphProject\\Handlers\\GraphFileHandler.cs",
-              "ViewState": "AgIAAL0AAAAAAAAAAAAqwNIAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAgwNIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-26T10:56:17.746Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MenuHandler.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\MenuHandler.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\MenuHandler.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\MenuHandler.cs",
               "RelativeToolTip": "GraphProject\\Handlers\\MenuHandler.cs",
-              "ViewState": "AgIAANYAAAAAAAAAAAAAAPsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAOEAAAAAAAAAAAAkwPsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-26T10:56:49.18Z",
               "EditorCaption": ""
@@ -85,18 +99,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "GraphPrinter.cs",
-              "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphPrinter.cs",
-              "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphPrinter.cs",
-              "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphPrinter.cs",
-              "RelativeToolTip": "GraphProject\\Handlers\\GraphPrinter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T10:56:32.393Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "Vertex.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Structures\\Vertex.cs",
               "RelativeDocumentMoniker": "GraphProject\\Structures\\Vertex.cs",
@@ -108,7 +110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Edge.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Structures\\Edge.cs",
               "RelativeDocumentMoniker": "GraphProject\\Structures\\Edge.cs",
@@ -126,13 +128,14 @@
               "RelativeDocumentMoniker": "GraphProject\\Structures\\Graph.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Structures\\Graph.cs",
               "RelativeToolTip": "GraphProject\\Structures\\Graph.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAwwDoAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T10:56:27.019Z"
+              "WhenOpened": "2024-09-26T10:56:27.019Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Program.cs",
               "RelativeDocumentMoniker": "GraphProject\\Program.cs",

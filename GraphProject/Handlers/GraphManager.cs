@@ -145,72 +145,33 @@ namespace Handlers
             }
         }
 
-        // Метод для отображения списка смежности графа
-        public void DisplayAdjacencyList()
+        // Метод для получения вершины по ее имени
+        public Vertex GetVertexByName(string name)
         {
-            // Вывод заголовка списка смежности
-            Console.WriteLine("\nСписок смежности графа:");
+            // Приводим имя к нижнему регистру для поиска без учета регистра
+            string lowerName = name.ToLower();
 
-            // Проходим по каждому элементу списка смежности
-            foreach (var adjacencyElement in graph.adjacencyList)
+            // Проходим по всем вершинам в списке смежности
+            foreach (var vertex in graph.adjacencyList.Keys)
             {
-                // Получаем исходную вершину и список ее ребер
-                var sourceVertex = adjacencyElement.Key;
-                var connectedEdges = adjacencyElement.Value;
-
-                // Выводим имя исходной вершины и двоеточие
-                Console.Write($"{sourceVertex.Name}: ");
-
-                // Если у вершины нет исходящих ребер
-                if (connectedEdges.Count == 0)
-                {
-                    // Выводим сообщение об отсутствии ребер
-                    Console.WriteLine("нет рёбер.");
-                }
-                else
-                {
-                    // Создаем список строк для представления ребер
-                    List<string> edgeDescriptions = new List<string>();
-
-                    // Проходим по каждому ребру
-                    foreach (var edge in connectedEdges)
-                    {
-                        // Инициализируем строку с именем вершины назначения
-                        string edgeDescription = "(" + edge.Destination.Name;
-
-                        // Если у ребра задан вес
-                        if (edge.Weight.HasValue)
-                        {
-                            // Добавляем информацию о весе к строке
-                            edgeDescription += ", Вес: " + edge.Weight.Value;
-                        }
-
-                        // Закрываем скобку в строке
-                        edgeDescription += ")";
-
-                        // Добавляем строку в список описаний ребер
-                        edgeDescriptions.Add(edgeDescription);
-                    }
-
-                    // Выводим объединенные через пробел описания ребер
-                    Console.WriteLine(string.Join(" ", edgeDescriptions));
-                }
+                // Если имя вершины совпадает с заданным (без учета регистра)
+                if (vertex.Name.ToLower() == lowerName)
+                    return vertex; // Возвращаем найденную вершину
             }
 
-            // Вывод пустой строки для разделения выводов
-            Console.WriteLine();
+            // Если вершина не найдена, возвращаем null
+            return null;
         }
-        // Метод для вывода вершин, полустепень исхода которых больше, чем у заданной вершины
-        public void DisplayVerticesWithGreaterOutDegree(string vertexName)
+        public List<Vertex> FindVerticesWithGreaterOutDegree(string vertexName)
         {
+
             // Получаем вершину по ее имени
             Vertex givenVertex = GetVertexByName(vertexName);
 
             // Проверяем, что вершина существует
             if (givenVertex == null)
             {
-                Console.WriteLine($"Вершина '{vertexName}' не найдена в графе.");
-                return;
+                return null;
             }
 
             // Получаем полустепень исхода заданной вершины
@@ -238,24 +199,10 @@ namespace Handlers
                 }
             }
 
-            // Вывод результата
-            if (verticesWithGreaterOutDegree.Count > 0)
-            {
-                Console.WriteLine($"Вершины, полустепень исхода которых больше, чем у вершины '{vertexName}' (исходящая степень {givenVertexOutDegree}):");
-                foreach (var vertex in verticesWithGreaterOutDegree)
-                {
-                    int outDegree = GetOutDegree(vertex);
-                    Console.WriteLine($"- {vertex.Name} (исходящая степень {outDegree})");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"Нет вершин с полустепенью исхода, большей чем у вершины '{vertexName}' (исходящая степень {givenVertexOutDegree}).");
-            }
+            return verticesWithGreaterOutDegree;
         }
-
         // Вспомогательный метод для получения полустепени исхода вершины
-        private int GetOutDegree(Vertex vertex)
+        public int GetOutDegree(Vertex vertex)
         {
             // Проверяем, содержит ли граф данную вершину
             if (graph.adjacencyList.ContainsKey(vertex))
@@ -268,22 +215,84 @@ namespace Handlers
                 return 0;
             }
         }
-        // Метод для получения вершины по ее имени
-        public Vertex GetVertexByName(string name)
+        public List<Vertex> FindNonAdjacentVertices(string vertexName)
         {
-            // Приводим имя к нижнему регистру для поиска без учета регистра
-            string lowerName = name.ToLower();
+            // Получаем вершину по ее имени
+            Vertex givenVertex = GetVertexByName(vertexName);
 
-            // Проходим по всем вершинам в списке смежности
-            foreach (var vertex in graph.adjacencyList.Keys)
+            // Проверяем, что вершина существует
+            if (givenVertex == null)
             {
-                // Если имя вершины совпадает с заданным (без учета регистра)
-                if (vertex.Name.ToLower() == lowerName)
-                    return vertex; // Возвращаем найденную вершину
+                return null;
             }
 
-            // Если вершина не найдена, возвращаем null
-            return null;
+            // Список не смежных вершин
+            List<Vertex> nonAdjacentVertices = new List<Vertex>();
+
+            // Проходим по всем вершинам в графе
+            foreach (var vertex in graph.adjacencyList.Keys)
+            {
+                // Пропускаем заданную вершину
+                if (vertex.Equals(givenVertex))
+                {
+                    continue;
+                }
+
+                bool isAdjacent = false;
+
+                if (graph.IsDirected)
+                {
+                    // В ориентированном графе проверяем наличие исходящего ребра от заданной вершины к текущей
+                    List<Edge> edgesFromGiven = graph.adjacencyList[givenVertex];
+                    foreach (var edge in edgesFromGiven)
+                    {
+                        if (edge.Destination.Equals(vertex))
+                        {
+                            isAdjacent = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    // В неориентированном графе проверяем наличие ребра между заданной вершиной и текущей
+                    bool found = false;
+
+                    // Проверяем исходящие ребра от заданной вершины
+                    List<Edge> edgesFromGiven = graph.adjacencyList[givenVertex];
+                    foreach (var edge in edgesFromGiven)
+                    {
+                        if (edge.Destination.Equals(vertex))
+                        {
+                            isAdjacent = true;
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    // Если ребро не найдено от заданной вершины, проверяем исходящие ребра от текущей вершины
+                    if (!found)
+                    {
+                        List<Edge> edgesFromCurrent = graph.adjacencyList[vertex];
+                        foreach (var edge in edgesFromCurrent)
+                        {
+                            if (edge.Destination.Equals(givenVertex))
+                            {
+                                isAdjacent = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                // Если вершина не смежна, добавляем ее в список
+                if (!isAdjacent)
+                {
+                    nonAdjacentVertices.Add(vertex);
+                }
+            }
+            return nonAdjacentVertices;
         }
+
     }
 }
