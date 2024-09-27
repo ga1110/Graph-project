@@ -144,6 +144,7 @@ namespace Handlers
                     Console.WriteLine($"Ребро от '{destination.Name}' к '{source.Name}' не найдено (неориентированный граф).");
             }
         }
+
         // Метод для получения вершины по ее имени
         public Vertex GetVertexByName(string name)
         {
@@ -161,7 +162,137 @@ namespace Handlers
             // Если вершина не найдена, возвращаем null
             return null;
         }
-        
+        public List<Vertex> FindVerticesWithGreaterOutDegree(string vertexName)
+        {
+
+            // Получаем вершину по ее имени
+            Vertex givenVertex = GetVertexByName(vertexName);
+
+            // Проверяем, что вершина существует
+            if (givenVertex == null)
+            {
+                return null;
+            }
+
+            // Получаем полустепень исхода заданной вершины
+            int givenVertexOutDegree = GetOutDegree(givenVertex);
+
+            // Список вершин с большей полустепенью исхода
+            List<Vertex> verticesWithGreaterOutDegree = new List<Vertex>();
+
+            // Проходим по всем вершинам в графе
+            foreach (var vertex in graph.adjacencyList.Keys)
+            {
+                // Пропускаем заданную вершину
+                if (vertex.Equals(givenVertex))
+                {
+                    continue;
+                }
+
+                // Получаем полустепень исхода текущей вершины
+                int currentVertexOutDegree = GetOutDegree(vertex);
+
+                // Если полустепень исхода больше, добавляем в список
+                if (currentVertexOutDegree > givenVertexOutDegree)
+                {
+                    verticesWithGreaterOutDegree.Add(vertex);
+                }
+            }
+
+            return verticesWithGreaterOutDegree;
+        }
+        // Вспомогательный метод для получения полустепени исхода вершины
+        public int GetOutDegree(Vertex vertex)
+        {
+            // Проверяем, содержит ли граф данную вершину
+            if (graph.adjacencyList.ContainsKey(vertex))
+            {
+                // Возвращаем количество исходящих ребер
+                return graph.adjacencyList[vertex].Count;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public List<Vertex> FindNonAdjacentVertices(string vertexName)
+        {
+            // Получаем вершину по ее имени
+            Vertex givenVertex = GetVertexByName(vertexName);
+
+            // Проверяем, что вершина существует
+            if (givenVertex == null)
+            {
+                return null;
+            }
+
+            // Список не смежных вершин
+            List<Vertex> nonAdjacentVertices = new List<Vertex>();
+
+            // Проходим по всем вершинам в графе
+            foreach (var vertex in graph.adjacencyList.Keys)
+            {
+                // Пропускаем заданную вершину
+                if (vertex.Equals(givenVertex))
+                {
+                    continue;
+                }
+
+                bool isAdjacent = false;
+
+                if (graph.IsDirected)
+                {
+                    // В ориентированном графе проверяем наличие исходящего ребра от заданной вершины к текущей
+                    List<Edge> edgesFromGiven = graph.adjacencyList[givenVertex];
+                    foreach (var edge in edgesFromGiven)
+                    {
+                        if (edge.Destination.Equals(vertex))
+                        {
+                            isAdjacent = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    // В неориентированном графе проверяем наличие ребра между заданной вершиной и текущей
+                    bool found = false;
+
+                    // Проверяем исходящие ребра от заданной вершины
+                    List<Edge> edgesFromGiven = graph.adjacencyList[givenVertex];
+                    foreach (var edge in edgesFromGiven)
+                    {
+                        if (edge.Destination.Equals(vertex))
+                        {
+                            isAdjacent = true;
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    // Если ребро не найдено от заданной вершины, проверяем исходящие ребра от текущей вершины
+                    if (!found)
+                    {
+                        List<Edge> edgesFromCurrent = graph.adjacencyList[vertex];
+                        foreach (var edge in edgesFromCurrent)
+                        {
+                            if (edge.Destination.Equals(givenVertex))
+                            {
+                                isAdjacent = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                // Если вершина не смежна, добавляем ее в список
+                if (!isAdjacent)
+                {
+                    nonAdjacentVertices.Add(vertex);
+                }
+            }
+            return nonAdjacentVertices;
+        }
 
     }
 }
