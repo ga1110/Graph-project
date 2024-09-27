@@ -1,3 +1,12 @@
 Directed
-A B 2
-B
+A B 3
+A C 2
+B D 1
+C D 5
+D E 6
+E F 7
+F G 8
+G H 3
+H I 2
+I J 1
+J A 6
