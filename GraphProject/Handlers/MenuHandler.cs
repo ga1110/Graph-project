@@ -104,22 +104,15 @@ namespace Handlers
                 Console.Write("Введите имя файла для загрузки графа: ");
                 string loadFilename = Console.ReadLine();
 
-                if (File.Exists(loadFilename))
+                try
                 {
-                    try
-                    {
-                        Graph loadedGraph = GraphFileHandler.LoadFromFile(loadFilename);
-                        return loadedGraph;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Ошибка при загрузке графа: {ex.Message}");
-                        return null;
-                    }
+                    Graph loadedGraph = GraphFileHandler.LoadFromFile(loadFilename);
+                    return loadedGraph;
                 }
-                else
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Файл не найден. Попробуйте снова.");
+                    Console.WriteLine($"Ошибка при загрузке графа: {ex.Message}");
+                    return null;
                 }
             }
         }
@@ -153,6 +146,9 @@ namespace Handlers
                         SaveGraphToFile();
                         break;
                     case "7":
+                        DisplayVerticesWithGreaterOutDegree();
+                        break;
+                    case "8":
                         Console.WriteLine("Возвращение в главное меню.");
                         return;
                     default:
@@ -172,7 +168,8 @@ namespace Handlers
             Console.WriteLine("4. Удалить ребро");
             Console.WriteLine("5. Показать список смежности");
             Console.WriteLine("6. Сохранить граф в файл");
-            Console.WriteLine("7. Вернуться в главное меню");
+            Console.WriteLine("7. Вывести вершины с большей полустепенью исхода");
+            Console.WriteLine("8. Вернуться в главное меню");
             Console.Write("Выберите опцию: ");
         }
 
@@ -241,6 +238,14 @@ namespace Handlers
             Console.Write("Введите имя файла для сохранения графа: ");
             string saveFilename = Console.ReadLine();
             GraphFileHandler.SaveToFile(graph, saveFilename);
+        }
+
+        // Приватный метод для вывода вершин с большей полустепенью исхода
+        private void DisplayVerticesWithGreaterOutDegree()
+        {
+            Console.Write("Введите название вершины для сравнения полустепени исхода: ");
+            string vertexName = Console.ReadLine();
+            graphManager.DisplayVerticesWithGreaterOutDegree(vertexName);
         }
     }
 }

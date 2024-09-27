@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Study\\Теория графов\\GraphProject\\GraphProject\\GraphProject.csproj": {}
+    "F:\\Study\\Теория графов\\Graph-project\\GraphProject\\GraphProject.csproj": {}
   },
   "projects": {
-    "F:\\Study\\Теория графов\\GraphProject\\GraphProject\\GraphProject.csproj": {
+    "F:\\Study\\Теория графов\\Graph-project\\GraphProject\\GraphProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Study\\Теория графов\\GraphProject\\GraphProject\\GraphProject.csproj",
+        "projectUniqueName": "F:\\Study\\Теория графов\\Graph-project\\GraphProject\\GraphProject.csproj",
         "projectName": "GraphProject",
-        "projectPath": "F:\\Study\\Теория графов\\GraphProject\\GraphProject\\GraphProject.csproj",
+        "projectPath": "F:\\Study\\Теория графов\\Graph-project\\GraphProject\\GraphProject.csproj",
         "packagesPath": "C:\\Users\\Home\\.nuget\\packages\\",
-        "outputPath": "F:\\Study\\Теория графов\\GraphProject\\GraphProject\\obj\\",
+        "outputPath": "F:\\Study\\Теория графов\\Graph-project\\GraphProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Home\\AppData\\Roaming\\NuGet\\NuGet.Config",
