@@ -1,0 +1,3 @@
+Undirected
+A B 3 2
+B A 3 2
