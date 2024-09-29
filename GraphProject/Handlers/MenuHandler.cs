@@ -11,6 +11,28 @@ namespace Handlers
         // Приватное поле graphManager для управления графом
         private GraphManager graphManager;
 
+        // Приватное поле для выбора опций в главном меню
+        private enum MainMenuOption
+        {
+            CreateNewGraph,
+            LoadGraphFromFile,
+            Exit
+        }
+
+        // Приватное поле для выбора опций в меню управления графом
+        private enum GraphMenuOption
+        {
+            AddVertex,
+            AddEdge,
+            RemoveVertex,
+            RemoveEdge,
+            DisplayGraph,
+            SaveGraphToFile,
+            DisplayVerticesWithGreaterOutDegree,
+            DisplayNonAdjacentVertices,
+            RemoveLeafsEdges,
+            Exit
+        }
         // Метод Start, запускающий основной цикл программы
         public void Start()
         {
@@ -21,31 +43,32 @@ namespace Handlers
                 // Считывание выбора пользователя из консоли
                 string userChoice = Console.ReadLine();
 
-                // Обработка выбора пользователя с помощью конструкции switch
-                switch (userChoice)
+                if (int.TryParse(userChoice, out int option))
                 {
-                    case "1":
-                        // Создание нового графа
-                        graph = CreateNewGraph();
-                        // Инициализация GraphManager с новым графом
-                        graphManager = new GraphManager(graph);
-                        break;
-                    case "2":
-                        // Загрузка графа из файла
-                        graph = LoadGraphFromFile();
-                        // Инициализация GraphManager с загруженным графом
-                        if (graph != null)
+                    // Обработка выбора пользователя с помощью конструкции switch
+                    switch ((MainMenuOption)option)
+                    {
+                        case MainMenuOption.CreateNewGraph:
+                            // Создание нового графа
+                            graph = CreateNewGraph();
+                            // Инициализация GraphManager с новым графом
                             graphManager = new GraphManager(graph);
-                        break;
-                    case "3":
-                        // Завершение программы
-                        return;
-                    default:
-                        // Вывод сообщения об ошибке при неверном вводе
-                        Console.WriteLine("Неверная опция. Попробуйте снова.");
-                        break;
+                            break;
+                        case MainMenuOption.LoadGraphFromFile:
+                            // Загрузка графа из файла
+                            graph = LoadGraphFromFile();
+                            // Инициализация GraphManager с загруженным графом
+                            if (graph != null)
+                                graphManager = new GraphManager(graph);
+                            break;
+                        case MainMenuOption.Exit:
+                            // Завершение программы
+                            return;
+                        default:
+                            Console.WriteLine("Неверная опция. Попробуйте снова.");
+                            break;
+                    }
                 }
-
                 // Если граф успешно создан или загружен
                 if (graph != null && graphManager != null)
                 {
@@ -62,9 +85,9 @@ namespace Handlers
         private void ShowMainMenu()
         {
             Console.WriteLine("Главное меню:");
-            Console.WriteLine("1. Создать новый граф");
-            Console.WriteLine("2. Загрузить граф из файла");
-            Console.WriteLine("3. Выход");
+            Console.WriteLine("0. Создать новый граф");
+            Console.WriteLine("1. Загрузить граф из файла");
+            Console.WriteLine("2. Выход");
             Console.Write("Выберите опцию: ");
         }
 
@@ -120,43 +143,45 @@ namespace Handlers
             while (true)
             {
                 ShowGraphManagementMenu();
-                string choice = Console.ReadLine();
-
-                switch (choice)
+                string userChoice = Console.ReadLine();
+                if (int.TryParse(userChoice, out int option))
                 {
-                    case "1":
-                        AddVertex();
-                        break;
-                    case "2":
-                        AddEdge();
-                        break;
-                    case "3":
-                        RemoveVertex();
-                        break;
-                    case "4":
-                        RemoveEdge();
-                        break;
-                    case "5":
-                        DisplayGraph();
-                        break;
-                    case "6":
-                        SaveGraphToFile();
-                        break;
-                    case "7":
-                        DisplayVerticesWithGreaterOutDegree();
-                        break;
-                    case "8":
-                        DisplayNonAdjacentVertices();
-                        break;
-                    case "9":
-                        RemoveLeafsEdges();
-                        break;
-                    case "10":
-                        Console.WriteLine("Возвращение в главное меню.");
-                        return;
-                    default:
-                        Console.WriteLine("Неверная опция. Попробуйте снова.");
-                        break;
+                    switch ((GraphMenuOption)option)
+                    {
+                        case GraphMenuOption.AddVertex:
+                            AddVertex();
+                            break;
+                        case GraphMenuOption.AddEdge:
+                            AddEdge();
+                            break;
+                        case GraphMenuOption.RemoveVertex:
+                            RemoveVertex();
+                            break;
+                        case GraphMenuOption.RemoveEdge:
+                            RemoveEdge();
+                            break;
+                        case GraphMenuOption.DisplayGraph:
+                            DisplayGraph();
+                            break;
+                        case GraphMenuOption.SaveGraphToFile:
+                            SaveGraphToFile();
+                            break;
+                        case GraphMenuOption.DisplayVerticesWithGreaterOutDegree:
+                            DisplayVerticesWithGreaterOutDegree();
+                            break;
+                        case GraphMenuOption.DisplayNonAdjacentVertices:
+                            DisplayNonAdjacentVertices();
+                            break;
+                        case GraphMenuOption.RemoveLeafsEdges:
+                            RemoveLeafsEdges();
+                            break;
+                        case GraphMenuOption.Exit:
+                            Console.WriteLine("Возвращение в главное меню.");
+                            return;
+                        default:
+                            Console.WriteLine("Неверная опция. Попробуйте снова.");
+                            break;
+                    }
                 }
             }
         }
@@ -165,16 +190,16 @@ namespace Handlers
         private void ShowGraphManagementMenu()
         {
             Console.WriteLine("\nМеню управления графом:");
-            Console.WriteLine("1. Добавить вершину");
-            Console.WriteLine("2. Добавить ребро");
-            Console.WriteLine("3. Удалить вершину");
-            Console.WriteLine("4. Удалить ребро");
-            Console.WriteLine("5. Показать список смежности");
-            Console.WriteLine("6. Сохранить граф в файл");
-            Console.WriteLine("7. Вывести вершины с большей полустепенью исхода");
-            Console.WriteLine("8. Вывести вершины с несмежные с данной");
-            Console.WriteLine("9. Удалить ребра ведущие к листьям");
-            Console.WriteLine("10. Вернуться в главное меню");
+            Console.WriteLine("0. Добавить вершину");
+            Console.WriteLine("1. Добавить ребро");
+            Console.WriteLine("2. Удалить вершину");
+            Console.WriteLine("3. Удалить ребро");
+            Console.WriteLine("4. Показать список смежности");
+            Console.WriteLine("5. Сохранить граф в файл");
+            Console.WriteLine("6. Вывести вершины с большей полустепенью исхода");
+            Console.WriteLine("7. Вывести вершины с несмежные с данной");
+            Console.WriteLine("8. Удалить ребра ведущие к листьям");
+            Console.WriteLine("9. Вернуться в главное меню");
             Console.Write("Выберите опцию: ");
         }
 
