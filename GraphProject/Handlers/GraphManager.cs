@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Structures;
+﻿using Structures;
 
 namespace Handlers
 {
@@ -47,8 +45,8 @@ namespace Handlers
         public void AddEdge(string sourceName, string destinationName, double? weight = null)
         {
             // Получаем объекты вершин по их именам
-            var source = GetVertexByName(sourceName);
-            var destination = GetVertexByName(destinationName);
+            var source = GraphSearcher.FindVertexByName(sourceName, graph);
+            var destination = GraphSearcher.FindVertexByName(destinationName, graph);
 
             // Проверяем, существует ли исходная вершина
             if (source == null)
@@ -82,7 +80,7 @@ namespace Handlers
         public void RemoveVertex(string vertexName)
         {
             // Получаем объект вершины по имени
-            var vertex = GetVertexByName(vertexName);
+            var vertex = GraphSearcher.FindVertexByName(vertexName, graph);
 
             // Проверяем, существует ли такая вершина
             if (vertex == null)
@@ -108,8 +106,8 @@ namespace Handlers
         public void RemoveEdge(string sourceName, string destinationName)
         {
             // Получаем объекты вершин по их именам
-            var source = GetVertexByName(sourceName);
-            var destination = GetVertexByName(destinationName);
+            var source = GraphSearcher.FindVertexByName(sourceName, graph);
+            var destination = GraphSearcher.FindVertexByName(destinationName, graph);
 
             // Проверяем, существует ли исходная вершина
             if (source == null)
@@ -145,154 +143,27 @@ namespace Handlers
             }
         }
 
-        // Метод для получения вершины по ее имени
-        public Vertex GetVertexByName(string name)
+        // Метод для удаления ребра из графа
+        public void RemoveEdge(Vertex source, Vertex destination)
         {
-            // Приводим имя к нижнему регистру для поиска без учета регистра
-            string lowerName = name.ToLower();
+            // Удаляем ребра из списка исходной вершины, ведущие к конечной вершине
+            bool removed = graph.adjacencyList[source].RemoveAll(e => e.Destination.Equals(destination)) > 0;
 
-            // Проходим по всем вершинам в списке смежности
-            foreach (var vertex in graph.adjacencyList.Keys)
-            {
-                // Если имя вершины совпадает с заданным (без учета регистра)
-                if (vertex.Name.ToLower() == lowerName)
-                    return vertex; // Возвращаем найденную вершину
-            }
-
-            // Если вершина не найдена, возвращаем null
-            return null;
-        }
-        public List<Vertex> FindVerticesWithGreaterOutDegree(string vertexName)
-        {
-
-            // Получаем вершину по ее имени
-            Vertex givenVertex = GetVertexByName(vertexName);
-
-            // Проверяем, что вершина существует
-            if (givenVertex == null)
-            {
-                return null;
-            }
-
-            // Получаем полустепень исхода заданной вершины
-            int givenVertexOutDegree = GetOutDegree(givenVertex);
-
-            // Список вершин с большей полустепенью исхода
-            List<Vertex> verticesWithGreaterOutDegree = new List<Vertex>();
-
-            // Проходим по всем вершинам в графе
-            foreach (var vertex in graph.adjacencyList.Keys)
-            {
-                // Пропускаем заданную вершину
-                if (vertex.Equals(givenVertex))
-                {
-                    continue;
-                }
-
-                // Получаем полустепень исхода текущей вершины
-                int currentVertexOutDegree = GetOutDegree(vertex);
-
-                // Если полустепень исхода больше, добавляем в список
-                if (currentVertexOutDegree > givenVertexOutDegree)
-                {
-                    verticesWithGreaterOutDegree.Add(vertex);
-                }
-            }
-
-            return verticesWithGreaterOutDegree;
-        }
-        // Вспомогательный метод для получения полустепени исхода вершины
-        public int GetOutDegree(Vertex vertex)
-        {
-            // Проверяем, содержит ли граф данную вершину
-            if (graph.adjacencyList.ContainsKey(vertex))
-            {
-                // Возвращаем количество исходящих ребер
-                return graph.adjacencyList[vertex].Count;
-            }
+            // Выводим сообщение об успешном удалении или отсутствии ребра
+            if (removed)
+                Console.WriteLine($"Ребро от '{source.Name}' к '{destination.Name}' удалено.");
             else
+                Console.WriteLine($"Ребро от '{source.Name}' к '{destination.Name}' не найдено.");
+
+            // Если граф неориентированный, удаляем обратное ребро
+            if (!graph.IsDirected)
             {
-                return 0;
-            }
-        }
-        public List<Vertex> FindNonAdjacentVertices(string vertexName)
-        {
-            // Получаем вершину по ее имени
-            Vertex givenVertex = GetVertexByName(vertexName);
-
-            // Проверяем, что вершина существует
-            if (givenVertex == null)
-            {
-                return null;
-            }
-
-            // Список не смежных вершин
-            List<Vertex> nonAdjacentVertices = new List<Vertex>();
-
-            // Проходим по всем вершинам в графе
-            foreach (var vertex in graph.adjacencyList.Keys)
-            {
-                // Пропускаем заданную вершину
-                if (vertex.Equals(givenVertex))
-                {
-                    continue;
-                }
-
-                bool isAdjacent = false;
-
-                if (graph.IsDirected)
-                {
-                    // В ориентированном графе проверяем наличие исходящего ребра от заданной вершины к текущей
-                    List<Edge> edgesFromGiven = graph.adjacencyList[givenVertex];
-                    foreach (var edge in edgesFromGiven)
-                    {
-                        if (edge.Destination.Equals(vertex))
-                        {
-                            isAdjacent = true;
-                            break;
-                        }
-                    }
-                }
+                bool removedReverse = graph.adjacencyList[destination].RemoveAll(e => e.Destination.Equals(source)) > 0;
+                if (removedReverse)
+                    Console.WriteLine($"Ребро от '{destination.Name}' к '{source.Name}' удалено (неориентированный граф).");
                 else
-                {
-                    // В неориентированном графе проверяем наличие ребра между заданной вершиной и текущей
-                    bool found = false;
-
-                    // Проверяем исходящие ребра от заданной вершины
-                    List<Edge> edgesFromGiven = graph.adjacencyList[givenVertex];
-                    foreach (var edge in edgesFromGiven)
-                    {
-                        if (edge.Destination.Equals(vertex))
-                        {
-                            isAdjacent = true;
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    // Если ребро не найдено от заданной вершины, проверяем исходящие ребра от текущей вершины
-                    if (!found)
-                    {
-                        List<Edge> edgesFromCurrent = graph.adjacencyList[vertex];
-                        foreach (var edge in edgesFromCurrent)
-                        {
-                            if (edge.Destination.Equals(givenVertex))
-                            {
-                                isAdjacent = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                // Если вершина не смежна, добавляем ее в список
-                if (!isAdjacent)
-                {
-                    nonAdjacentVertices.Add(vertex);
-                }
+                    Console.WriteLine($"Ребро от '{destination.Name}' к '{source.Name}' не найдено (неориентированный граф).");
             }
-            return nonAdjacentVertices;
         }
-
     }
 }

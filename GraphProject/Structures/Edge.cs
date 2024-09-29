@@ -1,4 +1,6 @@
-﻿namespace Structures
+﻿using System.Xml.Linq;
+
+namespace Structures
 {
     public class Edge
     {
@@ -26,5 +28,6 @@
             // Возвращаем итоговую строку, представляющую ребро
             return result;
         }
+
     }
 }

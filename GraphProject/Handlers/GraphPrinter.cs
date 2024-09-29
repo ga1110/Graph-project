@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Structures;
+﻿using Structures;
 
 namespace Handlers
 {
@@ -11,12 +9,12 @@ namespace Handlers
             Console.WriteLine("\nСписок смежности графа:");
 
             // Проходим по каждому элементу списка смежности графа
-            foreach (var adjacencyListElement in graph.adjacencyList)
+            foreach (var vertex in graph.adjacencyList)
             {
                 // Получаем имя вершины
-                string vertexName = adjacencyListElement.Key.Name;
+                string vertexName = vertex.Key.Name;
                 // Получаем список ребер, исходящих из данной вершины
-                var edges = adjacencyListElement.Value;
+                var edges = vertex.Value;
 
                 // Выводим имя вершины
                 Console.Write($"{vertexName}: ");
@@ -59,22 +57,23 @@ namespace Handlers
             // Вывод пустой строки для разделения выводов
             Console.WriteLine();
         }
-        public static void DisplayVerticesWithGreaterOutDegree(string vertexName, GraphManager graphManager)
+        public static void DisplayVerticesWithGreaterOutDegree(string vertexName, Graph graph)
         {
 
-            List<Vertex> verticesWithGreaterOutDegree = graphManager.FindVerticesWithGreaterOutDegree(vertexName);
+            List<Vertex> verticesWithGreaterOutDegree = GraphSearcher.FindVerticesWithGreaterOutDegree(vertexName, graph);
             if (verticesWithGreaterOutDegree == null)
             {
                 Console.WriteLine($"Вершина '{vertexName}' не найдена в графе.");
                 return;
             }
-            int givenVertexOutDegree = graphManager.GetOutDegree(graphManager.GetVertexByName(vertexName));
+            Vertex currVertex = GraphSearcher.FindVertexByName(vertexName, graph);
+            int givenVertexOutDegree = VertexAnalyzer.GetOutDegree(currVertex, graph);
             if (verticesWithGreaterOutDegree.Count > 0)
             {
                 Console.WriteLine($"Вершины, полустепень исхода которых больше, чем у вершины '{vertexName}' (исходящая степень {givenVertexOutDegree}):");
                 foreach (var vertex in verticesWithGreaterOutDegree)
                 {
-                    int outDegree = graphManager.GetOutDegree(vertex);
+                    int outDegree = VertexAnalyzer.GetOutDegree(vertex, graph);
                     Console.WriteLine($"- {vertex.Name} (исходящая степень {outDegree})");
                 }
             }
@@ -83,9 +82,9 @@ namespace Handlers
                 Console.WriteLine($"Нет вершин с полустепенью исхода, большей чем у вершины '{vertexName}' (исходящая степень {givenVertexOutDegree}).");
             }
         }
-        public static void DisplayNonAdjacentVertices(string vertexName, GraphManager graphManager)
+        public static void DisplayNonAdjacentVertices(string vertexName, Graph graph)
         {
-            List<Vertex> nonAdjacentVertices = graphManager.FindNonAdjacentVertices(vertexName);
+            List<Vertex> nonAdjacentVertices = GraphSearcher.FindNonAdjacentVertices(vertexName, graph);
             if (nonAdjacentVertices == null)
             {
                 Console.WriteLine($"Вершина '{vertexName}' не найдена в графе.");

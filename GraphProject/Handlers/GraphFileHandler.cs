@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Structures;
+﻿using Structures;
 
 namespace Handlers
 {
@@ -69,7 +66,7 @@ namespace Handlers
                     string sourceVertexName = lineElems[0];
 
                     // Ищем вершину по имени или создаём новую, если она не найдена
-                    Vertex sourceVertex = graphManager.GetVertexByName(sourceVertexName);
+                    Vertex sourceVertex = GraphSearcher.FindVertexByName(sourceVertexName, graph);
 
                     if (sourceVertex == null)
                     {
@@ -82,7 +79,7 @@ namespace Handlers
                     {
                         // Получаем имя конечной вершины
                         string destinationVertexName = lineElems[1];
-                        Vertex destinationVertex = graphManager.GetVertexByName(destinationVertexName);
+                        Vertex destinationVertex = GraphSearcher.FindVertexByName(destinationVertexName, graph);
 
                         // Если конечная вершина не найдена, создаём и добавляем её
                         if (destinationVertex == null)

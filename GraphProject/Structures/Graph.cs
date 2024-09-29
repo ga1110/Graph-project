@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Structures
+﻿namespace Structures
 {
     // Публичный класс Graph, представляющий граф
     public class Graph

@@ -1,5 +1,4 @@
-﻿using System;
-namespace Structures
+﻿namespace Structures
 {
     //Класс, представляющий вершину графа
     public class Vertex
@@ -27,15 +26,13 @@ namespace Structures
             }
             return false;
         }
-
-        public override int GetHashCode()
-        {
-            return Name.ToLower().GetHashCode();
-        }
-
         public override string ToString()
         {
             return Name;
+        }
+        public override int GetHashCode()
+        {
+            return Name.ToLower().GetHashCode();
         }
     }
 }

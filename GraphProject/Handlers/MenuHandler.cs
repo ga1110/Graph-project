@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using Structures;
-using Handlers;
+﻿using Structures;
 
 namespace Handlers
 {
@@ -149,6 +146,12 @@ namespace Handlers
                         DisplayVerticesWithGreaterOutDegree();
                         break;
                     case "8":
+                        DisplayNonAdjacentVertices();
+                        break;
+                    case "9":
+                        RemoveLeafsEdges();
+                        break;
+                    case "10":
                         Console.WriteLine("Возвращение в главное меню.");
                         return;
                     default:
@@ -169,7 +172,9 @@ namespace Handlers
             Console.WriteLine("5. Показать список смежности");
             Console.WriteLine("6. Сохранить граф в файл");
             Console.WriteLine("7. Вывести вершины с большей полустепенью исхода");
-            Console.WriteLine("8. Вернуться в главное меню");
+            Console.WriteLine("8. Вывести вершины с несмежные с данной");
+            Console.WriteLine("9. Удалить ребра ведущие к листьям");
+            Console.WriteLine("10. Вернуться в главное меню");
             Console.Write("Выберите опцию: ");
         }
 
@@ -245,7 +250,25 @@ namespace Handlers
         {
             Console.Write("Введите название вершины для сравнения полустепени исхода: ");
             string vertexName = Console.ReadLine();
-            GraphPrinter.DisplayVerticesWithGreaterOutDegree(vertexName, graphManager, graph);
+            GraphPrinter.DisplayVerticesWithGreaterOutDegree(vertexName, graph);
+        }
+
+        // Приватный метод для вывода вершин с большей полустепенью исхода
+        private void DisplayNonAdjacentVertices()
+        {
+            Console.Write("Введите название вершины для поиска несмежных вершин: ");
+            string vertexName = Console.ReadLine();
+            GraphPrinter.DisplayNonAdjacentVertices(vertexName, graph);
+        }
+
+        // Приватный метод для удаления ребер ведущих к листьям 
+        private void RemoveLeafsEdges()
+        {
+            var tmpList = GraphSearcher.FindLeafsEdges(graph);
+            foreach (var pair in tmpList)
+            {
+                graphManager.RemoveEdge(pair.Item1, pair.Item2);
+            }
         }
     }
 }
