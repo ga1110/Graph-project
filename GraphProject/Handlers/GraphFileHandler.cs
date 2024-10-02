@@ -5,115 +5,6 @@ namespace Handlers
     // Класс-обработчик для работы с файлами графов (загрузка и сохранение)
     public static class GraphFileHandler
     {
-        // Метод для загрузки графа из файла
-        public static Graph LoadFromFile(string filename)
-        {
-            // Проверяем и добавляем расширение .txt, если его нет
-            if (!filename.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
-            {
-                filename += ".txt";
-            }
-
-            // Получаем путь к папке проекта
-            string projectDirectory = GetProjectDirectory();
-
-            // Создаем полный путь к файлу внутри папки SavedGraphs
-            string filePath = Path.Combine(projectDirectory, "SavedGraphs", filename);
-
-            // Проверяем, существует ли указанный файл
-            if (!File.Exists(filePath))
-            {
-                throw new FileNotFoundException($"Файл '{filePath}' не найден.");
-            }
-
-            Graph graph;
-            GraphManager graphManager;
-
-            // Открываем файл для чтения
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                // Читаем первую строку файла (тип графа: ориентированный или неориентированный)
-                string firstLine = reader.ReadLine();
-
-                // Если файл пустой, вызываем исключение
-                if (firstLine == null)
-                {
-                    throw new InvalidDataException("Файл пуст.");
-                }
-
-                // Проверяем, является ли граф ориентированным, и создаём объект Graph 
-                bool isDirected = firstLine.Trim().ToLower() == "directed";
-                graph = new Graph(isDirected);
-
-                // Инициализируем GraphManager с созданным графом
-                graphManager = new GraphManager(graph);
-
-                string currentLine;
-
-                // Читаем файл построчно до конца
-                while ((currentLine = reader.ReadLine()) != null)
-                {
-                    // Разбиваем строку на имена вершин и опционально вес 
-                    var lineElems = currentLine.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-                    // Пропускаем пустые строки
-                    if (lineElems.Length == 0)
-                    {
-                        continue;
-                    }
-
-                    // Получаем имя исходной вершины
-                    string sourceVertexName = lineElems[0];
-
-                    // Ищем вершину по имени или создаём новую, если она не найдена
-                    Vertex sourceVertex = GraphSearcher.FindVertexByName(sourceVertexName, graph);
-
-                    if (sourceVertex == null)
-                    {
-                        sourceVertex = new Vertex(sourceVertexName);
-                        graphManager.AddVertex(sourceVertex);
-                    }
-
-                    // Если в строке указана вторая вершина (ребро)
-                    if (lineElems.Length > 1)
-                    {
-                        // Получаем имя конечной вершины
-                        string destinationVertexName = lineElems[1];
-                        Vertex destinationVertex = GraphSearcher.FindVertexByName(destinationVertexName, graph);
-
-                        // Если конечная вершина не найдена, создаём и добавляем её
-                        if (destinationVertex == null)
-                        {
-                            destinationVertex = new Vertex(destinationVertexName);
-                            graphManager.AddVertex(destinationVertex);
-                        }
-
-                        // Вес ребра (опциональный параметр)
-                        double? weight = null;
-
-                        // Если в строке указан вес
-                        if (lineElems.Length > 2)
-                        {
-                            // Пытаемся распарсить третий элемент как вес ребра
-                            if (double.TryParse(lineElems[2], out double parsedWeight))
-                            {
-                                weight = parsedWeight;
-                            }
-                        }
-
-                        // Добавляем ребро в граф с указанными параметрами через GraphManager
-                        graphManager.AddEdge(sourceVertexName, destinationVertexName, weight);
-                    }
-                }
-            }
-
-            // Выводим сообщение об успешной загрузке графа
-            Console.WriteLine($"Граф успешно загружен из файла '{filePath}'. Тип графа: {(graph.IsDirected ? "Ориентированный" : "Неориентированный")}.");
-
-            // Возвращаем загруженный граф
-            return graph;
-        }
-
         // Метод для сохранения графа в файл
         public static void SaveToFile(Graph graph, string filename)
         {
@@ -203,6 +94,28 @@ namespace Handlers
             }
 
             return directory.FullName;
+        }
+
+        public static string CreateFilePath(string fileName)
+        {
+            // Проверяем и добавляем расширение .txt, если его нет
+            if (!fileName.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
+            {
+                fileName += ".txt";
+            }
+
+            string projectDirectory = GraphFileHandler.GetProjectDirectory();
+
+            // Создаем полный путь к файлу внутри папки SavedGraphs
+            string filePath = Path.Combine(projectDirectory, "SavedGraphs", fileName);
+
+            // Проверяем, существует ли указанный файл
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException($"Файл '{filePath}' не найден.");
+            }
+
+            return filePath;
         }
     }
 }

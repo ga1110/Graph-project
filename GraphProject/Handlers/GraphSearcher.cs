@@ -179,15 +179,16 @@ namespace Handlers
         {
             // Приводим имя к нижнему регистру для поиска без учета регистра
             string lowerName = name.ToLower();
-
-            // Проходим по всем вершинам в списке смежности
-            foreach (var vertex in graph.adjacencyList.Keys)
+            if (graph.adjacencyList != null)
             {
-                // Если имя вершины совпадает с заданным (без учета регистра)
-                if (vertex.Name.ToLower() == lowerName)
-                    return vertex; // Возвращаем найденную вершину
+                // Проходим по всем вершинам в списке смежности
+                foreach (var vertex in graph.adjacencyList.Keys)
+                {
+                    // Если имя вершины совпадает с заданным (без учета регистра)
+                    if (vertex.Name.ToLower() == lowerName)
+                        return vertex; // Возвращаем найденную вершину
+                }
             }
-
             // Если вершина не найдена, возвращаем null
             return null;
         }

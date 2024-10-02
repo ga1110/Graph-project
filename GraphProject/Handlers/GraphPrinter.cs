@@ -104,5 +104,17 @@ namespace Handlers
                 Console.WriteLine($"Все вершины смежны с вершиной '{vertexName}'.");
             }
         }
+        public static void DisplayGraphList(GraphVoult graphVoult)
+        {
+            Console.WriteLine("\nСписок графов:");
+            var currentGraphVoult = graphVoult.GetGrahpsList();
+            var index = 1;
+            foreach (var graphInList in currentGraphVoult)
+            {
+                Console.WriteLine($"{index}. {graphInList.GraphName}");
+                index++;
+            }
+            Console.WriteLine();
+        }
     }
 }

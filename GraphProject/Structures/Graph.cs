@@ -1,4 +1,7 @@
-﻿namespace Structures
+﻿using Handlers;
+using Structures;
+
+namespace Structures
 {
     // Публичный класс Graph, представляющий граф
     public class Graph
@@ -6,19 +9,107 @@
         // Внутреннее поле adjacencyList, хранящее список смежности графа
         internal Dictionary<Vertex, List<Edge>> adjacencyList;
 
+        public string GraphName { get; set; }
+
         // Публичное свойство IsDirected, определяющее, является ли граф ориентированным
         public bool IsDirected { get; private set; }
 
         // Инициализирует новый пустой граф с указанным направлением (ориентированный или неориентированный)
-        public Graph(bool isDirected = false)
+        public Graph(string name, bool isDirected = false)
         {
+            GraphName = string.IsNullOrEmpty(name) ? "Nameless Graph" : name;
             IsDirected = isDirected;
             adjacencyList = new Dictionary<Vertex, List<Edge>>();
         }
 
-        // Конструктор копирования, принимающий другой объект Graph
+        // Конструктор графа из файла
+        public Graph(string filePath, string name)
+        {
+            GraphName = string.IsNullOrEmpty(name) ? "Nameless Graph" : name;
+            GraphManager graphManager = new GraphManager(this);
+            adjacencyList = new Dictionary<Vertex, List<Edge>>();
+            // Открываем файл для чтения
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                // Читаем первую строку файла (тип графа: ориентированный или неориентированный)
+                string firstLine = reader.ReadLine();
+
+                // Если файл пустой, вызываем исключение
+                if (firstLine == null)
+                {
+                    throw new InvalidDataException("Файл пуст.");
+                }
+
+                // Проверяем, является ли граф ориентированным
+                IsDirected = firstLine.Trim().ToLower() == "directed";
+
+                string currentLine;
+
+                // Читаем файл построчно до конца
+                while ((currentLine = reader.ReadLine()) != null)
+                {
+                    // Разбиваем строку на имена вершин и опционально вес
+                    var lineElems = currentLine.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                    // Пропускаем пустые строки
+                    if (lineElems.Length == 0)
+                    {
+                        continue;
+                    }
+
+                    // Получаем имя исходной вершины
+                    string sourceVertexName = lineElems[0];
+                    
+                    // Ищем вершину по имени или создаём новую, если она не найдена
+                    Vertex sourceVertex = GraphSearcher.FindVertexByName(sourceVertexName, this);
+                    
+                    if (sourceVertex == null)
+                    {
+                        sourceVertex = new Vertex(sourceVertexName);
+                        graphManager.AddVertex(sourceVertex);
+                    }
+
+                    // Если в строке указана вторая вершина (ребро)
+                    if (lineElems.Length > 1)
+                    {
+                        // Получаем имя конечной вершины
+                        string destinationVertexName = lineElems[1];
+                        Vertex destinationVertex = GraphSearcher.FindVertexByName(destinationVertexName, this);
+
+                        // Если конечная вершина не найдена, создаём и добавляем её
+                        if (destinationVertex == null)
+                        {
+                            destinationVertex = new Vertex(destinationVertexName);
+                            graphManager.AddVertex(destinationVertex);
+                        }
+
+                        // Вес ребра (опциональный параметр)
+                        double? weight = null;
+
+                        // Если в строке указан вес
+                        if (lineElems.Length > 2)
+                        {
+                            // Пытаемся распарсить третий элемент как вес ребра
+                            if (double.TryParse(lineElems[2], out double parsedWeight))
+                            {
+                                weight = parsedWeight;
+                            }
+                        }
+
+                        // Добавляем ребро в граф с указанными параметрами через GraphManager
+                        graphManager.AddEdge(sourceVertexName, destinationVertexName, weight);
+                    }
+                }
+            }
+
+            // Выводим сообщение об успешной загрузке графа
+            Console.WriteLine($"Граф успешно загружен из файла '{filePath}'. Тип графа: {(IsDirected ? "Ориентированный" : "Неориентированный")}.");
+        }
+
+        // Конструктор копирования
         public Graph(Graph other)
         {
+            GraphName = other.GraphName + "_copy";
             // Проверяем, что переданный граф не равен null
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
@@ -52,5 +143,6 @@
                 }
             }
         }
+
     }
 }
