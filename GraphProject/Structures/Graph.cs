@@ -26,7 +26,6 @@ namespace Structures
         public Graph(string filePath, string name)
         {
             GraphName = string.IsNullOrEmpty(name) ? "Nameless Graph" : name;
-            GraphManager graphManager = new GraphManager(this);
             adjacencyList = new Dictionary<Vertex, List<Edge>>();
             // Открываем файл для чтения
             using (StreamReader reader = new StreamReader(filePath))
@@ -66,7 +65,7 @@ namespace Structures
                     if (sourceVertex == null)
                     {
                         sourceVertex = new Vertex(sourceVertexName);
-                        graphManager.AddVertex(sourceVertex);
+                        GraphManager.AddVertex(sourceVertex, this);
                     }
 
                     // Если в строке указана вторая вершина (ребро)
@@ -80,7 +79,7 @@ namespace Structures
                         if (destinationVertex == null)
                         {
                             destinationVertex = new Vertex(destinationVertexName);
-                            graphManager.AddVertex(destinationVertex);
+                            GraphManager.AddVertex(destinationVertex, this);
                         }
 
                         // Вес ребра (опциональный параметр)
@@ -97,7 +96,7 @@ namespace Structures
                         }
 
                         // Добавляем ребро в граф с указанными параметрами через GraphManager
-                        graphManager.AddEdge(sourceVertexName, destinationVertexName, weight);
+                        GraphManager.AddEdge(sourceVertexName, destinationVertexName, this, weight);
                     }
                 }
             }

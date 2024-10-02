@@ -3,20 +3,10 @@
 namespace Handlers
 {
     // Публичный класс GraphManager для управления графом
-    public class GraphManager
+    public static class GraphManager
     {
-        // Приватное поле graph типа Graph, с которым будет работать менеджер
-        private Graph graph;
-
-        // Конструктор класса GraphManager, принимающий экземпляр графа
-        public GraphManager(Graph graph)
-        {
-            // Проверяем, что переданный граф не равен null
-            this.graph = graph ?? throw new ArgumentNullException(nameof(graph));
-        }
-
         // Метод для добавления новой вершины в граф
-        public void AddVertex(Vertex vertex)
+        public static void AddVertex(Vertex vertex, Graph graph)
         {
             // Проверяем, что переданная вершина не равна null
             if (vertex == null)
@@ -42,7 +32,7 @@ namespace Handlers
         }
 
         // Метод для добавления нового ребра в граф
-        public void AddEdge(string sourceName, string destinationName, double? weight = null)
+        public static void AddEdge(string sourceName, string destinationName, Graph graph, double? weight = null)
         {
             // Получаем объекты вершин по их именам
             var source = GraphSearcher.FindVertexByName(sourceName, graph);
@@ -77,7 +67,7 @@ namespace Handlers
         }
 
         // Метод для удаления вершины из графа
-        public void RemoveVertex(string vertexName)
+        public static void RemoveVertex(string vertexName, Graph graph)
         {
             // Получаем объект вершины по имени
             var vertex = GraphSearcher.FindVertexByName(vertexName, graph);
@@ -103,7 +93,7 @@ namespace Handlers
         }
 
         // Метод для удаления ребра из графа
-        public void RemoveEdge(string sourceName, string destinationName)
+        public static void RemoveEdge(string sourceName, string destinationName, Graph graph)
         {
             // Получаем объекты вершин по их именам
             var source = GraphSearcher.FindVertexByName(sourceName, graph);
@@ -144,7 +134,7 @@ namespace Handlers
         }
 
         // Метод для удаления ребра из графа
-        public void RemoveEdge(Vertex source, Vertex destination)
+        public static void RemoveEdge(Vertex source, Vertex destination, Graph graph)
         {
             // Удаляем ребра из списка исходной вершины, ведущие к конечной вершине
             bool removed = graph.adjacencyList[source].RemoveAll(e => e.Destination.Equals(destination)) > 0;

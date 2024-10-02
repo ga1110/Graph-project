@@ -115,6 +115,21 @@ namespace Handlers
                 index++;
             }
             Console.WriteLine();
+            var currentGraphIndex = graphVoult.GetCurrentGraphIndex();
+            var currentGraphName = graphVoult.GetCurrentGraph().GraphName;
+            Console.WriteLine($"Выбранный граф: {currentGraphIndex}. {currentGraphName}");
+            Console.WriteLine();
+        }
+        public static void DisplayCurrentGraph (GraphVoult graphVoult)
+        {
+            var currentGraphName = graphVoult.GetCurrentGraph().GraphName;
+            var currentGraphIndex = graphVoult.GetCurrentGraphIndex();
+            Console.WriteLine($"Текущий граф: {currentGraphIndex}. {currentGraphName}");
+        }
+        public static void DisplayGraphIndexError (GraphVoult graphVoult)
+        {
+            var currentGraphIndex = graphVoult.GetCurrentGraphIndex();
+            Console.WriteLine($"Графа под номером {currentGraphIndex} не существует.");
         }
     }
 }

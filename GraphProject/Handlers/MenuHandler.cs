@@ -1,4 +1,5 @@
-﻿using Structures;
+﻿using Handlers;
+using Structures;
 
 namespace Handlers
 {
@@ -7,9 +8,6 @@ namespace Handlers
     {
         // Приватное поле graph, которое будет использоваться для хранения текущего графа
         private Graph graph;
-
-        // Приватное поле graphManager для управления графом
-        private GraphManager graphManager;
 
         private GraphVoult graphVoult = new GraphVoult();
 
@@ -36,7 +34,7 @@ namespace Handlers
             OpenGraphVoultManager,
             Exit
         }
-       
+
         private enum GraphVoultMenuOption
         {
             ShowList,
@@ -64,19 +62,10 @@ namespace Handlers
                         case MainMenuOption.CreateNewGraph:
                             // Создание нового графа
                             graph = CreateNewGraph();
-                            // Инициализация GraphManager с новым графом
-                            graphManager = new GraphManager(graph);
-                            AddGraphToList(graph);
                             break;
                         case MainMenuOption.LoadGraphFromFile:
                             // Загрузка графа из файла
                             graph = LoadGraphFromFile();
-                            // Инициализация GraphManager с загруженным графом
-                            if (graph != null)
-                            {
-                                graphManager = new GraphManager(graph);
-                            }
-                            AddGraphToList(graph);
                             break;
                         case MainMenuOption.Exit:
                             // Завершение программы
@@ -87,9 +76,10 @@ namespace Handlers
                     }
                 }
                 // Если граф успешно создан или загружен
-                if (graph != null && graphManager != null)
+                if (graph != null)
                 {
                     // Вызов метода для обработки операций с графом
+                    AddGraphToList(graph);
                     HandleGraphOperations();
                 }
 
@@ -106,57 +96,6 @@ namespace Handlers
             Console.WriteLine("1. Загрузить граф из файла");
             Console.WriteLine("2. Выход");
             Console.Write("Выберите опцию: ");
-        }
-
-        // Приватный метод для создания нового графа
-        private Graph CreateNewGraph()
-        {
-            while (true)
-            {
-                Console.Write("Создать ориентированный граф? (Y/N): ");
-                string input = Console.ReadLine().Trim().ToLower();
-
-                Console.Write("Введите имя графа: ");
-                string name = Console.ReadLine();
-
-                if (input == "y")
-                {
-                    Console.WriteLine("Создание ориентированного графа.");
-                    return new Graph(name, isDirected: true);
-                }
-                else if (input == "n")
-                {
-                    Console.WriteLine("Создание неориентированного графа.");
-                    return new Graph(name, isDirected: false);
-                }
-                else
-                {
-                    Console.WriteLine("Некорректный ввод. Пожалуйста, введите 'y' или 'n'.");
-                }
-            }
-        }
-
-        // Приватный метод для загрузки графа из файла
-        private Graph LoadGraphFromFile()
-        {
-            while (true)
-            {
-                Console.Write("Введите имя файла для загрузки графа: ");
-                string loadFilename = Console.ReadLine();
-
-                Console.Write("Введите имя графа: ");
-                string name = Console.ReadLine();
-                try
-                {
-                    var filePath = GraphFileHandler.CreateFilePath(loadFilename);
-                    return new Graph(filePath, name);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Ошибка при загрузке графа: {ex.Message}");
-                    return null;
-                }
-            }
         }
 
         // Приватный метод для обработки операций с графом после его создания или загрузки
@@ -244,6 +183,7 @@ namespace Handlers
                 }
             }
         }
+
         private void ShowGraphVoultManagementMenu()
         {
             Console.WriteLine("\nМеню управления списком графов:");
@@ -251,9 +191,61 @@ namespace Handlers
             Console.WriteLine("1. Удалить n-й граф");
             Console.WriteLine("2. Дублировать текущий граф");
             Console.WriteLine("3. Поменять текущий граф");
-            Console.WriteLine("4. Вернуться в главное меню");
+            Console.WriteLine("4. Вернуться в меню управления графом");
             Console.Write("Выберите опцию: ");
         }
+
+        // Приватный метод для создания нового графа
+        private Graph CreateNewGraph()
+        {
+            while (true)
+            {
+                Console.Write("Создать ориентированный граф? (Y/N): ");
+                string input = Console.ReadLine().Trim().ToLower();
+
+                Console.Write("Введите имя графа: ");
+                string name = Console.ReadLine();
+
+                if (input == "y")
+                {
+                    Console.WriteLine("Создание ориентированного графа.");
+                    return new Graph(name, isDirected: true);
+                }
+                else if (input == "n")
+                {
+                    Console.WriteLine("Создание неориентированного графа.");
+                    return new Graph(name, isDirected: false);
+                }
+                else
+                {
+                    Console.WriteLine("Некорректный ввод. Пожалуйста, введите 'y' или 'n'.");
+                }
+            }
+        }
+
+        // Приватный метод для загрузки графа из файла
+        private Graph LoadGraphFromFile()
+        {
+            while (true)
+            {
+                Console.Write("Введите имя файла для загрузки графа: ");
+                string loadFilename = Console.ReadLine();
+
+                Console.Write("Введите имя графа: ");
+                string name = Console.ReadLine();
+                try
+                {
+                    var filePath = GraphFileHandler.CreateFilePath(loadFilename);
+                    return new Graph(filePath, name);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Ошибка при загрузке графа: {ex.Message}");
+                    return null;
+                }
+            }
+        }
+
         // Приватный метод, отображающий меню управления графом
         private void ShowGraphManagementMenu()
         {
@@ -280,7 +272,7 @@ namespace Handlers
             try
             {
                 var vertex = new Vertex(vertexName);
-                graphManager.AddVertex(vertex);
+                GraphManager.AddVertex(vertex, graph);
             }
             catch (ArgumentException ex)
             {
@@ -304,7 +296,7 @@ namespace Handlers
                 weight = parsedWeight;
             }
 
-            graphManager.AddEdge(source, destination, weight);
+            GraphManager.AddEdge(source, destination, graph, weight);
         }
 
         // Приватный метод для удаления вершины из графа
@@ -312,7 +304,7 @@ namespace Handlers
         {
             Console.Write("Введите название вершины для удаления: ");
             string vertexToRemove = Console.ReadLine();
-            graphManager.RemoveVertex(vertexToRemove);
+            GraphManager.RemoveVertex(vertexToRemove, graph);
         }
 
         // Приватный метод для удаления ребра из графа
@@ -322,7 +314,7 @@ namespace Handlers
             string edgeSource = Console.ReadLine();
             Console.Write("Введите конечную вершину: ");
             string edgeDestination = Console.ReadLine();
-            graphManager.RemoveEdge(edgeSource, edgeDestination);
+            GraphManager.RemoveEdge(edgeSource, edgeDestination, graph);
         }
 
         // Приватный метод для отображения списка смежности графа
@@ -361,7 +353,7 @@ namespace Handlers
             var tmpList = GraphSearcher.FindLeafsEdges(graph);
             foreach (var pair in tmpList)
             {
-                graphManager.RemoveEdge(pair.Item1, pair.Item2);
+                GraphManager.RemoveEdge(pair.Item1, pair.Item2, graph);
             }
         }
 
@@ -403,7 +395,7 @@ namespace Handlers
         {
             GraphPrinter.DisplayGraphList(graphVoult);
         }
-    
+
         // Приватный метод для удаления графа по номеру
         private void RemoveNthGraph()
         {
@@ -412,8 +404,15 @@ namespace Handlers
             int index;
             if (int.TryParse(userChoice, out index))
             {
-                graphVoult.RemoveGraph(index);
-                Console.WriteLine("Граф успешно удален");
+                bool isDeleted = graphVoult.RemoveGraph(index);
+                if (isDeleted)
+                {
+                    Console.WriteLine($"Граф под номером {index} успешно удален");
+                }
+                else
+                {
+                    GraphPrinter.DisplayGraphIndexError(graphVoult);
+                }
             }
             else
             {
@@ -425,14 +424,21 @@ namespace Handlers
         // Приватный метод для смены текущего графа
         private void ChangeCurrentGraph()
         {
-            Console.Write("Введите номер графа нового текущего графа: ");
+            Console.Write("Введите номер нового текущего графа: ");
             string userChoice = Console.ReadLine();
             int index;
             if (int.TryParse(userChoice, out index))
             {
-                graphVoult.ChangeCurrentGraph(index);
-                graph = graphVoult.GetCurrentGraph();
-                Console.WriteLine("Успешно задан новый граф");
+
+                if (graphVoult.ChangeCurrentGraph(index))
+                {
+                    graph = graphVoult.GetCurrentGraph();
+                    var newCurrentGraphIndex = graphVoult.GetCurrentGraphIndex();
+                    var newCurrentGraphName = graph.GraphName;
+                    Console.WriteLine("Успешно задан новый граф");
+                    GraphPrinter.DisplayCurrentGraph(graphVoult);
+                }
+                GraphPrinter.DisplayGraphIndexError(graphVoult);
             }
             else
             {
@@ -440,10 +446,11 @@ namespace Handlers
             }
         }
 
-        // 
+        // Приватный метод для копирования текущего графа
         private void CopyCurrentGraph()
         {
             graphVoult.CopyCurrentGrahp();
+            Console.WriteLine("Текущий граф скопирован в конец списка");
         }
     }
 }

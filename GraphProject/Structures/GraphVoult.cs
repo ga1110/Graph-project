@@ -32,7 +32,7 @@ namespace Structures
         }
 
         // Метод получения номера текущего графа
-        public int? GetCurrentGraphNum()
+        public int? GetCurrentGraphIndex()
         {
             if (_graphs.Count() == 0)
             {
@@ -60,27 +60,31 @@ namespace Structures
         // Метод копирования текущего графа
         public void CopyCurrentGrahp()
         {
-            _graphs.Add(_graphs[_currentGraph]);
+            Graph tmpGraph = new Graph(_graphs[_currentGraph]);
+            _graphs.Add(tmpGraph);
             _currentGraph = _graphs.Count() - 1;
         }
 
         // Метод смены текущего графа
-        public void ChangeCurrentGraph(int newCurrentGrahp)
+        public bool ChangeCurrentGraph(int newCurrentGrahp)
         {
-            CheckUserInput(newCurrentGrahp);
-            _currentGraph = newCurrentGrahp - 1;
+            if (CheckUserInput(newCurrentGrahp))
+            {
+                _currentGraph = newCurrentGrahp - 1;
+                return true;
+            }
+            return false; 
         }
 
         // Метод удаления графа по номеру
-        public void RemoveGraph(int graphToDelete)
+        public bool RemoveGraph(int graphToDelete)
         {
             if(CheckUserInput(graphToDelete))
             {
                 _graphs.RemoveAt(graphToDelete - 1);
-                return;
+                return true;
             }
-            Console.WriteLine($"Графа с номером {graphToDelete} не существует");
-            return;
+            return false;
         }
         
         // Проверка ввода пользователя
