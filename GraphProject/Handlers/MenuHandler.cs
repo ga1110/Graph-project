@@ -31,6 +31,7 @@ namespace Handlers
             DisplayVerticesWithGreaterOutDegree,
             DisplayNonAdjacentVertices,
             RemoveLeafsEdges,
+            FindUnreachableVertices,
             OpenGraphVoultManager,
             Exit
         }
@@ -136,6 +137,9 @@ namespace Handlers
                         case GraphMenuOption.RemoveLeafsEdges:
                             RemoveLeafsEdges();
                             break;
+                        case GraphMenuOption.FindUnreachableVertices:
+                            FindUnreachableVertices();
+                            break;
                         case GraphMenuOption.OpenGraphVoultManager:
                             HandleGraphVoultOperations();
                             break;
@@ -223,6 +227,13 @@ namespace Handlers
             }
         }
 
+        // Приватный метод для копирования текущего графа
+        private void CopyCurrentGraph()
+        {
+            graphVoult.CopyCurrentGrahp();
+            Console.WriteLine("Текущий граф скопирован в конец списка");
+        }
+
         // Приватный метод для загрузки графа из файла
         private Graph LoadGraphFromFile()
         {
@@ -250,17 +261,18 @@ namespace Handlers
         private void ShowGraphManagementMenu()
         {
             Console.WriteLine("\nМеню управления графом:");
-            Console.WriteLine("0. Добавить вершину");
-            Console.WriteLine("1. Добавить ребро");
-            Console.WriteLine("2. Удалить вершину");
-            Console.WriteLine("3. Удалить ребро");
-            Console.WriteLine("4. Показать список смежности");
-            Console.WriteLine("5. Сохранить граф в файл");
-            Console.WriteLine("6. Вывести вершины с большей полустепенью исхода");
-            Console.WriteLine("7. Вывести вершины с несмежные с данной");
-            Console.WriteLine("8. Удалить ребра ведущие к листьям");
-            Console.WriteLine("9. Открыть меню управления списком графов");
-            Console.WriteLine("10. Вернуться в главное меню");
+            Console.WriteLine("0. Добавить вершину.");
+            Console.WriteLine("1. Добавить ребро.");
+            Console.WriteLine("2. Удалить вершину.");
+            Console.WriteLine("3. Удалить ребро.");
+            Console.WriteLine("4. Показать список смежности.");
+            Console.WriteLine("5. Сохранить граф в файл.");
+            Console.WriteLine("6. Вывести вершины с большей полустепенью исхода.");
+            Console.WriteLine("7. Вывести вершины с несмежные с данной.");
+            Console.WriteLine("8. Построить граф, полученный удалением рёбер, ведущих в листья.");
+            Console.WriteLine("9. Найти вершины недостижимые из данной.");
+            Console.WriteLine("10. Открыть меню управления списком графов");
+            Console.WriteLine("11. Вернуться в главное меню.");
             Console.Write("Выберите опцию: ");
         }
 
@@ -350,6 +362,7 @@ namespace Handlers
         // Приватный метод для удаления ребер ведущих к листьям 
         private void RemoveLeafsEdges()
         {
+            CopyCurrentGraph();
             var tmpList = GraphSearcher.FindLeafsEdges(graph);
             foreach (var pair in tmpList)
             {
@@ -446,11 +459,12 @@ namespace Handlers
             }
         }
 
-        // Приватный метод для копирования текущего графа
-        private void CopyCurrentGraph()
+        // Приватный метод для поиска не смежных вершин
+        private void FindUnreachableVertices()
         {
-            graphVoult.CopyCurrentGrahp();
-            Console.WriteLine("Текущий граф скопирован в конец списка");
+            Console.Write("Введите имя вершины: ");
+            var vertexName = Console.ReadLine();
+            GraphPrinter.DisplayUnreachableVertices(vertexName, graph);
         }
     }
 }

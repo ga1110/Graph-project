@@ -131,5 +131,24 @@ namespace Handlers
             var currentGraphIndex = graphVoult.GetCurrentGraphIndex();
             Console.WriteLine($"Графа под номером {currentGraphIndex} не существует.");
         }
+        public static void DisplayUnreachableVertices(string vertexName, Graph graph)
+        {
+            List<Vertex> unreachableVertices = GraphSearcher.FindUnreachableVertices(vertexName, graph);
+            int index = 1;
+            if (unreachableVertices != null && unreachableVertices.Count() != 0)
+            {
+                Console.WriteLine($"Cписок вершин не достижимых из {vertexName}:");
+                foreach (var vertex in unreachableVertices)
+                {
+                    Console.WriteLine($"{index}. {vertex.Name}");
+                    index++;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Нет вершин не смежных с {vertexName}.");
+            }
+        }
     }
+
 }

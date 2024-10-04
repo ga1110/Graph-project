@@ -175,10 +175,10 @@ namespace Handlers
         }
 
         // Метод для получения вершины по ее имени
-        public static Vertex FindVertexByName(string name, Graph graph)
+        public static Vertex FindVertexByName(string vertexName, Graph graph)
         {
             // Приводим имя к нижнему регистру для поиска без учета регистра
-            string lowerName = name.ToLower();
+            string lowerName = vertexName.ToLower();
             if (graph.adjacencyList != null)
             {
                 // Проходим по всем вершинам в списке смежности
@@ -191,6 +191,45 @@ namespace Handlers
             }
             // Если вершина не найдена, возвращаем null
             return null;
+        }
+
+        // Метод поиска недостижимых вершин из данной 
+        public static List<Vertex> FindUnreachableVertices(string vertexName, Graph graph)
+        {
+            // Получаем вершину по ее имени
+            Vertex givenVertex = FindVertexByName(vertexName, graph);
+
+            // Проверяем, что вершина существует
+            if (givenVertex == null)
+            {
+                return null;
+            }
+
+            // Список не смежных вершин
+            List<Vertex> unreachableVertices = new List<Vertex>();
+            List<Vertex> reachableVertices = new List<Vertex>();
+            recursiveGraphTraversal(reachableVertices, graph, givenVertex);
+
+            foreach (var currentVertex in graph.adjacencyList.Keys.ToList()) // ToList() для предотвращения модификации коллекции во время итерации
+            {
+                if (!reachableVertices.Contains(currentVertex) && currentVertex != givenVertex)
+                {
+                    unreachableVertices.Add(currentVertex);
+                }
+            }
+
+            return unreachableVertices.Distinct().ToList();
+        }
+
+        private static List<Vertex> recursiveGraphTraversal(List<Vertex> vertices, Graph graph, Vertex currentVertex)
+        {
+            vertices.Add(currentVertex);
+            var edges = graph.adjacencyList[currentVertex].ToList();
+            foreach (var edge in edges)
+            {
+                recursiveGraphTraversal(vertices, graph, edge.Destination);
+            }
+            return vertices;
         }
     }
 }
