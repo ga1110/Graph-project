@@ -208,7 +208,7 @@ namespace Handlers
             // Список не смежных вершин
             List<Vertex> unreachableVertices = new List<Vertex>();
             List<Vertex> reachableVertices = new List<Vertex>();
-            recursiveGraphTraversal(reachableVertices, graph, givenVertex);
+            reachableVertices = GraphTraversal.RecursiveGraphTraversal(graph, givenVertex);
 
             foreach (var currentVertex in graph.adjacencyList.Keys.ToList()) // ToList() для предотвращения модификации коллекции во время итерации
             {
@@ -221,15 +221,6 @@ namespace Handlers
             return unreachableVertices.Distinct().ToList();
         }
 
-        private static List<Vertex> recursiveGraphTraversal(List<Vertex> vertices, Graph graph, Vertex currentVertex)
-        {
-            vertices.Add(currentVertex);
-            var edges = graph.adjacencyList[currentVertex].ToList();
-            foreach (var edge in edges)
-            {
-                recursiveGraphTraversal(vertices, graph, edge.Destination);
-            }
-            return vertices;
-        }
+
     }
 }

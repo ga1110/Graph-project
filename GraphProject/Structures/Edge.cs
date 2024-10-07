@@ -28,6 +28,5 @@ namespace Structures
             // Возвращаем итоговую строку, представляющую ребро
             return result;
         }
-
     }
 }

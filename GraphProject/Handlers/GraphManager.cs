@@ -52,17 +52,35 @@ namespace Handlers
                 return;
             }
 
-            // Добавляем новое ребро в список ребер исходной вершины
-            graph.adjacencyList[source].Add(new Edge(destination, weight));
+            // Проверяем, существует ли уже ребро от source к destination
+            var existingEdge = graph.adjacencyList[source].FirstOrDefault(e => e.Destination == destination);
+            if (existingEdge != null)
+            {
+                Console.WriteLine($"Ребро от '{source.Name}' к '{destination.Name}' уже существует.");
+            }
+            else
+            {
+                // Добавляем новое ребро в список ребер исходной вершины
+                graph.adjacencyList[source].Add(new Edge(destination, weight));
 
-            // Выводим сообщение об успешном добавлении ребра
-            Console.WriteLine($"Ребро от '{source.Name}' к '{destination.Name}' добавлено.");
+                // Выводим сообщение об успешном добавлении ребра
+                Console.WriteLine($"Ребро от '{source.Name}' к '{destination.Name}' добавлено.");
+            }
 
             // Если граф неориентированный, добавляем обратное ребро
             if (!graph.IsDirected)
             {
-                graph.adjacencyList[destination].Add(new Edge(source, weight));
-                Console.WriteLine($"Ребро от '{destination.Name}' к '{source.Name}' добавлено (неориентированный граф).");
+                // Проверяем, существует ли уже обратное ребро
+                var existingReverseEdge = graph.adjacencyList[destination].FirstOrDefault(e => e.Destination == source);
+                if (existingReverseEdge != null)
+                {
+                    Console.WriteLine($"Ребро от '{destination.Name}' к '{source.Name}' уже существует.");
+                }
+                else
+                {
+                    graph.adjacencyList[destination].Add(new Edge(source, weight));
+                    Console.WriteLine($"Ребро от '{destination.Name}' к '{source.Name}' добавлено.");
+                }
             }
         }
 

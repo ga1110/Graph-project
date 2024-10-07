@@ -9,7 +9,7 @@ namespace Handlers
         // Приватное поле graph, которое будет использоваться для хранения текущего графа
         private Graph graph;
 
-        private GraphVoult graphVoult = new GraphVoult();
+        private GraphVault GraphVault = new GraphVault();
 
         // Приватное поле для выбора опций в главном меню
         private enum MainMenuOption
@@ -22,21 +22,30 @@ namespace Handlers
         // Приватное поле для выбора опций в меню управления графом
         private enum GraphMenuOption
         {
-            AddVertex,
-            AddEdge,
-            RemoveVertex,
-            RemoveEdge,
-            DisplayGraph,
+            OpenGraphManager,
             SaveGraphToFile,
             DisplayVerticesWithGreaterOutDegree,
             DisplayNonAdjacentVertices,
             RemoveLeafsEdges,
             FindUnreachableVertices,
-            OpenGraphVoultManager,
+            IsGraphConnected,
+            OpenGraphVaultManager,
             Exit
         }
 
-        private enum GraphVoultMenuOption
+
+        private enum GraphManagerMenyOption
+        {
+            AddVertex,
+            AddEdge,
+            RemoveVertex,
+            RemoveEdge,
+            DisplayGraph,
+            Exit
+        }
+
+        // Приватное поле для выбора опций в меню списка графов
+        private enum GraphVaultMenuOption
         {
             ShowList,
             RemoveAtNth,
@@ -50,8 +59,8 @@ namespace Handlers
         {
             while (true)
             {
-                // Вызов метода, отображающего главное меню
-                ShowMainMenu();
+                // Вызов метода, отображающего меню загрузки графа
+                ShowGraphLoadCreateMenu();
                 // Считывание выбора пользователя из консоли
                 string userChoice = Console.ReadLine();
 
@@ -89,41 +98,19 @@ namespace Handlers
             }
         }
 
-        // Приватный метод, отображающий главное меню
-        private void ShowMainMenu()
-        {
-            Console.WriteLine("Главное меню:");
-            Console.WriteLine("0. Создать новый граф");
-            Console.WriteLine("1. Загрузить граф из файла");
-            Console.WriteLine("2. Выход");
-            Console.Write("Выберите опцию: ");
-        }
-
         // Приватный метод для обработки операций с графом после его создания или загрузки
         private void HandleGraphOperations()
         {
             while (true)
             {
-                ShowGraphManagementMenu();
+                ShowMainMenu();
                 string userChoice = Console.ReadLine();
                 if (int.TryParse(userChoice, out int option))
                 {
                     switch ((GraphMenuOption)option)
                     {
-                        case GraphMenuOption.AddVertex:
-                            AddVertex();
-                            break;
-                        case GraphMenuOption.AddEdge:
-                            AddEdge();
-                            break;
-                        case GraphMenuOption.RemoveVertex:
-                            RemoveVertex();
-                            break;
-                        case GraphMenuOption.RemoveEdge:
-                            RemoveEdge();
-                            break;
-                        case GraphMenuOption.DisplayGraph:
-                            DisplayGraph();
+                        case GraphMenuOption.OpenGraphManager:
+                            HandleGraphManagerOperations();
                             break;
                         case GraphMenuOption.SaveGraphToFile:
                             SaveGraphToFile();
@@ -140,8 +127,11 @@ namespace Handlers
                         case GraphMenuOption.FindUnreachableVertices:
                             FindUnreachableVertices();
                             break;
-                        case GraphMenuOption.OpenGraphVoultManager:
-                            HandleGraphVoultOperations();
+                        case GraphMenuOption.IsGraphConnected:
+                            IsGraphConnected();
+                            break;
+                        case GraphMenuOption.OpenGraphVaultManager:
+                            HandleGraphVaultOperations();
                             break;
                         case GraphMenuOption.Exit:
                             Console.WriteLine("Возвращение в главное меню.");
@@ -154,30 +144,30 @@ namespace Handlers
             }
         }
 
-        // Приватный метод для обработки операций с графом после его создания или загрузки
-        private void HandleGraphVoultOperations()
+        // Приватный метод для обработки операций с списком графов
+        private void HandleGraphVaultOperations()
         {
             while (true)
             {
-                ShowGraphVoultManagementMenu();
+                ShowGraphVaultManagementMenu();
                 string userChoice = Console.ReadLine();
                 if (int.TryParse(userChoice, out int option))
                 {
-                    switch ((GraphVoultMenuOption)option)
+                    switch ((GraphVaultMenuOption)option)
                     {
-                        case GraphVoultMenuOption.ShowList:
+                        case GraphVaultMenuOption.ShowList:
                             ShowGraphList();
                             break;
-                        case GraphVoultMenuOption.RemoveAtNth:
+                        case GraphVaultMenuOption.RemoveAtNth:
                             RemoveNthGraph();
                             break;
-                        case GraphVoultMenuOption.CopyCurrentGrpah:
+                        case GraphVaultMenuOption.CopyCurrentGrpah:
                             CopyCurrentGraph();
                             break;
-                        case GraphVoultMenuOption.ChangeCurrentGraph:
+                        case GraphVaultMenuOption.ChangeCurrentGraph:
                             ChangeCurrentGraph();
                             break;
-                        case GraphVoultMenuOption.Exit:
+                        case GraphVaultMenuOption.Exit:
                             Console.WriteLine("Возвращение в меню управления графом.");
                             return;
                         default:
@@ -188,7 +178,45 @@ namespace Handlers
             }
         }
 
-        private void ShowGraphVoultManagementMenu()
+        // Приватный метод для обработки операций с графом
+        private void HandleGraphManagerOperations()
+        {
+            while (true)
+            {
+                ShowGraphManagerMenu();
+                string userChoice = Console.ReadLine();
+                if (int.TryParse(userChoice, out int option))
+                {
+                    switch ((GraphManagerMenyOption)option)
+                    {
+                        case GraphManagerMenyOption.AddVertex:
+                            AddVertex();
+                            break;
+                        case GraphManagerMenyOption.AddEdge:
+                            AddEdge();
+                            break;
+                        case GraphManagerMenyOption.RemoveVertex:
+                            RemoveVertex();
+                            break;
+                        case GraphManagerMenyOption.RemoveEdge:
+                            RemoveEdge();
+                            break;
+                        case GraphManagerMenyOption.DisplayGraph:
+                            DisplayGraph();
+                            break;
+                        case GraphManagerMenyOption.Exit:
+                            Console.WriteLine("Возвращение в главное меню.");
+                            return;
+                        default:
+                            Console.WriteLine("Неверная опция. Попробуйте снова.");
+                            break;
+                    }
+                }
+            }
+        }
+
+        // Приватный метод для обработки операций с графом 
+        private void ShowGraphVaultManagementMenu()
         {
             Console.WriteLine("\nМеню управления списком графов:");
             Console.WriteLine("0. Показать список");
@@ -196,6 +224,45 @@ namespace Handlers
             Console.WriteLine("2. Дублировать текущий граф");
             Console.WriteLine("3. Поменять текущий граф");
             Console.WriteLine("4. Вернуться в меню управления графом");
+            Console.Write("Выберите опцию: ");
+        }
+
+        // Приватный метод, отображающий главное меню
+        private void ShowMainMenu()
+        {
+            int index = 0;
+            Console.WriteLine("\n==Главное меню==");
+            Console.WriteLine($"{index++}. Открыть меню управления графом.");
+            Console.WriteLine($"{index++}. Сохранить граф в файл.");
+            Console.WriteLine($"{index++}. Вывести вершины с большей полустепенью исхода.");
+            Console.WriteLine($"{index++}. Вывести вершины с несмежные с данной.");
+            Console.WriteLine($"{index++}. Построить граф, полученный удалением рёбер, ведущих в листья.");
+            Console.WriteLine($"{index++}. Найти вершины недостижимые из данной.");
+            Console.WriteLine($"{index++}. Проверить является ли граф связным");
+            Console.WriteLine($"{index++}. Открыть меню управления списком графов");
+            Console.WriteLine($"{index++}. Вернуться в меню создания и загрузки.");
+            Console.Write("Выберите опцию: ");
+        }
+
+        private void ShowGraphManagerMenu()
+        {
+            Console.WriteLine("\n==Меню управления графом==");
+            Console.WriteLine("0. Добавить вершину.");
+            Console.WriteLine("1. Добавить ребро.");
+            Console.WriteLine("2. Удалить вершину.");
+            Console.WriteLine("3. Удалить ребро.");
+            Console.WriteLine("4. Показать список смежности.");
+            Console.WriteLine("5. Вернуться в главное меню.");
+            Console.Write("Выберите опцию: ");
+        }
+
+        // Приватный метод, отображающий меню загруски и сошздания графа
+        private void ShowGraphLoadCreateMenu()
+        {
+            Console.WriteLine("\n==Меню создания и загрузки графа==");
+            Console.WriteLine("0. Создать новый граф");
+            Console.WriteLine("1. Загрузить граф из файла");
+            Console.WriteLine("2. Выход");
             Console.Write("Выберите опцию: ");
         }
 
@@ -230,7 +297,7 @@ namespace Handlers
         // Приватный метод для копирования текущего графа
         private void CopyCurrentGraph()
         {
-            graphVoult.CopyCurrentGrahp();
+            GraphVault.CopyCurrentGrahp();
             Console.WriteLine("Текущий граф скопирован в конец списка");
         }
 
@@ -241,12 +308,11 @@ namespace Handlers
             {
                 Console.Write("Введите имя файла для загрузки графа: ");
                 string loadFilename = Console.ReadLine();
-
-                Console.Write("Введите имя графа: ");
-                string name = Console.ReadLine();
                 try
                 {
                     var filePath = GraphFileHandler.CreateFilePath(loadFilename);
+                    Console.Write("Введите имя графа: ");
+                    string name = Console.ReadLine();
                     return new Graph(filePath, name);
                 }
                 catch (Exception ex)
@@ -257,25 +323,6 @@ namespace Handlers
             }
         }
 
-        // Приватный метод, отображающий меню управления графом
-        private void ShowGraphManagementMenu()
-        {
-            Console.WriteLine("\nМеню управления графом:");
-            Console.WriteLine("0. Добавить вершину.");
-            Console.WriteLine("1. Добавить ребро.");
-            Console.WriteLine("2. Удалить вершину.");
-            Console.WriteLine("3. Удалить ребро.");
-            Console.WriteLine("4. Показать список смежности.");
-            Console.WriteLine("5. Сохранить граф в файл.");
-            Console.WriteLine("6. Вывести вершины с большей полустепенью исхода.");
-            Console.WriteLine("7. Вывести вершины с несмежные с данной.");
-            Console.WriteLine("8. Построить граф, полученный удалением рёбер, ведущих в листья.");
-            Console.WriteLine("9. Найти вершины недостижимые из данной.");
-            Console.WriteLine("10. Открыть меню управления списком графов");
-            Console.WriteLine("11. Вернуться в главное меню.");
-            Console.Write("Выберите опцию: ");
-        }
-
         // Приватный метод для добавления новой вершины в граф
         private void AddVertex()
         {
@@ -283,7 +330,7 @@ namespace Handlers
             string vertexName = Console.ReadLine();
             try
             {
-                var vertex = new Vertex(vertexName);
+                var vertex = new Vertex(vertexName.ToUpper());
                 GraphManager.AddVertex(vertex, graph);
             }
             catch (ArgumentException ex)
@@ -373,9 +420,9 @@ namespace Handlers
         // Приватный метод добавления графа в список
         private void AddGraphToList(Graph graph)
         {
-            if (graphVoult.isVoultEmpty())
+            if (GraphVault.isVoultEmpty())
             {
-                graphVoult.AddNewGraph(graph);
+                GraphVault.AddNewGraph(graph);
             }
             else
             {
@@ -386,13 +433,13 @@ namespace Handlers
                     if (input == "y")
                     {
                         Console.WriteLine("Текущий граф заменён.");
-                        graphVoult.ReplaceCurrentGraph(graph);
+                        GraphVault.ReplaceCurrentGraph(graph);
                         return;
                     }
                     else if (input == "n")
                     {
                         Console.WriteLine("В список добавлен новый граф.");
-                        graphVoult.AddNewGraph(graph);
+                        GraphVault.AddNewGraph(graph);
                         return;
                     }
                     else
@@ -406,7 +453,7 @@ namespace Handlers
         // Приватный метод для вывода списка графов
         private void ShowGraphList()
         {
-            GraphPrinter.DisplayGraphList(graphVoult);
+            GraphPrinter.DisplayGraphList(GraphVault);
         }
 
         // Приватный метод для удаления графа по номеру
@@ -417,14 +464,14 @@ namespace Handlers
             int index;
             if (int.TryParse(userChoice, out index))
             {
-                bool isDeleted = graphVoult.RemoveGraph(index);
+                bool isDeleted = GraphVault.RemoveGraph(index);
                 if (isDeleted)
                 {
                     Console.WriteLine($"Граф под номером {index} успешно удален");
                 }
                 else
                 {
-                    GraphPrinter.DisplayGraphIndexError(graphVoult);
+                    GraphPrinter.DisplayGraphIndexError(GraphVault);
                 }
             }
             else
@@ -443,15 +490,15 @@ namespace Handlers
             if (int.TryParse(userChoice, out index))
             {
 
-                if (graphVoult.ChangeCurrentGraph(index))
+                if (GraphVault.ChangeCurrentGraph(index))
                 {
-                    graph = graphVoult.GetCurrentGraph();
-                    var newCurrentGraphIndex = graphVoult.GetCurrentGraphIndex();
+                    graph = GraphVault.GetCurrentGraph();
+                    var newCurrentGraphIndex = GraphVault.GetCurrentGraphIndex();
                     var newCurrentGraphName = graph.GraphName;
                     Console.WriteLine("Успешно задан новый граф");
-                    GraphPrinter.DisplayCurrentGraph(graphVoult);
+                    GraphPrinter.DisplayCurrentGraph(GraphVault);
                 }
-                GraphPrinter.DisplayGraphIndexError(graphVoult);
+                GraphPrinter.DisplayGraphIndexError(GraphVault);
             }
             else
             {
@@ -465,6 +512,19 @@ namespace Handlers
             Console.Write("Введите имя вершины: ");
             var vertexName = Console.ReadLine();
             GraphPrinter.DisplayUnreachableVertices(vertexName, graph);
+        }
+
+        // Приватный метод для проверки является ли граф связным
+        private void IsGraphConnected()
+        {
+            if (GraphAnalyzer.IsGraphConnected(graph))
+            {
+                Console.WriteLine($"Граф {GraphVault.GetCurrentGraphIndex()} - связный");
+            }
+            else
+            {
+                Console.WriteLine($"Граф {GraphVault.GetCurrentGraphIndex()} - не связный");
+            }
         }
     }
 }

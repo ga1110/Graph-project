@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Structures
 {
-    public class GraphVoult
+    public class GraphVault
     {
         private List<Graph> _graphs = new List<Graph>();
         private int _currentGraph = 0;
