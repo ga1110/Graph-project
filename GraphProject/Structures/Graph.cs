@@ -137,7 +137,7 @@ namespace Structures
                 foreach (var edge in kvp.Value)
                 {
                     var destinationCopy = vertexMapping[edge.Destination];
-                    var edgeCopy = new Edge(destinationCopy, edge.Weight);
+                    var edgeCopy = new Edge(sourceCopy, destinationCopy, edge.Weight);
                     adjacencyList[sourceCopy].Add(edgeCopy);
                 }
             }

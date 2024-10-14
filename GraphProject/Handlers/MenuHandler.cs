@@ -1,4 +1,5 @@
-﻿using Handlers;
+﻿using GraphProject.Handlers;
+using Handlers;
 using Structures;
 
 namespace Handlers
@@ -32,7 +33,6 @@ namespace Handlers
             OpenGraphVaultManager,
             Exit
         }
-
 
         private enum GraphManagerMenyOption
         {
@@ -380,6 +380,7 @@ namespace Handlers
         private void DisplayGraph()
         {
             GraphPrinter.DisplayAdjacencyList(graph);
+            KruskalsAlgorithm.FindMST(graph);
         }
 
         // Приватный метод для сохранения графа в файл

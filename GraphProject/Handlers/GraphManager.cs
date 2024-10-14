@@ -61,7 +61,7 @@ namespace Handlers
             else
             {
                 // Добавляем новое ребро в список ребер исходной вершины
-                graph.adjacencyList[source].Add(new Edge(destination, weight));
+                graph.adjacencyList[source].Add(new Edge(source, destination, weight));
 
                 // Выводим сообщение об успешном добавлении ребра
                 Console.WriteLine($"Ребро от '{source.Name}' к '{destination.Name}' добавлено.");
@@ -78,7 +78,7 @@ namespace Handlers
                 }
                 else
                 {
-                    graph.adjacencyList[destination].Add(new Edge(source, weight));
+                    graph.adjacencyList[destination].Add(new Edge(source, destination, weight));
                     Console.WriteLine($"Ребро от '{destination.Name}' к '{source.Name}' добавлено.");
                 }
             }
@@ -173,5 +173,6 @@ namespace Handlers
                     Console.WriteLine($"Ребро от '{destination.Name}' к '{source.Name}' не найдено (неориентированный граф).");
             }
         }
+
     }
 }

@@ -1,0 +1,22 @@
+Undirected
+A E 1
+A B 3
+E E 1
+E B 4
+E D 7
+E C 6
+E A 1
+B B 3
+B B 4
+B A 3
+B E 4
+B C 5
+D D 7
+D D 2
+D C 2
+D E 7
+C C 6
+C C 5
+C B 5
+C E 6
+C D 2

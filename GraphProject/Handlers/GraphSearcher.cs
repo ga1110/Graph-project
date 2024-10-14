@@ -220,7 +220,5 @@ namespace Handlers
 
             return unreachableVertices.Distinct().ToList();
         }
-
-
     }
 }
