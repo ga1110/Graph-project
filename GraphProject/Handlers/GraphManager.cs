@@ -1,4 +1,7 @@
 ﻿using Structures;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Handlers
 {
@@ -78,7 +81,7 @@ namespace Handlers
                 }
                 else
                 {
-                    graph.adjacencyList[destination].Add(new Edge(source, destination, weight));
+                    graph.adjacencyList[destination].Add(new Edge(destination, source, weight));
                     Console.WriteLine($"Ребро от '{destination.Name}' к '{source.Name}' добавлено.");
                 }
             }

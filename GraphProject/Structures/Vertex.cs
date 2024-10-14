@@ -1,4 +1,6 @@
-﻿namespace Structures
+﻿using System;
+
+namespace Structures
 {
     //Класс, представляющий вершину графа
     public class Vertex

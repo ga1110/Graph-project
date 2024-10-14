@@ -1,6 +1,7 @@
 ﻿using GraphProject.Handlers;
 using Handlers;
 using Structures;
+using System;
 
 namespace Handlers
 {
@@ -30,6 +31,7 @@ namespace Handlers
             RemoveLeafsEdges,
             FindUnreachableVertices,
             IsGraphConnected,
+            FindMst,
             OpenGraphVaultManager,
             Exit
         }
@@ -130,6 +132,9 @@ namespace Handlers
                         case GraphMenuOption.IsGraphConnected:
                             IsGraphConnected();
                             break;
+                        case GraphMenuOption.FindMst:
+                            MST();
+                            break;
                         case GraphMenuOption.OpenGraphVaultManager:
                             HandleGraphVaultOperations();
                             break;
@@ -218,12 +223,13 @@ namespace Handlers
         // Приватный метод для обработки операций с графом 
         private void ShowGraphVaultManagementMenu()
         {
+            int index = 0;
             Console.WriteLine("\nМеню управления списком графов:");
-            Console.WriteLine("0. Показать список");
-            Console.WriteLine("1. Удалить n-й граф");
-            Console.WriteLine("2. Дублировать текущий граф");
-            Console.WriteLine("3. Поменять текущий граф");
-            Console.WriteLine("4. Вернуться в меню управления графом");
+            Console.WriteLine($"{index++}. Показать список");
+            Console.WriteLine($"{index++}. Удалить n-й граф");
+            Console.WriteLine($"{index++}. Дублировать текущий граф");
+            Console.WriteLine($"{index++}. Поменять текущий граф");
+            Console.WriteLine($"{index++}. Вернуться в главное меню");
             Console.Write("Выберите опцию: ");
         }
 
@@ -239,6 +245,7 @@ namespace Handlers
             Console.WriteLine($"{index++}. Построить граф, полученный удалением рёбер, ведущих в листья.");
             Console.WriteLine($"{index++}. Найти вершины недостижимые из данной.");
             Console.WriteLine($"{index++}. Проверить является ли граф связным");
+            Console.WriteLine($"{index++}. Найти минимальное остовное дерево");
             Console.WriteLine($"{index++}. Открыть меню управления списком графов");
             Console.WriteLine($"{index++}. Вернуться в меню создания и загрузки.");
             Console.Write("Выберите опцию: ");
@@ -246,23 +253,25 @@ namespace Handlers
 
         private void ShowGraphManagerMenu()
         {
+            int index = 0;
             Console.WriteLine("\n==Меню управления графом==");
-            Console.WriteLine("0. Добавить вершину.");
-            Console.WriteLine("1. Добавить ребро.");
-            Console.WriteLine("2. Удалить вершину.");
-            Console.WriteLine("3. Удалить ребро.");
-            Console.WriteLine("4. Показать список смежности.");
-            Console.WriteLine("5. Вернуться в главное меню.");
+            Console.WriteLine($"{index++}. Добавить вершину.");
+            Console.WriteLine($"{index++}. Добавить ребро.");
+            Console.WriteLine($"{index++}. Удалить вершину.");
+            Console.WriteLine($"{index++}. Удалить ребро.");
+            Console.WriteLine($"{index++}. Показать список смежности.");
+            Console.WriteLine($"{index++}. Вернуться в главное меню.");
             Console.Write("Выберите опцию: ");
         }
 
         // Приватный метод, отображающий меню загруски и сошздания графа
         private void ShowGraphLoadCreateMenu()
         {
+            int index = 0;
             Console.WriteLine("\n==Меню создания и загрузки графа==");
-            Console.WriteLine("0. Создать новый граф");
-            Console.WriteLine("1. Загрузить граф из файла");
-            Console.WriteLine("2. Выход");
+            Console.WriteLine($"{index++}. Создать новый граф");
+            Console.WriteLine($"{index++}. Загрузить граф из файла");
+            Console.WriteLine($"{index++}. Выход");
             Console.Write("Выберите опцию: ");
         }
 
@@ -302,17 +311,18 @@ namespace Handlers
         }
 
         // Приватный метод для загрузки графа из файла
-        private Graph LoadGraphFromFile()
+        private Graph? LoadGraphFromFile()
         {
             while (true)
             {
                 Console.Write("Введите имя файла для загрузки графа: ");
-                string loadFilename = Console.ReadLine();
+                string? loadFilename = Console.ReadLine();
                 try
                 {
                     var filePath = GraphFileHandler.CreateFilePath(loadFilename);
                     Console.Write("Введите имя графа: ");
-                    string name = Console.ReadLine();
+                    string? input = Console.ReadLine();
+                    string name = string.IsNullOrEmpty(input) ? loadFilename : input;
                     return new Graph(filePath, name);
                 }
                 catch (Exception ex)
@@ -380,7 +390,6 @@ namespace Handlers
         private void DisplayGraph()
         {
             GraphPrinter.DisplayAdjacencyList(graph);
-            KruskalsAlgorithm.FindMST(graph);
         }
 
         // Приватный метод для сохранения графа в файл
@@ -526,6 +535,19 @@ namespace Handlers
             {
                 Console.WriteLine($"Граф {GraphVault.GetCurrentGraphIndex()} - не связный");
             }
+        }
+
+        // Метод получения минимального остовного дерева
+        private void MST()
+        {
+            if(!KruskalsAlgorithm.IsGraphCorrectForMST(graph))
+            {
+                return;
+            }
+            Graph tmpGraph = KruskalsAlgorithm.FindMST(graph);
+            AddGraphToList(tmpGraph);
+            GraphPrinter.DisplayAdjacencyList(tmpGraph);
+            graph = tmpGraph;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Handlers;
-using Structures;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Structures
 {
@@ -17,7 +19,7 @@ namespace Structures
         // Инициализирует новый пустой граф с указанным направлением (ориентированный или неориентированный)
         public Graph(string name, bool isDirected = false)
         {
-            GraphName = string.IsNullOrEmpty(name) ? "Nameless Graph" : name;
+            GraphName = string.IsNullOrEmpty(name) ? "NamelessGraph" : name;
             IsDirected = isDirected;
             adjacencyList = new Dictionary<Vertex, List<Edge>>();
         }
@@ -25,7 +27,7 @@ namespace Structures
         // Конструктор графа из файла
         public Graph(string filePath, string name)
         {
-            GraphName = string.IsNullOrEmpty(name) ? "Nameless Graph" : name;
+            GraphName = string.IsNullOrEmpty(name) ? "NamelessGraph" : name;
             adjacencyList = new Dictionary<Vertex, List<Edge>>();
             // Открываем файл для чтения
             using (StreamReader reader = new StreamReader(filePath))
@@ -143,5 +145,40 @@ namespace Structures
             }
         }
 
+        public Graph(List<Edge> edges, string graphName, bool isDirected)
+        {
+            GraphName = graphName + "_MST";
+
+            // Копируем значение свойства IsDirected из другого графа
+            IsDirected = isDirected;
+
+            // Инициализируем новый пустой список смежности
+            adjacencyList = new Dictionary<Vertex, List<Edge>>();
+            
+            List<Vertex> vertices = new List<Vertex>();
+
+            foreach (var edge in edges)
+            {
+                vertices.Add(edge.Source);
+                vertices.Add(edge.Destination);
+            }
+
+            vertices.Distinct(); //Уникальные значения 
+
+            foreach (var vertex in vertices)
+            {
+                var newVertex = new Vertex(vertex.Name);
+                adjacencyList[vertex] = new List<Edge>();
+            }
+
+            foreach (var edge in edges)
+            {
+                adjacencyList[edge.Source].Add(new Edge(edge.Source, edge.Destination, edge.Weight));
+                if(!isDirected)
+                {
+                    adjacencyList[edge.Destination].Add(new Edge(edge.Destination, edge.Source, edge.Weight));
+                }
+            }
+        }
     }
 }
