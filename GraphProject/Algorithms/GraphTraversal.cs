@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Handlers
+namespace Algorithms
 {
     public static class GraphTraversal
     {
