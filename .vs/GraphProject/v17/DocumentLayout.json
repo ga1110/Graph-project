@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\algorithms\\floydwarshallalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\algorithms\\floydwarshallalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\algorithms\\dijkstraalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\algorithms\\dijkstraalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -75,19 +79,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "FloydWarshallAlgorithm.cs",
+              "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\FloydWarshallAlgorithm.cs",
+              "RelativeDocumentMoniker": "GraphProject\\Algorithms\\FloydWarshallAlgorithm.cs",
+              "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\FloydWarshallAlgorithm.cs",
+              "RelativeToolTip": "GraphProject\\Algorithms\\FloydWarshallAlgorithm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T17:38:49.703Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "DijkstraAlgorithm.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\DijkstraAlgorithm.cs",
               "RelativeDocumentMoniker": "GraphProject\\Algorithms\\DijkstraAlgorithm.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\DijkstraAlgorithm.cs",
               "RelativeToolTip": "GraphProject\\Algorithms\\DijkstraAlgorithm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-22T17:14:02.057Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "GraphSearcher.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphSearcher.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphSearcher.cs",
@@ -95,12 +112,11 @@
               "RelativeToolTip": "GraphProject\\Handlers\\GraphSearcher.cs",
               "ViewState": "AgIAANMAAAAAAAAAAAAcwO4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T07:46:07.728Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-29T07:46:07.728Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "KruskalAlgorithm.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\KruskalAlgorithm.cs",
               "RelativeDocumentMoniker": "GraphProject\\Algorithms\\KruskalAlgorithm.cs",
@@ -108,12 +124,11 @@
               "RelativeToolTip": "GraphProject\\Algorithms\\KruskalAlgorithm.cs",
               "ViewState": "AgIAADUAAAAAAAAAAAAwwBIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T14:38:39.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-22T14:38:39.462Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MenuHandler.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\MenuHandler.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\MenuHandler.cs",
@@ -121,12 +136,11 @@
               "RelativeToolTip": "GraphProject\\Handlers\\MenuHandler.cs",
               "ViewState": "AgIAAFQCAAAAAAAAAAAqwGECAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T10:56:49.18Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-26T10:56:49.18Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "GraphPrinter.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphPrinter.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphPrinter.cs",
@@ -134,12 +148,11 @@
               "RelativeToolTip": "GraphProject\\Handlers\\GraphPrinter.cs",
               "ViewState": "AgIAADYAAAAAAAAAAAAtwKwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T17:02:21.163Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T17:02:21.163Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "GraphTraversal.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\GraphTraversal.cs",
               "RelativeDocumentMoniker": "GraphProject\\Algorithms\\GraphTraversal.cs",
@@ -147,12 +160,11 @@
               "RelativeToolTip": "GraphProject\\Algorithms\\GraphTraversal.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T16:40:12.979Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T16:40:12.979Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Graph.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Structures\\Graph.cs",
               "RelativeDocumentMoniker": "GraphProject\\Structures\\Graph.cs",
@@ -164,7 +176,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "GraphFileHandler.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphFileHandler.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphFileHandler.cs",
@@ -176,7 +188,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "GraphManager.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphManager.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphManager.cs",
@@ -188,7 +200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Vertex.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Structures\\Vertex.cs",
               "RelativeDocumentMoniker": "GraphProject\\Structures\\Vertex.cs",
@@ -200,7 +212,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Edge.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Structures\\Edge.cs",
               "RelativeDocumentMoniker": "GraphProject\\Structures\\Edge.cs",
@@ -208,12 +220,11 @@
               "RelativeToolTip": "GraphProject\\Structures\\Edge.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T10:56:59.122Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-26T10:56:59.122Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "GraphAnalyzer.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphAnalyzer.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphAnalyzer.cs",
@@ -221,12 +232,11 @@
               "RelativeToolTip": "GraphProject\\Handlers\\GraphAnalyzer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T16:35:16.804Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T16:35:16.804Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "VertexAnalyzer.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\VertexAnalyzer.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\VertexAnalyzer.cs",
@@ -238,7 +248,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "GraphVoult.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Structures\\GraphVoult.cs",
               "RelativeDocumentMoniker": "GraphProject\\Structures\\GraphVoult.cs",
@@ -250,7 +260,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Program.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Program.cs",
               "RelativeDocumentMoniker": "GraphProject\\Program.cs",
