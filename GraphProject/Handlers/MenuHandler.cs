@@ -27,8 +27,6 @@ namespace Handlers
         {
             OpenGraphManager,
             OpenVertexManager,
-            IsGraphConnected,
-            FindMst,
             OpenGraphVaultManager,
             Exit
         }
@@ -42,6 +40,8 @@ namespace Handlers
             RemoveVertex,
             RemoveEdge,
             DisplayGraph,
+            IsGraphConnected,
+            FindMst,
             Exit
         }
 
@@ -124,12 +124,6 @@ namespace Handlers
                         case MainMenuOption.OpenVertexManager:
                             HandleVertexManagerOperations();
                             break;
-                        case MainMenuOption.IsGraphConnected:
-                            IsGraphConnected();
-                            break;
-                        case MainMenuOption.FindMst:
-                            MST();
-                            break;
                         case MainMenuOption.OpenGraphVaultManager:
                             HandleGraphVaultOperations();
                             break;
@@ -150,7 +144,7 @@ namespace Handlers
             while (true)
             {
                 ShowGraphVaultManagementMenu();
-                string userChoice = Console.ReadLine();
+                string? userChoice = Console.ReadLine();
                 if (int.TryParse(userChoice, out int option))
                 {
                     switch ((GraphVaultMenuOption)option)
@@ -210,6 +204,12 @@ namespace Handlers
                         case GraphManagerMenyOption.DisplayGraph:
                             DisplayGraph();
                             break;
+                        case GraphManagerMenyOption.IsGraphConnected:
+                            IsGraphConnected();
+                            break;
+                        case GraphManagerMenyOption.FindMst:
+                            MST();
+                            break;
                         case GraphManagerMenyOption.Exit:
                             Console.WriteLine("Возвращение в главное меню.");
                             return;
@@ -227,7 +227,7 @@ namespace Handlers
             while (true)
             {
                 ShowVertexManagerMenu();
-                string userChoice = Console.ReadLine();
+                string? userChoice = Console.ReadLine();
                 if (int.TryParse(userChoice, out int option))
                 {
                     switch ((VertexMenuOption)option)
@@ -275,10 +275,8 @@ namespace Handlers
             Console.WriteLine("\n==Главное меню==");
             Console.WriteLine($"{index++}. Открыть меню управления графом.");
             Console.WriteLine($"{index++}. Открыть меню управления вершинами.");
-            Console.WriteLine($"{index++}. Проверить является ли граф связным");
-            Console.WriteLine($"{index++}. Найти минимальное остовное дерево");
             Console.WriteLine($"{index++}. Открыть меню управления списком графов");
-            Console.WriteLine($"{index++}. Вернуться в меню создания и загрузки.");
+            Console.WriteLine($"{index++}. Открыть меню создания и загрузки графа.");
             Console.Write("Выберите опцию: ");
         }
 
@@ -294,6 +292,8 @@ namespace Handlers
             Console.WriteLine($"{index++}. Удалить вершину.");
             Console.WriteLine($"{index++}. Удалить ребро.");
             Console.WriteLine($"{index++}. Показать список смежности.");
+            Console.WriteLine($"{index++}. Проверить является ли граф связным");
+            Console.WriteLine($"{index++}. Найти минимальное остовное дерево");
             Console.WriteLine($"{index++}. Вернуться в главное меню.");
             Console.Write("Выберите опцию: ");
         }
