@@ -10,11 +10,11 @@ namespace Handlers
     public static class GraphSearcher
     {
         // Метод поиска вершин у которых степень полуисхода больше чем у заданной
-        public static List<Vertex> FindVerticesWithGreaterOutDegree(string vertexName, Graph graph)
+        public static List<Vertex>? FindVerticesWithGreaterOutDegree(string vertexName, Graph graph)
         {
 
             // Получаем вершину по ее имени
-            Vertex givenVertex = FindVertexByName(vertexName, graph);
+            Vertex? givenVertex = FindVertexByName(vertexName, graph);
 
             // Проверяем, что вершина существует
             if (givenVertex == null)
@@ -51,10 +51,10 @@ namespace Handlers
         }
 
         // Метод для поиска вершин, которые не смежные с заданной
-        public static List<Vertex> FindNonAdjacentVertices(string vertexName, Graph graph)
+        public static List<Vertex>? FindNonAdjacentVertices(string vertexName, Graph graph)
         {
             // Получаем вершину по ее имени
-            Vertex givenVertex = FindVertexByName(vertexName, graph);
+            Vertex? givenVertex = FindVertexByName(vertexName, graph);
 
             // Проверяем, что вершина существует
             if (givenVertex == null)
@@ -175,7 +175,7 @@ namespace Handlers
         }
 
         // Метод для получения вершины по ее имени
-        public static Vertex FindVertexByName(string vertexName, Graph graph)
+        public static Vertex? FindVertexByName(string vertexName, Graph graph)
         {
             // Приводим имя к нижнему регистру для поиска без учета регистра
             string lowerName = vertexName.ToLower();
@@ -185,7 +185,7 @@ namespace Handlers
                 foreach (var vertex in graph.adjacencyList.Keys)
                 {
                     // Если имя вершины совпадает с заданным (без учета регистра)
-                    if (vertex.Name.ToLower() == lowerName)
+                    if (vertex.Name.Equals(lowerName, StringComparison.CurrentCultureIgnoreCase))
                         return vertex; // Возвращаем найденную вершину
                 }
             }
@@ -194,10 +194,10 @@ namespace Handlers
         }
 
         // Метод поиска недостижимых вершин из данной 
-        public static List<Vertex> FindUnreachableVertices(string vertexName, Graph graph)
+        public static List<Vertex>? FindUnreachableVertices(string vertexName, Graph graph)
         {
             // Получаем вершину по ее имени
-            Vertex givenVertex = FindVertexByName(vertexName, graph);
+            Vertex? givenVertex = FindVertexByName(vertexName, graph);
 
             // Проверяем, что вершина существует
             if (givenVertex == null)
@@ -206,9 +206,8 @@ namespace Handlers
             }
 
             // Список не смежных вершин
-            List<Vertex> unreachableVertices = new List<Vertex>();
-            List<Vertex> reachableVertices = new List<Vertex>();
-            reachableVertices = GraphTraversal.RecursiveGraphTraversal(graph, givenVertex);
+            List<Vertex> unreachableVertices = [];
+            List<Vertex> reachableVertices = [.. GraphTraversal.RecursiveGraphTraversal(graph, givenVertex).Keys];
 
             foreach (var currentVertex in graph.adjacencyList.Keys.ToList()) // ToList() для предотвращения модификации коллекции во время итерации
             {
@@ -219,6 +218,35 @@ namespace Handlers
             }
 
             return unreachableVertices.Distinct().ToList();
+        }
+
+        // Метод поиска недостижимых вершин из данной 
+        public static Dictionary<Vertex, int>? FindVerticesDistanceLessOrEqualN(string vertexName, Graph graph, int n)
+        {
+            // Получаем вершину по ее имени
+            Vertex? givenVertex = FindVertexByName(vertexName, graph);
+
+            // Проверяем, что вершина существует
+            if (givenVertex == null)
+            {
+                return null;
+            }
+
+            Dictionary<Vertex, int> vertices = GraphTraversal.RecursiveGraphTraversal(graph, givenVertex);
+
+            foreach (var vertex in vertices)
+            {
+                if (vertex.Value > n)
+                {
+                    vertices.Remove(vertex.Key);
+                }
+                if (vertex.Key == givenVertex)
+                {
+                    vertices.Remove(vertex.Key);
+                }
+            }
+
+            return vertices;
         }
     }
 }

@@ -7,20 +7,23 @@ namespace Handlers
 {
     public static class GraphTraversal
     {
-        public static List<Vertex> RecursiveGraphTraversal(Graph graph, Vertex currentVertex)
+        public static Dictionary<Vertex, int> RecursiveGraphTraversal(Graph graph, Vertex currentVertex)
         {
-            List<Vertex> visited = new List<Vertex>();
-            RecursiveGraphTraversalHelp(graph, currentVertex, visited);
-            return visited;
+            Dictionary<Vertex, int> visitedDictionary = new Dictionary<Vertex, int>();
+
+            recursiveGraphTraversalHelp(graph, currentVertex, visitedDictionary);
+
+            return visitedDictionary;
         }
-        private static void RecursiveGraphTraversalHelp(Graph graph, Vertex currentVertex, List<Vertex> visited)
+
+        private static void recursiveGraphTraversalHelp(Graph graph, Vertex currentVertex, Dictionary<Vertex, int> visitedDictionary, int n = 0)
         {
             // Проверяем, была ли вершина уже посещена
-            if (visited.Contains(currentVertex))
+            if (visitedDictionary.ContainsKey(currentVertex))
                 return;
 
             // Добавляем текущую вершину в список посещенных
-            visited.Add(currentVertex);
+            visitedDictionary.Add(currentVertex, n);
 
             // Проверяем, существуют ли смежные вершины для текущей вершины
             if (graph.adjacencyList.ContainsKey(currentVertex))
@@ -28,7 +31,7 @@ namespace Handlers
                 var edges = graph.adjacencyList[currentVertex];
                 foreach (var edge in edges)
                 {
-                    RecursiveGraphTraversalHelp(graph, edge.Destination, visited);
+                    recursiveGraphTraversalHelp(graph, edge.Destination, visitedDictionary, n + 1);
                 }
             }
         }

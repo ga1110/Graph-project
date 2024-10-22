@@ -1,7 +1,8 @@
-﻿using GraphProject.Handlers;
-using Handlers;
+﻿using Handlers;
 using Structures;
 using System;
+using Algorithms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Handlers
 {
@@ -9,12 +10,12 @@ namespace Handlers
     public class MenuHandler
     {
         // Приватное поле graph, которое будет использоваться для хранения текущего графа
-        private Graph graph;
+        private Graph? graph;
 
-        private GraphVault GraphVault = new GraphVault();
+        private GraphVault GraphVault = new();
 
         // Приватное поле для выбора опций в главном меню
-        private enum MainMenuOption
+        private enum GraphLoadCreateMenuOption
         {
             CreateNewGraph,
             LoadGraphFromFile,
@@ -22,14 +23,10 @@ namespace Handlers
         }
 
         // Приватное поле для выбора опций в меню управления графом
-        private enum GraphMenuOption
+        private enum MainMenuOption
         {
             OpenGraphManager,
-            SaveGraphToFile,
-            DisplayVerticesWithGreaterOutDegree,
-            DisplayNonAdjacentVertices,
-            RemoveLeafsEdges,
-            FindUnreachableVertices,
+            OpenVertexManager,
             IsGraphConnected,
             FindMst,
             OpenGraphVaultManager,
@@ -38,6 +35,8 @@ namespace Handlers
 
         private enum GraphManagerMenyOption
         {
+            SaveGraphToFile,
+            RemoveLeafsEdges,
             AddVertex,
             AddEdge,
             RemoveVertex,
@@ -56,6 +55,14 @@ namespace Handlers
             Exit
         }
 
+        private enum VertexMenuOption
+        {
+            DisplayVerticesWithGreaterOutDegree,
+            DisplayNonAdjacentVertices,
+            FindUnreachableVertices,
+            FindVerticesDistanceLessN,
+            Exit
+        }
         // Метод Start, запускающий основной цикл программы
         public void Start()
         {
@@ -69,17 +76,17 @@ namespace Handlers
                 if (int.TryParse(userChoice, out int option))
                 {
                     // Обработка выбора пользователя с помощью конструкции switch
-                    switch ((MainMenuOption)option)
+                    switch ((GraphLoadCreateMenuOption)option)
                     {
-                        case MainMenuOption.CreateNewGraph:
+                        case GraphLoadCreateMenuOption.CreateNewGraph:
                             // Создание нового графа
                             graph = CreateNewGraph();
                             break;
-                        case MainMenuOption.LoadGraphFromFile:
+                        case GraphLoadCreateMenuOption.LoadGraphFromFile:
                             // Загрузка графа из файла
                             graph = LoadGraphFromFile();
                             break;
-                        case MainMenuOption.Exit:
+                        case GraphLoadCreateMenuOption.Exit:
                             // Завершение программы
                             return;
                         default:
@@ -92,7 +99,7 @@ namespace Handlers
                 {
                     // Вызов метода для обработки операций с графом
                     AddGraphToList(graph);
-                    HandleGraphOperations();
+                    HandleMainMenu();
                 }
 
                 // Вывод пустой строки для разделения выводов в консоли
@@ -101,44 +108,32 @@ namespace Handlers
         }
 
         // Приватный метод для обработки операций с графом после его создания или загрузки
-        private void HandleGraphOperations()
+        private void HandleMainMenu()
         {
             while (true)
             {
                 ShowMainMenu();
-                string userChoice = Console.ReadLine();
+                string? userChoice = Console.ReadLine();
                 if (int.TryParse(userChoice, out int option))
                 {
-                    switch ((GraphMenuOption)option)
+                    switch ((MainMenuOption)option)
                     {
-                        case GraphMenuOption.OpenGraphManager:
+                        case MainMenuOption.OpenGraphManager:
                             HandleGraphManagerOperations();
                             break;
-                        case GraphMenuOption.SaveGraphToFile:
-                            SaveGraphToFile();
+                        case MainMenuOption.OpenVertexManager:
+                            HandleVertexManagerOperations();
                             break;
-                        case GraphMenuOption.DisplayVerticesWithGreaterOutDegree:
-                            DisplayVerticesWithGreaterOutDegree();
-                            break;
-                        case GraphMenuOption.DisplayNonAdjacentVertices:
-                            DisplayNonAdjacentVertices();
-                            break;
-                        case GraphMenuOption.RemoveLeafsEdges:
-                            RemoveLeafsEdges();
-                            break;
-                        case GraphMenuOption.FindUnreachableVertices:
-                            FindUnreachableVertices();
-                            break;
-                        case GraphMenuOption.IsGraphConnected:
+                        case MainMenuOption.IsGraphConnected:
                             IsGraphConnected();
                             break;
-                        case GraphMenuOption.FindMst:
+                        case MainMenuOption.FindMst:
                             MST();
                             break;
-                        case GraphMenuOption.OpenGraphVaultManager:
+                        case MainMenuOption.OpenGraphVaultManager:
                             HandleGraphVaultOperations();
                             break;
-                        case GraphMenuOption.Exit:
+                        case MainMenuOption.Exit:
                             Console.WriteLine("Возвращение в главное меню.");
                             return;
                         default:
@@ -194,6 +189,12 @@ namespace Handlers
                 {
                     switch ((GraphManagerMenyOption)option)
                     {
+                        case GraphManagerMenyOption.SaveGraphToFile:
+                            SaveGraphToFile();
+                            break;
+                        case GraphManagerMenyOption.RemoveLeafsEdges:
+                            RemoveLeafsEdges();
+                            break;
                         case GraphManagerMenyOption.AddVertex:
                             AddVertex();
                             break;
@@ -210,6 +211,40 @@ namespace Handlers
                             DisplayGraph();
                             break;
                         case GraphManagerMenyOption.Exit:
+                            Console.WriteLine("Возвращение в главное меню.");
+                            return;
+                        default:
+                            Console.WriteLine("Неверная опция. Попробуйте снова.");
+                            break;
+                    }
+                }
+            }
+        }
+
+        // Приватный метод для обработки операций с вершинами
+        private void HandleVertexManagerOperations()
+        {
+            while (true)
+            {
+                ShowVertexManagerMenu();
+                string userChoice = Console.ReadLine();
+                if (int.TryParse(userChoice, out int option))
+                {
+                    switch ((VertexMenuOption)option)
+                    {
+                        case VertexMenuOption.DisplayVerticesWithGreaterOutDegree:
+                            DisplayVerticesWithGreaterOutDegree();
+                            break;
+                        case VertexMenuOption.DisplayNonAdjacentVertices:
+                            DisplayNonAdjacentVertices();
+                            break;
+                        case VertexMenuOption.FindUnreachableVertices:
+                            FindUnreachableVertices();
+                            break;
+                        case VertexMenuOption.FindVerticesDistanceLessN:
+                            FindVerticesDistanceLessN();
+                            break;
+                        case VertexMenuOption.Exit:
                             Console.WriteLine("Возвращение в главное меню.");
                             return;
                         default:
@@ -239,11 +274,7 @@ namespace Handlers
             int index = 0;
             Console.WriteLine("\n==Главное меню==");
             Console.WriteLine($"{index++}. Открыть меню управления графом.");
-            Console.WriteLine($"{index++}. Сохранить граф в файл.");
-            Console.WriteLine($"{index++}. Вывести вершины с большей полустепенью исхода.");
-            Console.WriteLine($"{index++}. Вывести вершины с несмежные с данной.");
-            Console.WriteLine($"{index++}. Построить граф, полученный удалением рёбер, ведущих в листья.");
-            Console.WriteLine($"{index++}. Найти вершины недостижимые из данной.");
+            Console.WriteLine($"{index++}. Открыть меню управления вершинами.");
             Console.WriteLine($"{index++}. Проверить является ли граф связным");
             Console.WriteLine($"{index++}. Найти минимальное остовное дерево");
             Console.WriteLine($"{index++}. Открыть меню управления списком графов");
@@ -251,10 +282,13 @@ namespace Handlers
             Console.Write("Выберите опцию: ");
         }
 
+        // Приватный метод, отображающий меню управления графом
         private void ShowGraphManagerMenu()
         {
             int index = 0;
             Console.WriteLine("\n==Меню управления графом==");
+            Console.WriteLine($"{index++}. Сохранить граф в файл.");
+            Console.WriteLine($"{index++}. Построить граф, полученный удалением рёбер, ведущих в листья.");
             Console.WriteLine($"{index++}. Добавить вершину.");
             Console.WriteLine($"{index++}. Добавить ребро.");
             Console.WriteLine($"{index++}. Удалить вершину.");
@@ -275,6 +309,18 @@ namespace Handlers
             Console.Write("Выберите опцию: ");
         }
 
+        // Приватный метод, отображающий меню для работы с вершинами
+        private void ShowVertexManagerMenu()
+        {
+            int index = 0;
+            Console.WriteLine("\n==Меню управления вершинами==");
+            Console.WriteLine($"{index++}. Вывести вершины с большей полустепенью исхода.");
+            Console.WriteLine($"{index++}. Вывести вершины с несмежные с данной.");
+            Console.WriteLine($"{index++}. Найти вершины недостижимые из данной.");
+            Console.WriteLine($"{index++}. Найти множество вершины, расстояние от которых до заданной вершины не более N.");
+            Console.WriteLine($"{index++}. Выход");
+            Console.Write("Выберите опцию: ");
+        }
         // Приватный метод для создания нового графа
         private Graph CreateNewGraph()
         {
@@ -521,6 +567,10 @@ namespace Handlers
         {
             Console.Write("Введите имя вершины: ");
             var vertexName = Console.ReadLine();
+            if (vertexName == null || vertexName == "")
+            {
+                return;
+            }
             GraphPrinter.DisplayUnreachableVertices(vertexName, graph);
         }
 
@@ -540,14 +590,42 @@ namespace Handlers
         // Метод получения минимального остовного дерева
         private void MST()
         {
-            if(!KruskalsAlgorithm.IsGraphCorrectForMST(graph))
+            if(!KruskalAlgorithm.IsGraphCorrectForMST(graph))
             {
                 return;
             }
-            Graph tmpGraph = KruskalsAlgorithm.FindMST(graph);
+            Graph tmpGraph = KruskalAlgorithm.KruskalMST(graph);
             AddGraphToList(tmpGraph);
             GraphPrinter.DisplayAdjacencyList(tmpGraph);
             graph = tmpGraph;
+        }
+
+        // Метод нахождения вершин расстояние от заданной меньше N
+        private void FindVerticesDistanceLessN()
+        {
+            Console.Write("Введите имя вершины: ");
+            var vertexName = Console.ReadLine();
+            if (vertexName == null || vertexName == "")
+            {
+                return;
+            }
+
+            Console.Write("Введите N: ");
+            var n = Console.ReadLine();
+            int parsedN;
+            if (n == null || n == "" || !int.TryParse(n, out parsedN))
+            {
+                return;
+            }
+
+            Vertex? vertex = GraphSearcher.FindVertexByName(vertexName, graph);
+            if (vertex == null) 
+            {
+                Console.WriteLine($"Вершины с именем {vertexName} - не существует");
+            }
+
+            var vertexList = GraphSearcher.FindVerticesDistanceLessOrEqualN(vertexName, graph, parsedN);
+            GraphPrinter.DisplayVertexDistanceLessN(vertexList, vertexName, parsedN);
         }
     }
 }

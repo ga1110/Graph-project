@@ -30,10 +30,10 @@ namespace Structures
             GraphName = string.IsNullOrEmpty(name) ? "NamelessGraph" : name;
             adjacencyList = new Dictionary<Vertex, List<Edge>>();
             // Открываем файл для чтения
-            using (StreamReader reader = new StreamReader(filePath))
+            using (StreamReader reader = new(filePath))
             {
                 // Читаем первую строку файла (тип графа: ориентированный или неориентированный)
-                string firstLine = reader.ReadLine();
+                string? firstLine = reader.ReadLine();
 
                 // Если файл пустой, вызываем исключение
                 if (firstLine == null)
@@ -42,9 +42,9 @@ namespace Structures
                 }
 
                 // Проверяем, является ли граф ориентированным
-                IsDirected = firstLine.Trim().ToLower() == "directed";
+                IsDirected = firstLine.Trim().Equals("directed", StringComparison.CurrentCultureIgnoreCase);
 
-                string currentLine;
+                string? currentLine;
 
                 // Читаем файл построчно до конца
                 while ((currentLine = reader.ReadLine()) != null)

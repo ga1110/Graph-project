@@ -24,7 +24,7 @@ namespace Structures
             if (obj is Vertex other)
             {
                 // Сравниваем имена, приводя их к нижнему регистру
-                return Name.ToLower() == other.Name.ToLower();
+                return Name.Equals(other.Name, StringComparison.CurrentCultureIgnoreCase);
             }
             return false;
         }

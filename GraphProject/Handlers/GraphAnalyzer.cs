@@ -12,14 +12,13 @@ namespace Handlers
         public static bool IsGraphConnected(Graph graph)
         {
             var allVertex = graph.adjacencyList.Keys.ToList(); // Все вершины графа
-            var contAllVertex = allVertex.ToList().Count();
+            var contAllVertex = allVertex.ToList().Count;
 
-            List<List<Vertex>> traversalList = new List<List<Vertex>>();
-            List<Vertex> tmpVertexList = new List<Vertex>();
+            List<List<Vertex>> traversalList = [];
 
             foreach (var vertex in allVertex)
             {
-                traversalList.Add(GraphTraversal.RecursiveGraphTraversal(graph, vertex));
+                traversalList.Add([.. GraphTraversal.RecursiveGraphTraversal(graph, vertex).Keys]);
             }
 
             foreach (var vertexList in traversalList)

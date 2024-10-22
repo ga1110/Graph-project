@@ -1,0 +1,5 @@
+F:\Study\Теория графов\Graph-project\publish\GraphProject.exe
+F:\Study\Теория графов\Graph-project\publish\GraphProject.dll
+F:\Study\Теория графов\Graph-project\publish\GraphProject.deps.json
+F:\Study\Теория графов\Graph-project\publish\GraphProject.runtimeconfig.json
+F:\Study\Теория графов\Graph-project\publish\GraphProject.pdb

@@ -63,7 +63,7 @@ namespace Handlers
         public static void DisplayVerticesWithGreaterOutDegree(string vertexName, Graph graph)
         {
 
-            List<Vertex> verticesWithGreaterOutDegree = GraphSearcher.FindVerticesWithGreaterOutDegree(vertexName, graph);
+            List<Vertex>? verticesWithGreaterOutDegree = GraphSearcher.FindVerticesWithGreaterOutDegree(vertexName, graph);
             if (verticesWithGreaterOutDegree == null)
             {
                 Console.WriteLine($"Вершина '{vertexName}' не найдена в графе.");
@@ -150,6 +150,21 @@ namespace Handlers
             else
             {
                 Console.WriteLine($"Нет вершин не достижимых из {vertexName}.");
+            }
+        }
+        public static void DisplayVertexDistanceLessN (Dictionary<Vertex,int> vertexList, string vertexName, int n)
+        {
+            if (vertexList == null)
+            {
+                Console.WriteLine($"Вершин, расстояние которых от вершины {vertexName}, меньше {n} - нет");
+                return;
+            }
+            int index = 1;
+            Console.WriteLine("Список найденных вершин:");
+            vertexList = vertexList.OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+            foreach (var currentElement in vertexList)
+            {
+                Console.WriteLine($"{index++}. {currentElement.Key.Name}, расстояние: {currentElement.Value}");
             }
         }
     }
