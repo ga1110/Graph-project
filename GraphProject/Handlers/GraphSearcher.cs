@@ -222,26 +222,16 @@ namespace Handlers
         }
 
         // Метод поиска недостижимых вершин из данной 
-        public static Dictionary<Vertex, int>? FindVerticesDistanceLessOrEqualN(string vertexName, Graph graph, int n)
+        public static Dictionary<Vertex, double>? FindVerticesDistanceLessOrEqualN(string vertexName, Graph graph, double n)
         {
             // Получаем вершину по ее имени
             Vertex? givenVertex = FindVertexByName(vertexName, graph);
 
-            // Проверяем, что вершина существует
-            if (givenVertex == null)
-            {
-                return null;
-            }
-
-            Dictionary<Vertex, int> vertices = GraphTraversal.RecursiveGraphTraversal(graph, givenVertex);
+            var vertices = DijkstraAlgorithm.Execute(graph, givenVertex);
 
             foreach (var vertex in vertices)
             {
-                if (vertex.Value > n)
-                {
-                    vertices.Remove(vertex.Key);
-                }
-                if (vertex.Key == givenVertex)
+                if (vertex.Value > n || vertex.Key == givenVertex)
                 {
                     vertices.Remove(vertex.Key);
                 }

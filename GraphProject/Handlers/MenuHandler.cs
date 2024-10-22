@@ -607,13 +607,14 @@ namespace Handlers
             var vertexName = Console.ReadLine();
             if (vertexName == null || vertexName == "")
             {
+                Console.WriteLine("Введите имя вершины.");
                 return;
             }
 
             Console.Write("Введите N: ");
             var n = Console.ReadLine();
-            int parsedN;
-            if (n == null || n == "" || !int.TryParse(n, out parsedN))
+            double parsedN;
+            if (n == null || n == "" || !double.TryParse(n, out parsedN))
             {
                 return;
             }
@@ -622,6 +623,7 @@ namespace Handlers
             if (vertex == null) 
             {
                 Console.WriteLine($"Вершины с именем {vertexName} - не существует");
+                return;
             }
 
             var vertexList = GraphSearcher.FindVerticesDistanceLessOrEqualN(vertexName, graph, parsedN);

@@ -152,7 +152,7 @@ namespace Handlers
                 Console.WriteLine($"Нет вершин не достижимых из {vertexName}.");
             }
         }
-        public static void DisplayVertexDistanceLessN (Dictionary<Vertex,int> vertexList, string vertexName, int n)
+        public static void DisplayVertexDistanceLessN (Dictionary<Vertex,double> vertexList, string vertexName, double n)
         {
             if (vertexList == null)
             {
