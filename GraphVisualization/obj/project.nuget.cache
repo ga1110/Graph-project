@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "7F1t4VjaQg8=",
+  "success": true,
+  "projectFilePath": "F:\\Study\\Теория графов\\Graph-project\\GraphVisualization\\GraphVisualization.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Home\\.nuget\\packages\\automaticgraphlayout\\1.1.12\\automaticgraphlayout.1.1.12.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\automaticgraphlayout.drawing\\1.1.12\\automaticgraphlayout.drawing.1.1.12.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\automaticgraphlayout.graphviewergdi\\1.1.12\\automaticgraphlayout.graphviewergdi.1.1.12.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\automaticgraphlayout.wpfgraphcontrol\\1.1.12\\automaticgraphlayout.wpfgraphcontrol.1.1.12.nupkg.sha512"
+  ],
+  "logs": []
+}
