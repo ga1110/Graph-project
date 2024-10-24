@@ -177,5 +177,9 @@ namespace Handlers
             }
         }
 
+        public static Dictionary<Vertex, List<Edge>> GetAdj (Graph graph)
+        {
+            return graph.adjacencyList;
+        }
     }
 }

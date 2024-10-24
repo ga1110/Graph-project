@@ -13,9 +13,3 @@ F:\Study\Теория графов\Graph-project\GraphProject\obj\Release\net8.0
 F:\Study\Теория графов\Graph-project\GraphProject\obj\Release\net8.0\GraphProject.pdb
 F:\Study\Теория графов\Graph-project\GraphProject\obj\Release\net8.0\GraphProject.genruntimeconfig.cache
 F:\Study\Теория графов\Graph-project\GraphProject\obj\Release\net8.0\ref\GraphProject.dll
-F:\Study\Теория графов\Graph-project\GraphProject\bin\Release\net8.0\GraphX.Core.Controls.dll
-F:\Study\Теория графов\Graph-project\GraphProject\bin\Release\net8.0\GraphX.Standard.Common.dll
-F:\Study\Теория графов\Graph-project\GraphProject\bin\Release\net8.0\GraphX.Standard.Logic.dll
-F:\Study\Теория графов\Graph-project\GraphProject\bin\Release\net8.0\QuickGraph.dll
-F:\Study\Теория графов\Graph-project\GraphProject\obj\Release\net8.0\GraphProject.csproj.AssemblyReference.cache
-F:\Study\Теория графов\Graph-project\GraphProject\obj\Release\net8.0\GraphPro.BF198FF1.Up2Date
