@@ -37,6 +37,12 @@ namespace Handlers
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
+            if (string.IsNullOrEmpty(sourceName))
+                throw new Exception("Имя вершины не может быть null");
+
+            if (string.IsNullOrEmpty(destinationName))
+                throw new Exception("Имя вершины не может быть null");
+
             // Получаем объекты вершин по их именам
             var source = GraphSearcher.FindVertexByName(sourceName, graph);
             var destination = GraphSearcher.FindVertexByName(destinationName, graph);
@@ -44,13 +50,15 @@ namespace Handlers
             // Проверяем, существует ли исходная вершина
             if (source == null)
             {
-                throw new ArgumentException($"Вершина '{sourceName}' не существует");
+                source = new Vertex(sourceName);
+                AddVertex(source, graph);
             }
 
             // Проверяем, существует ли конечная вершина
             if (destination == null)
             {
-                throw new ArgumentException($"Вершина '{destinationName}' не существует");
+                destination = new Vertex(destinationName);
+                AddVertex(destination, graph);
             }
 
             // Проверяем, существует ли уже ребро от source к destination
