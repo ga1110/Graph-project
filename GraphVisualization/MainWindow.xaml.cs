@@ -12,7 +12,7 @@ namespace GraphVisualization
     {
         private GraphViewer graphViewer;
         private Microsoft.Msagl.Drawing.Graph MsaglGraph;
-        private Structures.Graph MyGraph;
+        private Structures.Graph graph;
         public MainWindow()
         {
             InitializeComponent();
@@ -24,7 +24,6 @@ namespace GraphVisualization
         {
             // Создаем экземпляр GraphViewer
             graphViewer = new GraphViewer();
-
             // Связываем GraphViewer с контейнером
             graphViewer.BindToPanel(graphContainer);
         }
@@ -36,12 +35,6 @@ namespace GraphVisualization
             //MsaglGraph = GraphConverter.Execute(MyGraph);
             // Центрируем граф в контейнере
             graphViewer.Invalidate();
-        }
-
-        private void MakeUndirected(Microsoft.Msagl.Drawing.Edge edge)
-        {
-            edge.Attr.ArrowheadAtTarget = ArrowStyle.None;
-            edge.Attr.ArrowheadAtSource = ArrowStyle.None;
         }
 
         private void AddEdgeButton_Click(object sender, RoutedEventArgs e)
@@ -56,22 +49,16 @@ namespace GraphVisualization
                 string startVertex = addEdgeWindow.StartVertex;
                 string endVertex = addEdgeWindow.EndVertex;
                 double? weight = addEdgeWindow.Weight;
-
-                // Добавляем ребро в граф
-                Microsoft.Msagl.Drawing.Edge edge = MsaglGraph.AddEdge(startVertex, endVertex);
-
-                // Устанавливаем вес, если он задан
-                if (weight.HasValue)
+                try
                 {
-                    edge.LabelText = weight.Value.ToString();
+                    GraphManager.AddEdge(startVertex, endVertex, graph, weight);
+                    graphViewer.Graph = MsaglGraph;
+                    graphViewer.Invalidate(); // Обновляем отображение
                 }
-
-                // Настраиваем ребро как неориентированное
-                MakeUndirected(edge);
-
-                // Обновляем отображение графа
-                graphViewer.Graph = MsaglGraph;
-                graphViewer.Invalidate(); // Обновляем отображение
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

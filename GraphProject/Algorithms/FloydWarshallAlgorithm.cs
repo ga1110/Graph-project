@@ -8,6 +8,9 @@ namespace Algorithms
     {
         public static double[,] Execute(Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - null");
+
             int V = graph.adjacencyList.Count;
             double[,] dist = new double[V, V];
 

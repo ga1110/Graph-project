@@ -34,8 +34,20 @@ namespace Algorithms
         // Основной метод для выполнения алгоритма Краскала
         public static Graph KruskalMST(Graph graph)
         {
+            if (graph == null) 
+                throw new ArgumentNullException(nameof(graph), "Граф - null");
+
             List<Edge> result = new List<Edge>(); // Список для хранения MST
             List<Edge> edges = new List<Edge>(); // Список всех рёбер графа
+
+            foreach (var element in graph.adjacencyList)
+            {
+                foreach (var edge in element.Value)
+                {
+                    if (edge.Weight == null)
+                        throw new ArgumentNullException($"Вершина {edge.ToString} не имеет веса");
+                }
+            }
 
             // Извлечение всех рёбер из графа
             foreach (var edgeList in graph.adjacencyList.Values)
@@ -78,26 +90,19 @@ namespace Algorithms
         public static bool IsGraphCorrectForMST(Graph graph)
         {
             if (graph == null)
-            {
-                Console.WriteLine("Граф - пустой и/или равен null");
-                return false;
-            }
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
             foreach (var vertex in graph.adjacencyList)
             {
                 foreach (var edge in vertex.Value)
                 {
                     if (edge.Weight == null)
-                    {
-                        Console.WriteLine($"В графе есть вершина без веса ({edge.ToString()})");
-                        return false;
-                    }
+                        throw new ArgumentNullException($"В графе есть вершина без веса ({edge.ToString()})");
                 }
             }
+
             if (graph.IsDirected)
-            {
-                Console.WriteLine($"Граф - ориентированный");
-                return false;
-            }
+                throw new ArgumentNullException($"Граф - ориентированный");
 
             return true;
         }

@@ -8,10 +8,11 @@ namespace Algorithms
     {
         public static Dictionary<Vertex, double> Execute(Graph graph, Vertex startVertex)
         {
+            if (graph == null) 
+                throw new ArgumentNullException(nameof(graph), "Граф - null");
+
             if (!graph.adjacencyList.ContainsKey(startVertex))
-            {
                 throw new ArgumentException("Исходная вершина не существует в графе.");
-            }
 
             var distances = new Dictionary<Vertex, double>();
             var visited = new HashSet<Vertex>();

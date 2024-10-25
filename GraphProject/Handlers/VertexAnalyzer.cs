@@ -7,6 +7,9 @@ namespace Handlers
         // Метод для получения полустепени исхода вершины
         public static int GetOutDegree(Vertex vertex, Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
             // Проверяем, содержит ли граф данную вершину
             if (graph.adjacencyList.ContainsKey(vertex))
             {
@@ -22,6 +25,9 @@ namespace Handlers
         // Метод для получения полустепени захода вершины
         public static int GetInDegree(Vertex vertex, Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
             int count = 0;
             foreach (var adjacencyListElement in graph.adjacencyList)
             {

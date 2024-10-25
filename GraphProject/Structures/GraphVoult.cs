@@ -47,6 +47,9 @@ namespace Structures
         // Метод добавления нового графа в список
         public void AddNewGraph(Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
             _graphs.Add(graph);
             _currentGraph = _graphs.Count() - 1;
         }
@@ -54,6 +57,9 @@ namespace Structures
         // Метод который заменяет текущий граф 
         public void ReplaceCurrentGraph(Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
             _graphs[_currentGraph] = graph;
         }
 

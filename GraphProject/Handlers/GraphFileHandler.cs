@@ -101,6 +101,9 @@ namespace Handlers
 
         public static string CreateFilePath(string fileName)
         {
+            if (fileName == null)
+                throw new ArgumentNullException("Имя файла пустое и/или null");
+
             // Проверяем и добавляем расширение .txt, если его нет
             if (!fileName.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
             {

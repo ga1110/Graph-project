@@ -13,9 +13,14 @@ namespace Handlers
         // Метод поиска вершин у которых степень полуисхода больше чем у заданной
         public static List<Vertex>? FindVerticesWithGreaterOutDegree(string vertexName, Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
             // Получаем вершину по ее имени
             Vertex? givenVertex = FindVertexByName(vertexName, graph);
+
+            if (givenVertex == null)
+                throw new ArgumentNullException($"Вершины {vertexName} не существует");
 
             // Проверяем, что вершина существует
             if (givenVertex == null)
@@ -54,14 +59,16 @@ namespace Handlers
         // Метод для поиска вершин, которые не смежные с заданной
         public static List<Vertex>? FindNonAdjacentVertices(string vertexName, Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
             // Получаем вершину по ее имени
             Vertex? givenVertex = FindVertexByName(vertexName, graph);
 
             // Проверяем, что вершина существует
             if (givenVertex == null)
-            {
-                return null;
-            }
+                throw new ArgumentNullException($"Вершины {vertexName} не существует");
+
 
             // Список не смежных вершин
             List<Vertex> nonAdjacentVertices = new List<Vertex>();
@@ -134,6 +141,9 @@ namespace Handlers
         // Метод для поиска ребер ведущих к листьям 
         public static List<Tuple<Vertex, Vertex>> FindLeafsEdges(Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
             // Список для хранения рёбер, которые нужно удалить
             List<Tuple<Vertex, Vertex>> leafsEdges = new List<Tuple<Vertex, Vertex>>();
 
@@ -178,6 +188,17 @@ namespace Handlers
         // Метод для получения вершины по ее имени
         public static Vertex? FindVertexByName(string vertexName, Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
+            // Получаем вершину по ее имени
+            Vertex? givenVertex = FindVertexByName(vertexName, graph);
+
+            // Проверяем, что вершина существует
+            if (givenVertex == null)
+                throw new ArgumentNullException($"Вершины {vertexName} не существует");
+
+
             // Приводим имя к нижнему регистру для поиска без учета регистра
             string lowerName = vertexName.ToLower();
             if (graph.adjacencyList != null)
@@ -197,14 +218,17 @@ namespace Handlers
         // Метод поиска недостижимых вершин из данной 
         public static List<Vertex>? FindUnreachableVertices(string vertexName, Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
             // Получаем вершину по ее имени
             Vertex? givenVertex = FindVertexByName(vertexName, graph);
 
             // Проверяем, что вершина существует
             if (givenVertex == null)
-            {
-                return null;
-            }
+                throw new ArgumentNullException($"Вершины {vertexName} не существует");
+
+
 
             // Список не смежных вершин
             List<Vertex> unreachableVertices = [];
@@ -224,8 +248,18 @@ namespace Handlers
         // Метод поиска недостижимых вершин из данной 
         public static Dictionary<Vertex, double>? FindVerticesDistanceLessOrEqualN(string vertexName, Graph graph, double n)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
             // Получаем вершину по ее имени
             Vertex? givenVertex = FindVertexByName(vertexName, graph);
+
+            // Проверяем, что вершина существует
+            if (givenVertex == null)
+                throw new ArgumentNullException($"Вершины {vertexName} не существует");
+
+            if (n == null)
+                n = 0;
 
             var vertices = DijkstraAlgorithm.Execute(graph, givenVertex);
 

@@ -21,7 +21,7 @@
                 Margin="10"
                 Click="AddEdgeButton_Click"
                 Panel.ZIndex="1"
-                Opacity="0.9"
+                Opacity="1"
                 Background="LightBlue"
                 FontWeight="Bold"/>
     </Grid>

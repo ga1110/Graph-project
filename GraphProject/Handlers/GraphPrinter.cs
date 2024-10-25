@@ -9,6 +9,8 @@ namespace Handlers
     {
         public static void DisplayAdjacencyList(Graph graph)
         {
+            if (graph == null)
+                throw new Exception("Граф - null");
             Console.WriteLine("\nСписок смежности графа:");
 
             // Проходим по каждому элементу списка смежности графа
@@ -62,14 +64,19 @@ namespace Handlers
         }
         public static void DisplayVerticesWithGreaterOutDegree(string vertexName, Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф не может быть null.");
 
             List<Vertex>? verticesWithGreaterOutDegree = GraphSearcher.FindVerticesWithGreaterOutDegree(vertexName, graph);
+
             if (verticesWithGreaterOutDegree == null)
-            {
-                Console.WriteLine($"Вершина '{vertexName}' не найдена в графе.");
-                return;
-            }
+                throw new ArgumentNullException($"Вершина '{vertexName}' не найдена в графе.");
+
             Vertex currVertex = GraphSearcher.FindVertexByName(vertexName, graph);
+
+            if (verticesWithGreaterOutDegree == null)
+                throw new ArgumentNullException($"Вершина '{vertexName}' не найдена в графе.");
+
             int givenVertexOutDegree = VertexAnalyzer.GetOutDegree(currVertex, graph);
             if (verticesWithGreaterOutDegree.Count > 0)
             {

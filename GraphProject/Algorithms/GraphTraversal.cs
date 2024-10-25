@@ -9,6 +9,12 @@ namespace Algorithms
     {
         public static Dictionary<Vertex, int> RecursiveGraphTraversal(Graph graph, Vertex currentVertex)
         {
+            if (graph == null) 
+                throw new ArgumentNullException(nameof(graph), "Граф - null");
+
+            if (currentVertex == null)
+                throw new ArgumentNullException($"Вершина {currentVertex} - не существует");
+
             Dictionary<Vertex, int> visitedDictionary = new Dictionary<Vertex, int>();
 
             recursiveGraphTraversalHelp(graph, currentVertex, visitedDictionary);
