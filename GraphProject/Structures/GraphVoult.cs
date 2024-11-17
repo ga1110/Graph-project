@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Structures
 {
-    public class GraphVault
+    public class GraphVoult
     {
         private List<Graph> _graphs = new List<Graph>();
         private int _currentGraph = 0;
@@ -83,14 +83,14 @@ namespace Structures
         }
 
         // Метод удаления графа по номеру
-        public bool RemoveGraph(int graphToDelete)
+        public void RemoveGraph(int graphToDelete)
         {
             if(CheckUserInput(graphToDelete))
             {
                 _graphs.RemoveAt(graphToDelete - 1);
-                return true;
+                return;
             }
-            return false;
+            throw new Exception("Не удалось удалить граф из списка");
         }
         
         // Проверка ввода пользователя

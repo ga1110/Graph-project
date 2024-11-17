@@ -191,16 +191,9 @@ namespace Handlers
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
-            // Получаем вершину по ее имени
-            Vertex? givenVertex = FindVertexByName(vertexName, graph);
-
-            // Проверяем, что вершина существует
-            if (givenVertex == null)
-                throw new ArgumentNullException($"Вершины {vertexName} не существует");
-
-
             // Приводим имя к нижнему регистру для поиска без учета регистра
             string lowerName = vertexName.ToLower();
+
             if (graph.adjacencyList != null)
             {
                 // Проходим по всем вершинам в списке смежности
@@ -211,9 +204,11 @@ namespace Handlers
                         return vertex; // Возвращаем найденную вершину
                 }
             }
-            // Если вершина не найдена, возвращаем null
+
+            // Если вершина не найдена, выбрасываем исключение
             return null;
         }
+
 
         // Метод поиска недостижимых вершин из данной 
         public static List<Vertex>? FindUnreachableVertices(string vertexName, Graph graph)

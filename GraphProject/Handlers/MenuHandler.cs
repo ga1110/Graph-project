@@ -12,7 +12,7 @@ namespace Handlers
         // Приватное поле graph, которое будет использоваться для хранения текущего графа
         private Graph? graph;
 
-        private GraphVault GraphVault = new();
+        private GraphVoult GraphVoult = new();
 
         // Приватное поле для выбора опций в главном меню
         private enum GraphLoadCreateMenuOption
@@ -27,7 +27,7 @@ namespace Handlers
         {
             OpenGraphManager,
             OpenVertexManager,
-            OpenGraphVaultManager,
+            OpenGraphVoultManager,
             Exit
         }
 
@@ -46,7 +46,7 @@ namespace Handlers
         }
 
         // Приватное поле для выбора опций в меню списка графов
-        private enum GraphVaultMenuOption
+        private enum GraphVoultMenuOption
         {
             ShowList,
             RemoveAtNth,
@@ -124,8 +124,8 @@ namespace Handlers
                         case MainMenuOption.OpenVertexManager:
                             HandleVertexManagerOperations();
                             break;
-                        case MainMenuOption.OpenGraphVaultManager:
-                            HandleGraphVaultOperations();
+                        case MainMenuOption.OpenGraphVoultManager:
+                            HandleGraphVoultOperations();
                             break;
                         case MainMenuOption.Exit:
                             Console.WriteLine("Возвращение в главное меню.");
@@ -139,29 +139,29 @@ namespace Handlers
         }
 
         // Приватный метод для обработки операций с списком графов
-        private void HandleGraphVaultOperations()
+        private void HandleGraphVoultOperations()
         {
             while (true)
             {
-                ShowGraphVaultManagementMenu();
+                ShowGraphVoultManagementMenu();
                 string? userChoice = Console.ReadLine();
                 if (int.TryParse(userChoice, out int option))
                 {
-                    switch ((GraphVaultMenuOption)option)
+                    switch ((GraphVoultMenuOption)option)
                     {
-                        case GraphVaultMenuOption.ShowList:
+                        case GraphVoultMenuOption.ShowList:
                             ShowGraphList();
                             break;
-                        case GraphVaultMenuOption.RemoveAtNth:
+                        case GraphVoultMenuOption.RemoveAtNth:
                             RemoveNthGraph();
                             break;
-                        case GraphVaultMenuOption.CopyCurrentGrpah:
+                        case GraphVoultMenuOption.CopyCurrentGrpah:
                             CopyCurrentGraph();
                             break;
-                        case GraphVaultMenuOption.ChangeCurrentGraph:
+                        case GraphVoultMenuOption.ChangeCurrentGraph:
                             ChangeCurrentGraph();
                             break;
-                        case GraphVaultMenuOption.Exit:
+                        case GraphVoultMenuOption.Exit:
                             Console.WriteLine("Возвращение в меню управления графом.");
                             return;
                         default:
@@ -256,7 +256,7 @@ namespace Handlers
         }
 
         // Приватный метод для обработки операций с графом 
-        private void ShowGraphVaultManagementMenu()
+        private void ShowGraphVoultManagementMenu()
         {
             int index = 0;
             Console.WriteLine("\nМеню управления списком графов:");
@@ -352,7 +352,7 @@ namespace Handlers
         // Приватный метод для копирования текущего графа
         private void CopyCurrentGraph()
         {
-            GraphVault.CopyCurrentGrahp();
+            GraphVoult.CopyCurrentGrahp();
             Console.WriteLine("Текущий граф скопирован в конец списка");
         }
 
@@ -476,9 +476,9 @@ namespace Handlers
         // Приватный метод добавления графа в список
         private void AddGraphToList(Graph graph)
         {
-            if (GraphVault.isVoultEmpty())
+            if (GraphVoult.isVoultEmpty())
             {
-                GraphVault.AddNewGraph(graph);
+                GraphVoult.AddNewGraph(graph);
             }
             else
             {
@@ -489,13 +489,13 @@ namespace Handlers
                     if (input == "y")
                     {
                         Console.WriteLine("Текущий граф заменён.");
-                        GraphVault.ReplaceCurrentGraph(graph);
+                        GraphVoult.ReplaceCurrentGraph(graph);
                         return;
                     }
                     else if (input == "n")
                     {
                         Console.WriteLine("В список добавлен новый граф.");
-                        GraphVault.AddNewGraph(graph);
+                        GraphVoult.AddNewGraph(graph);
                         return;
                     }
                     else
@@ -509,7 +509,7 @@ namespace Handlers
         // Приватный метод для вывода списка графов
         private void ShowGraphList()
         {
-            GraphPrinter.DisplayGraphList(GraphVault);
+            GraphPrinter.DisplayGraphList(GraphVoult);
         }
 
         // Приватный метод для удаления графа по номеру
@@ -520,15 +520,7 @@ namespace Handlers
             int index;
             if (int.TryParse(userChoice, out index))
             {
-                bool isDeleted = GraphVault.RemoveGraph(index);
-                if (isDeleted)
-                {
-                    Console.WriteLine($"Граф под номером {index} успешно удален");
-                }
-                else
-                {
-                    GraphPrinter.DisplayGraphIndexError(GraphVault);
-                }
+                GraphVoult.RemoveGraph(index);
             }
             else
             {
@@ -546,15 +538,13 @@ namespace Handlers
             if (int.TryParse(userChoice, out index))
             {
 
-                if (GraphVault.ChangeCurrentGraph(index))
+                if (GraphVoult.ChangeCurrentGraph(index))
                 {
-                    graph = GraphVault.GetCurrentGraph();
-                    var newCurrentGraphIndex = GraphVault.GetCurrentGraphIndex();
-                    var newCurrentGraphName = graph.GraphName;
+                    graph = GraphVoult.GetCurrentGraph();
                     Console.WriteLine("Успешно задан новый граф");
-                    GraphPrinter.DisplayCurrentGraph(GraphVault);
+                    GraphPrinter.DisplayCurrentGraph(GraphVoult);
                 }
-                GraphPrinter.DisplayGraphIndexError(GraphVault);
+                GraphPrinter.DisplayGraphIndexError(GraphVoult);
             }
             else
             {
@@ -579,11 +569,11 @@ namespace Handlers
         {
             if (GraphAnalyzer.IsGraphConnected(graph))
             {
-                Console.WriteLine($"Граф {GraphVault.GetCurrentGraphIndex()} - связный");
+                Console.WriteLine($"Граф {GraphVoult.GetCurrentGraphIndex()} - связный");
             }
             else
             {
-                Console.WriteLine($"Граф {GraphVault.GetCurrentGraphIndex()} - не связный");
+                Console.WriteLine($"Граф {GraphVoult.GetCurrentGraphIndex()} - не связный");
             }
         }
 

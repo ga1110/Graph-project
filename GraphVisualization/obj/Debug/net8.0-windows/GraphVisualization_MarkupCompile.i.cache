@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 F:\Study\Теория графов\Graph-project\GraphVisualization\App.xaml
-11407045341
+81434251422
 
-6-602496309
-1981124507420
-MainWindow.xaml;
+151360095905
+203-461092796
+MainWindow.xaml;Window\AddRemoveEdgeWindow.xaml;Window\AddRemoveVertexWindow.xaml;Window\CreateGraphWindow.xaml;Window\FindVertexWindow.xaml;Window\GraphListWindow.xaml;Window\LoadGraphWindow.xaml;Window\VertexChooseWindow.xaml;
 
-True
+False
 

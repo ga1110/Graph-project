@@ -2,12 +2,48 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="AddEdgeWindow.xaml.cs">
+    <Compile Update="Window\AddRemoveEdgeWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Window\AddRemoveVertexWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Window\CreateGraphWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Window\FindVertexWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Window\GraphListWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Window\LoadGraphWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Window\VertexChooseWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="AddEdgeWindow.xaml">
+    <Page Update="Window\AddRemoveEdgeWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Window\AddRemoveVertexWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Window\CreateGraphWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Window\FindVertexWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Window\GraphListWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Window\LoadGraphWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Window\VertexChooseWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

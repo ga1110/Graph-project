@@ -1,0 +1,36 @@
+﻿<Window x:Class="GraphVisualization.CreateGraphWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Создание графа" Height="202" Width="300">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Метка и текстовое поле для начальной вершины -->
+        <Label Grid.Row="0" Grid.Column="0" Content="Имя графа:" VerticalAlignment="Center" />
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="GraphNameTextBox" Margin="5" />
+
+        <!-- Метка и текстовое поле для конечной вершины -->
+        <Label Grid.Row="1" Grid.Column="0" Content="Граф ориентированный?" VerticalAlignment="Center" />
+        <CheckBox Grid.Row="1" Grid.Column="1" x:Name="IsDirectedCheckBox" Margin="5" />
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Заменить текущий граф?" VerticalAlignment="Center" />
+        <CheckBox Grid.Row="2" Grid.Column="1" x:Name="AddToVoult" Margin="5" />
+        
+        <!-- Метка и текстовое поле для веса -->
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
+            <Button Content="OK" Width="75" Margin="5" IsDefault="True" Click="OkButton_Click" />
+            <Button Content="Отмена" Width="75" Margin="5" IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

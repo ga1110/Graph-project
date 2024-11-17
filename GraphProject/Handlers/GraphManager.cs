@@ -50,14 +50,14 @@ namespace Handlers
             // Проверяем, существует ли исходная вершина
             if (source == null)
             {
-                source = new Vertex(sourceName);
+                source = new Vertex(sourceName.ToUpper().Trim());
                 AddVertex(source, graph);
             }
 
             // Проверяем, существует ли конечная вершина
             if (destination == null)
             {
-                destination = new Vertex(destinationName);
+                destination = new Vertex(destinationName.ToUpper().Trim());
                 AddVertex(destination, graph);
             }
 
@@ -159,7 +159,7 @@ namespace Handlers
 
             if (source == null || destination == null)
                 throw new ArgumentNullException("Вершина не найдена");
-            
+
             // Удаляем ребра из списка исходной вершины, ведущие к конечной вершине
             bool removed = graph.adjacencyList[source].RemoveAll(e => e.Destination.Equals(destination)) > 0;
 
@@ -175,6 +175,7 @@ namespace Handlers
                     throw new ArgumentNullException($"Ребро от '{destination.Name}' к '{source.Name}' не найдено");
             }
         }
+
 
         public static Dictionary<Vertex, List<Edge>> GetAdj (Graph graph)
         {

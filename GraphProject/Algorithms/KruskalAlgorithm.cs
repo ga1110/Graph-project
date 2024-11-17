@@ -40,15 +40,6 @@ namespace Algorithms
             List<Edge> result = new List<Edge>(); // Список для хранения MST
             List<Edge> edges = new List<Edge>(); // Список всех рёбер графа
 
-            foreach (var element in graph.adjacencyList)
-            {
-                foreach (var edge in element.Value)
-                {
-                    if (edge.Weight == null)
-                        throw new ArgumentNullException($"Вершина {edge.ToString} не имеет веса");
-                }
-            }
-
             // Извлечение всех рёбер из графа
             foreach (var edgeList in graph.adjacencyList.Values)
             {

@@ -114,31 +114,31 @@ namespace Handlers
                 Console.WriteLine($"Все вершины смежны с вершиной '{vertexName}'.");
             }
         }
-        public static void DisplayGraphList(GraphVault GraphVault)
+        public static void DisplayGraphList(GraphVoult GraphVoult)
         {
             Console.WriteLine("\nСписок графов:");
-            var currentGraphVault = GraphVault.GetGrahpsList();
+            var currentGraphVoult = GraphVoult.GetGrahpsList();
             var index = 1;
-            foreach (var graphInList in currentGraphVault)
+            foreach (var graphInList in currentGraphVoult)
             {
                 Console.WriteLine($"{index}. {graphInList.GraphName}");
                 index++;
             }
             Console.WriteLine();
-            var currentGraphIndex = GraphVault.GetCurrentGraphIndex();
-            var currentGraphName = GraphVault.GetCurrentGraph().GraphName;
+            var currentGraphIndex = GraphVoult.GetCurrentGraphIndex();
+            var currentGraphName = GraphVoult.GetCurrentGraph().GraphName;
             Console.WriteLine($"Выбранный граф: {currentGraphIndex}. {currentGraphName}");
             Console.WriteLine();
         }
-        public static void DisplayCurrentGraph (GraphVault GraphVault)
+        public static void DisplayCurrentGraph (GraphVoult GraphVoult)
         {
-            var currentGraphName = GraphVault.GetCurrentGraph().GraphName;
-            var currentGraphIndex = GraphVault.GetCurrentGraphIndex();
+            var currentGraphName = GraphVoult.GetCurrentGraph().GraphName;
+            var currentGraphIndex = GraphVoult.GetCurrentGraphIndex();
             Console.WriteLine($"Текущий граф: {currentGraphIndex}. {currentGraphName}");
         }
-        public static void DisplayGraphIndexError (GraphVault GraphVault)
+        public static void DisplayGraphIndexError (GraphVoult GraphVoult)
         {
-            var currentGraphIndex = GraphVault.GetCurrentGraphIndex();
+            var currentGraphIndex = GraphVoult.GetCurrentGraphIndex();
             Console.WriteLine($"Графа под номером {currentGraphIndex} не существует.");
         }
         public static void DisplayUnreachableVertices(string vertexName, Graph graph)

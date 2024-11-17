@@ -1,3 +1,6 @@
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphProject.deps.json
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphProject.runtimeconfig.json
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphProject.exe
 F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphVisualization.exe
 F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphVisualization.deps.json
 F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphVisualization.runtimeconfig.json
@@ -7,6 +10,8 @@ F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\
 F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\AutomaticGraphLayout.Drawing.dll
 F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\Microsoft.Msagl.GraphViewerGdi.dll
 F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\Microsoft.Msagl.WpfGraphControl.dll
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphProject.dll
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphProject.pdb
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\GraphVisualization.csproj.AssemblyReference.cache
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\MainWindow.baml
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\MainWindow.g.cs
@@ -24,10 +29,9 @@ F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\GraphVisualization.pdb
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\GraphVisualization.genruntimeconfig.cache
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\ref\GraphVisualization.dll
-F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphProject.deps.json
-F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphProject.runtimeconfig.json
-F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphProject.exe
-F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphProject.dll
-F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net8.0-windows\GraphProject.pdb
-F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\AddEdgeWindow.baml
-F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\AddEdgeWindow.g.cs
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\Window\AddEdgeWindow.baml
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\Window\CreateGraphWindow.baml
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\Window\AddEdgeWindow.g.cs
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\Window\CreateGraphWindow.g.cs
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\Window\RemoveEdgeWindow.baml
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Release\net8.0-windows\Window\RemoveEdgeWindow.g.cs
