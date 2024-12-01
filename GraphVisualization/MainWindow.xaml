@@ -6,200 +6,260 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Class="GraphVisualization.MainWindow"
     Height="900" Width="1600"
-    WindowStyle="None"
-    ResizeMode="NoResize"
+    WindowStyle="ToolWindow"
     xmlns:wpfgraphcontrol="http://mlsagl"
+    Background="Transparent"
+    AllowsTransparency="False"
     mc:Ignorable="mc">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/ExpanderStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Border Background="#0e1621">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
 
-    <Grid x:Name="mainGrid" ClipToBounds="True">
-        <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="2">
-            
-            <StackPanel Orientation="Vertical" Margin="10">
-                
-                <Button x:Name="CreateGraphButton"
-                    Content="Создать граф"
-                    Width="140"
-                    Height="40"
-                    Click="CreateGraphButton_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
-                
-                <Button x:Name="LoadGraphButton"
-                    Content="Загрузить граф"
-                    Width="140"
-                    Height="40"
-                    Click="LoadGraphButton_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
 
-                <Button x:Name="CopyGraphButton"
-                    Content="Скопировать граф"
-                    Width="140"
-                    Height="40"
-                    Click="CopyGraphButton_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Text ="Graph Visualization"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin="65,0,0,0"
+                FontSize="25"
+                Foreground="White"
+                FontWeight="Bold"
+             >
+            </TextBlock>
+            <Image Source="Resources\logo.png"
+                   Height="50" Width="50"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10,0,0,0"
+                   Grid.Row="0"
+                   Grid.Column="0">
+            </Image>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                          Grid.Row="1"
+                          Grid.Column="0">
+                <StackPanel>
+                    <!-- Первый Expander -->
+                    <Expander Header="Управление графом" 
+                              Margin="10,0,10,10"
+                              IsExpanded="False"
+                              Expanded="Expander_Expanded"
+                              >
+                        <StackPanel>
+                            <Button x:Name="CreateGraphButton"
+                                    Content="Создать граф" 
+                                    Click="CreateGraphButton_Click" 
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="LoadGraphButton"
+                                    Content="Загрузить граф"
+                                    Click="LoadGraphButton_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="CopyGraphButton"
+                                    Content="Скопировать граф"
+                                    Click="CopyGraphButton_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="OpenGraphVoult"
+                                    Content="Список графов"
+                                    Click="OpenGraphVoult_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                        </StackPanel>
+                    </Expander>
 
-                <Button x:Name="FindMST"
-                    Content="Найти MST"
-                    Width="140"
-                    Height="40"
-                    Click="FindMST_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
+                    <!-- Второй Expander -->
+                    <Expander Header="Операции с рёбрами" 
+                              IsExpanded="False" 
+                              Margin="10"
+                              Expanded="Expander_Expanded">
+                        <StackPanel>
+                            <Button x:Name="AddEdgeButton"
+                                    Content="Добавить ребро" 
+                                    Click="AddEdgeButton_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="RemoveEdgeButton"
+                                    Content="Удалить ребро"
+                                    Click="RemoveEdgeButton_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="RemoveLeafEdgeButton"
+                                    Content="Удалить ребра ведущие к листьям"
+                                    Click="RemoveLeafEdgeButton_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                        </StackPanel>
+                    </Expander>
 
-                <Button x:Name="OpenGraphVoult"
-                    Content="Список графов"
-                    Width="140"
-                    Height="40"
-                    Click="OpenGraphVoult_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
-            </StackPanel>
-            
-            <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="2">
-                
-                <Button x:Name="AddEdgeButton"
-                    Content="Добавить ребро"
-                    Width="140"
-                    Height="40"
-                    Click="AddEdgeButton_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
-                
-                <Button x:Name="RemoveEdgeButton"
-                    Content="Удалить ребро"
-                    Width="140"
-                    Height="40"
-                    Click="RemoveEdgeButton_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
-                
-                <Button x:Name="RemoveLeafEdgeButton"
-                    Content="Удалить лист. ребра"
-                    Width="140"
-                    Height="40"
-                    Click="RemoveLeafEdgeButton_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
+                    <!-- Третий Expander -->
+                    <Expander Header="Операции с вершинами" 
+                              IsExpanded="False" 
+                              Margin="10"
+                              Expanded="Expander_Expanded">
+                        <StackPanel>
+                            <Button x:Name="AddVertex"
+                                    Content="Добавить вершину" 
+                                    Click="AddVertexButton_Click"
+                                    Margin="10" 
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="RemoveVertex"
+                                    Content="Удалить вершину"
+                                    Click="RemoveVertexButton_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="FindVertex"
+                                    Content="Поиск вершин"
+                                    Click="FindVertex_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                        </StackPanel>
+                    </Expander>
+                    
+                    <!-- Четвертый Expander-->
+                    <Expander Header="Поиск вершин" 
+                              IsExpanded="False" 
+                              Margin="10"
+                              Expanded="Expander_Expanded">
+                        <StackPanel>
+                            <Button x:Name="NonAdjacentVertex"
+                                    Content="Вершины не смежные с данной"
+                                    Click="FindNonAdjacentVertex_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="VerticesWithGreaterOutDegree"
+                                    Content="Вершины с большей полуступенью исхода"
+                                    Click="FindVerticesWithGreaterOutDegree_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="FindUnreachableVertices"
+                                    Content="Недостижимые вершины"
+                                    Click="FindUnreachableVertices_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="FindVerticesDistanceLessN"
+                                    Content="Вершины с расстоянием меньше чем N"
+                                    Click="FindVerticesDistanceLessN_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="FindShortestPath"
+                                    Content="Кротчайшие пути от вершины"
+                                    Click="FindShortestPath_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="FindNPeriphery"
+                                    Content="Найти N-переферию"
+                                    Click="FindNPeriphery_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                        </StackPanel>
+                    </Expander>
+                    
+                    <Expander Header="Разное" 
+                              IsExpanded="False" 
+                              Margin="10"
+                              Expanded="Expander_Expanded">
+                        <StackPanel>
+                            <Button x:Name="FindMST"
+                                    Content="Найти MST"
+                                    Click="FindMST_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="FindMaxFlow"
+                                    Content="Найти максимальный поток"
+                                    Click="FindMaxFlow_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden"
+              Grid.Row="1"
+              Grid.Column="3">
+                <StackPanel>
+                    <Expander Header="Информация о графе" 
+                              Margin="10,0,10,10"
+                              IsExpanded="False">
+                        <TextBox x:Name="InfoTextBox"
+                                 Margin="10"  
+                                 IsReadOnly="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Hidden"
+                                 HorizontalScrollBarVisibility="Disabled"
+                                 Background="LightGray"
+                                 BorderBrush="Black"  
+                                 BorderThickness="2"
+                                 FontSize="15"
+                                 Panel.ZIndex="2"
+                                 />
+                    </Expander>
+                    <Expander Header="Список смежности графа" 
+                              Margin="10"
+                              IsExpanded="False">
+                        <TextBox x:Name="AdjTextBox"
+                                 Margin="10"  
+                                 IsReadOnly="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Hidden"
+                                 HorizontalScrollBarVisibility="Disabled"
+                                 Background="LightGray"
+                                 BorderBrush="Black"  
+                                 BorderThickness="2"
+                                 FontSize="15"
+                                 Panel.ZIndex="2"
+                                 />
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+            <Border Background="White" Grid.Row="1" Grid.Column="1">
+            <wpfgraphcontrol:AutomaticGraphLayoutControl x:Name="graphControl"
+                                                        Grid.Row="1"
+                                                        Grid.Column="1"
+                                                        Margin="10"
+                                                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                        ClipToBounds="False" 
 
-            </StackPanel>
-
-            <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="2">
-                
-                <Button x:Name="AddVertex"
-                    Content="Добавить вершину"
-                    Width="140"
-                    Height="40"
-                    Click="AddVertexButton_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
-
-                <Button x:Name="RemoveVertex"
-                    Content="Удалить вершину"
-                    Width="140"
-                    Height="40"
-                    Click="RemoveVertexButton_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
-                
-                <Button x:Name="FindVertex"
-                    Content="Поиск вершин"
-                    Width="140"
-                    Height="40"
-                    Click="FindVertex_Click"
-                    Background="LightBlue"
-                    FontWeight="Bold"
-                    Margin="10,10,10,10"
-                    Panel.ZIndex="2"
-                />
-
-            </StackPanel>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Panel.ZIndex="2">
-            <TextBox x:Name="InfoTextBox"
-                         VerticalAlignment="Bottom"
-                         HorizontalAlignment="Left"
-                         Width="300"
-                         Height="200"
-                         Margin="10,10,10,10"  
-                         IsReadOnly="True"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         HorizontalScrollBarVisibility="Disabled"
-                         Background="LightGray"
-                         BorderBrush="Black"  
-                         BorderThickness="2"
-                         FontSize="15"
-                         Panel.ZIndex="2"
-                         Text="Информация о графе:" 
-            />
-
-            <TextBox x:Name="AdjTextBox"
-                         VerticalAlignment="Bottom"
-                         HorizontalAlignment="Right"
-                         Width="300"
-                         Height="200"
-                         Margin="10,10,10,10"  
-                         IsReadOnly="True"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         HorizontalScrollBarVisibility="Disabled"
-                         Background="LightGray"
-                         BorderBrush="Black"  
-                         BorderThickness="2"
-                         FontSize="15"
-                         Panel.ZIndex="2"
-                         Text="Список смежности графа:" 
-            />
-        </StackPanel>
-
-        <ScrollViewer Height="200" Width="200" VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="radioButtonsPanel">
-                <!-- Радиокнопки будут добавляться сюда -->
-            </StackPanel>
-        </ScrollViewer>
-        <!-- graphControl в правом столбце (центре экрана) -->
-        <wpfgraphcontrol:AutomaticGraphLayoutControl x:Name="graphControl"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Margin="10"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ScrollViewer.VerticalScrollBarVisibility="Disabled"
-            ClipToBounds="True" 
-
-        />
-    </Grid>
+                                                    />
+                </Border>
+        </Grid>
+    </Border>
     
 </Window>

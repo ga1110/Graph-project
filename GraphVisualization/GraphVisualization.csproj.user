@@ -20,11 +20,20 @@
     <Compile Update="Window\LoadGraphWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Window\MaxFlowVertexChoose.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Window\VertexChooseWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Style\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Style\ExpanderStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Window\AddRemoveEdgeWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -41,6 +50,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Window\LoadGraphWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Window\MaxFlowVertexChoose.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Window\VertexChooseWindow.xaml">

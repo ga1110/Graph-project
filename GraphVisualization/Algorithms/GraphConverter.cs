@@ -29,15 +29,22 @@ namespace GraphVisualization.Algorithms
             {
                 var edges = element.Value;
                 var vertex = element.Key;
+
                 MsaglGraph.AddNode(vertex.Name);
                 foreach (var edge in edges)
                 {
+                    var edgeFlow = "";
+                    if (edge.Capacity != null)
+                    {
+                        edgeFlow = $"{edge.Flow} / {edge.Capacity}";
+                    }
+                    var mark = $"{edge.Weight}" + edgeFlow;
                     if (!myGraph.IsDirected)
                     {
                         if (!IsDublicate(edgesInGraph, edge))
                         {
                             Microsoft.Msagl.Drawing.Edge MsaglEdge = MsaglGraph.AddEdge(edge.Source.Name
-                                                                                         , edge.Weight.ToString()
+                                                                                         , mark
                                                                                          , edge.Destination.Name);
                             MakeUndirected(MsaglEdge);
                             edgesInGraph.Add(edge);
@@ -48,7 +55,7 @@ namespace GraphVisualization.Algorithms
                     else
                     {
                         Microsoft.Msagl.Drawing.Edge MsaglEdge = MsaglGraph.AddEdge(edge.Source.Name
-                                                                                     , edge.Weight.ToString()
+                                                                                     , mark
                                                                                      , edge.Destination.Name);
                         edgesInGraph.Add(edge);
                     }

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 F:\Study\Теория графов\Graph-project\GraphVisualization\App.xaml
-81434251422
+11672388405
 
-14-1900030484
+151765298838
 1981008645804
-MainWindow.xaml;Window\AddRemoveEdgeWindow.xaml;Window\AddRemoveVertexWindow.xaml;Window\CreateGraphWindow.xaml;Window\FindVertexWindow.xaml;Window\GraphListWindow.xaml;Window\LoadGraphWindow.xaml;Window\VertexChooseWindow.xaml;
+MainWindow.xaml;Style\ButtonStyle.xaml;Style\ExpanderStyle.xaml;Window\AddRemoveEdgeWindow.xaml;Window\AddRemoveVertexWindow.xaml;Window\CreateGraphWindow.xaml;Window\FindVertexWindow.xaml;Window\GraphListWindow.xaml;Window\LoadGraphWindow.xaml;Window\MaxFlowVertexChoose.xaml;Window\VertexChooseWindow.xaml;
 
-False
+True
 

@@ -309,5 +309,15 @@ namespace GraphProject.Handlers
 
             return periphery;
         }
+
+        public static double FindMaxFlow(Graph graph, string sourceName, string sinkName)
+        {
+
+            // Получаем вершину по ее имени
+            Vertex source = FindVertexByName(sourceName, graph) ?? throw new ArgumentNullException($"Вершины {sourceName} не существует");
+            // Получаем вершину по ее имени
+            Vertex sink = FindVertexByName(sinkName, graph) ?? throw new ArgumentNullException($"Вершины {sinkName} не существует");
+            return MaxFlowSolver.FindMaxFlow(graph, source, sink);
+        }
     }
 }

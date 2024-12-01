@@ -45,3 +45,9 @@ F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\ne
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\GraphVisualization.pdb
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\GraphVisualization.genruntimeconfig.cache
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\ref\GraphVisualization.dll
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\Style\ExpanderStyle.baml
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\GraphVisualization_MarkupCompile.lref
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\App.baml
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\Style\ButtonStyle.baml
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\Window\MaxFlowVertexChoose.baml
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\Window\MaxFlowVertexChoose.g.cs

@@ -8,15 +8,22 @@ namespace GraphProject.Structures
         public Vertex Source { get; set; }
         public Vertex Destination { get; set; } // Представляет вершину назначения, к которой ведет данное ребро
 
-        public double? Weight { get; set; } // Представляет вес ребра; если вес не задан, свойство будет равно null
+        public double? Capacity { get; set; } // Емкость ребра (максимальная пропускная способность)
+        public double Flow { get; set; } // Текущий поток по ребру
 
-        public Edge(Vertex source, Vertex destination, double? weight = null)
+        public double? Weight { get; set; } // Представляет вес ребра; если вес не задан, свойство будет равно null
+        public Edge(Vertex source, Vertex destination, double? weight = null, double? capacity = null)
         {
             Source = source;
             // Проверка: если параметр destination равен null, исключение ArgumentNullException
             Destination = destination ?? throw new ArgumentNullException(nameof(destination));
             Weight = weight;
+            Flow = 0;
+            Capacity = capacity;
+
         }
+
+        public double? ResidualCapacity => Capacity - Flow;
 
         // Переопределение метода ToString для представления объекта Edge в виде строки
         public override string ToString()
@@ -27,7 +34,8 @@ namespace GraphProject.Structures
             if (Weight != null)
                 // Если вес задан, добавляем информацию о весе к строке result
                 result += $", Вес: {Weight.Value}";
-
+            if (Capacity != null)
+                result += $", Поток: {this.Flow}/{Capacity.Value}";
             // Возвращаем итоговую строку, представляющую ребро
             return result;
         }

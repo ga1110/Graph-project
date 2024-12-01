@@ -12,6 +12,8 @@ using System;
 using System.Linq;
 using GraphProject.Structures;
 using GraphProject.Handlers;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace GraphVisualization
 {
@@ -21,7 +23,7 @@ namespace GraphVisualization
         private Microsoft.Msagl.Drawing.Graph _msaglGraph;
         private GraphProject.Structures.Graph _graph;
         private GraphVoult _graphVoult = new();
-
+        private const bool NeedToInputN = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -47,6 +49,30 @@ namespace GraphVisualization
             InfoTextBox.Text += $"\nГраф - {(GraphAnalyzer.IsGraphConnected(_graph) ? "связный" : "не связный")}";
 
             AdjTextBox.Text = AdjacencyListToStr.ToStr(_graph);
+        }
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            // Предотвращаем дальнейшее распространение события
+            e.Handled = true;
+
+            // Получаем текущий развёрнутый Expander
+            Expander expandedExpander = sender as Expander;
+
+            // Получаем родительский контейнер (StackPanel)
+            StackPanel parentPanel = expandedExpander.Parent as StackPanel;
+
+            if (parentPanel != null)
+            {
+                // Проходим по всем дочерним элементам контейнера
+                foreach (var child in parentPanel.Children)
+                {
+                    if (child is Expander expander && expander != expandedExpander)
+                    {
+                        // Сворачиваем все остальные Expanders
+                        expander.IsExpanded = false;
+                    }
+                }
+            }
         }
 
         private void AddVertexButton_Click(object sender, RoutedEventArgs e)
@@ -107,9 +133,10 @@ namespace GraphVisualization
                 string startVertex = addRemoveEdgeWindow.StartVertex;
                 string endVertex = addRemoveEdgeWindow.EndVertex;
                 double? weight = addRemoveEdgeWindow.Weight;
+                double? capacity = addRemoveEdgeWindow.Capacity;
                 try
                 {
-                    GraphManager.AddEdge(startVertex, endVertex, _graph, weight);
+                    GraphManager.AddEdge(startVertex, endVertex, _graph, weight, capacity);
                     DisplayGraph();
                 }
                 catch (Exception ex)
@@ -301,14 +328,303 @@ namespace GraphVisualization
                 }
             }
         }
+        private void FindNonAdjacentVertex_Click(object sender, RoutedEventArgs e)
+        {
+            // Создаем и отображаем диалоговое окно
+            VertexChooseWindow vertexChooseWindow = new(!NeedToInputN)
+            {
+                Owner = this
+            };
+
+            if (vertexChooseWindow.ShowDialog() == true)
+            {
+                // Получаем данные от пользователя
+                string vertexName = vertexChooseWindow.Vertex;
+                string output = "";
+                try
+                {
+                    List<Vertex>? nonAdjacentVertices = GraphSearcher.FindNonAdjacentVertices(vertexName, _graph);
+                    if (nonAdjacentVertices == null)
+                    {
+                        throw new Exception("Вершина не найдена");
+                    }
+                    // Вывод результата
+                    if (nonAdjacentVertices.Count > 0)
+                    {
+                        output += ($"Вершины, не смежные с вершиной {vertexName}:") + "\n";
+                        foreach (var vertex in nonAdjacentVertices)
+                        {
+                            output += ($"- {vertex.Name}") + "\n";
+                        }
+                    }
+                    else
+                    {
+                        output += ($"Все вершины смежны с вершиной '{vertexName}'.");
+                    }
+                    MessageBox.Show(output, $"Вершины не смежные с {vertexName}", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void FindVerticesWithGreaterOutDegree_Click(object sender, RoutedEventArgs e)
+        {
+            // Создаем и отображаем диалоговое окно
+            VertexChooseWindow vertexChooseWindow = new(!NeedToInputN)
+            {
+                Owner = this
+            };
+
+            if (vertexChooseWindow.ShowDialog() == true)
+            {
+                // Получаем данные от пользователя
+                string vertexName = vertexChooseWindow.Vertex;
+                string output = "";
+                try
+                {
+                    if (_graph == null)
+                        throw new ArgumentNullException(nameof(_graph), "Граф не может быть null.");
+
+                    List<Vertex>? verticesWithGreaterOutDegree = GraphSearcher.FindVerticesWithGreaterOutDegree(vertexName, _graph);
+
+                    if (verticesWithGreaterOutDegree == null)
+                        throw new ArgumentNullException($"Вершина '{vertexName}' не найдена в графе.");
+
+                    Vertex currVertex = GraphSearcher.FindVertexByName(vertexName, _graph);
+
+                    if (verticesWithGreaterOutDegree == null)
+                        throw new ArgumentNullException($"Вершина '{vertexName}' не найдена в графе.");
+
+                    int givenVertexOutDegree = VertexAnalyzer.GetOutDegree(currVertex, _graph);
+                    if (verticesWithGreaterOutDegree.Count > 0)
+                    {
+                        output += $"Вершины, полустепень исхода которых больше, чем у вершины '{vertexName}' (исходящая степень {givenVertexOutDegree}):" + "\n";
+                        foreach (var vertex in verticesWithGreaterOutDegree)
+                        {
+                            int outDegree = VertexAnalyzer.GetOutDegree(vertex, _graph);
+                            output += ($"- {vertex.Name} (исходящая степень {outDegree})") + "\n";
+                        }
+                    }
+                    else
+                    {
+                        output += $"Нет вершин с полустепенью исхода, большей чем у вершины '{vertexName}' (исходящая степень {givenVertexOutDegree})." + "\n";
+                    }
+                    MessageBox.Show(output, $"Вершины с большей полустепенью исхода {vertexName}", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void FindUnreachableVertices_Click(object sender, EventArgs e)
+        {
+            // Создаем и отображаем диалоговое окно
+            VertexChooseWindow vertexChooseWindow = new(!NeedToInputN)
+            {
+                Owner = this
+            };
+
+            if (vertexChooseWindow.ShowDialog() == true)
+            {
+                // Получаем данные от пользователя
+                string vertexName = vertexChooseWindow.Vertex;
+                string output = "";
+                try
+                {
+                    List<Vertex> unreachableVertices = GraphSearcher.FindUnreachableVertices(vertexName, _graph);
+                    int index = 1;
+                    if (unreachableVertices != null && unreachableVertices.Count() != 0)
+                    {
+                        output += $"Cписок вершин не достижимых из {vertexName}:" + "\n";
+                        foreach (var vertex in unreachableVertices)
+                        {
+                            output += $"{index}. {vertex.Name}" + "\n";
+                            index++;
+                        }
+                    }
+                    else
+                    {
+                        output += $"Нет вершин не достижимых из {vertexName}." + "\n";
+                    }
+                    MessageBox.Show(output, $"Вершины с большей полустепенью исхода {vertexName}", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void FindVerticesDistanceLessN_Click(object sender, EventArgs e)
+        {
+            // Создаем и отображаем диалоговое окно
+            VertexChooseWindow vertexChooseWindow = new(NeedToInputN)
+            {
+                Owner = this
+            };
+
+            if (vertexChooseWindow.ShowDialog() == true)
+            {
+                // Получаем данные от пользователя
+                string vertexName = vertexChooseWindow.Vertex;
+                string output = "";
+                double parsedN = vertexChooseWindow.N;
+                try
+                {
+                    Vertex? vertex = GraphSearcher.FindVertexByName(vertexName, _graph);
+                    if (vertex == null)
+                    {
+                        throw new Exception($"Вершины с именем {vertexName} - не существует");
+                    }
+
+                    var vertexList = GraphSearcher.FindVerticesDistanceLessOrEqualN(vertexName, _graph, parsedN);
+                    if (vertexList == null || vertexList.Count() == 0)
+                    {
+                        output += ($"Вершин, расстояние которых от вершины {vertexName}, меньше {parsedN} - нет \n");
+                    }
+                    else
+                    {
+                        int index = 1;
+                        vertexList = vertexList.OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+                        foreach (var currentElement in vertexList)
+                        {
+                            output += ($"{index++}. {currentElement.Key.Name}, расстояние: {currentElement.Value} \n");
+                            
+                        }
+                    }
+
+                    MessageBox.Show(output, $"Вершины с большей полустепенью исхода {vertexName}", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void FindShortestPath_Click(object sender, EventArgs e)
+        {
+            // Создаем и отображаем диалоговое окно
+            VertexChooseWindow vertexChooseWindow = new(!NeedToInputN)
+            {
+                Owner = this
+            };
+
+            if (vertexChooseWindow.ShowDialog() == true)
+            {
+                // Получаем данные от пользователя
+                string vertexName = vertexChooseWindow.Vertex;
+                string output = "";
+                try
+                {
+                    var distances = GraphSearcher.FindShortestPathsFrom(vertexName, _graph);
+                    output += $"Длинны кратчайших путей от {vertexName}:" + "\n";
+                    int index = 1;
+                    foreach (var vertex in distances)
+                    {
+                        output += $"{index++}. {vertex.Key} - {vertex.Value}" + "\n";
+                    }
+                    MessageBox.Show(output, $"Длинны кратчайших путей от {vertexName}", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void FindNPeriphery_Click(object sender, EventArgs e)
+        {
+            // Создаем и отображаем диалоговое окно
+            VertexChooseWindow vertexChooseWindow = new(NeedToInputN)
+            {
+                Owner = this
+            };
+
+            if (vertexChooseWindow.ShowDialog() == true)
+            {
+                // Получаем данные от пользователя
+                string vertexName = vertexChooseWindow.Vertex;
+                string output = "";
+                double parsedN = vertexChooseWindow.N;
+                try
+                {
+                    Vertex? vertex = GraphSearcher.FindVertexByName(vertexName, _graph);
+                    if (vertex == null)
+                    {
+                        Console.WriteLine($"Вершины с именем {vertexName} - не существует");
+                        return;
+                    }
+
+                    var periphery = GraphSearcher.FindNPeriphery(_graph, vertex, parsedN);
+                    if (periphery == null || periphery.Count() == 0)
+                    {
+                        output += "N-переферия не существует \n";
+                    }
+                    else
+                    {
+                        int index = 0;
+                        foreach (var element in periphery)
+                        {
+                            output += $"{index++}. {element}" + "\n";
+                        }
+
+                    }
+                    MessageBox.Show(output, $"N-переферия для {vertexName}", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void FindMaxFlow_Click(object sender, EventArgs e)
+        {
+            // Создаем и отображаем диалоговое окно
+            MaxFlowVertexChoose maxFlowVertexChoose = new()
+            {
+                Owner = this
+            };
+
+            if (maxFlowVertexChoose.ShowDialog() == true)
+            {
+                // Получаем данные от пользователя
+                string source = maxFlowVertexChoose.SourceVertex;
+                string sink = maxFlowVertexChoose.SinkVertex;
+
+                try
+                {
+                    Vertex? sourceVertex = GraphSearcher.FindVertexByName(source, _graph);
+                    if (sourceVertex == null)
+                    {
+                        Console.WriteLine($"Вершины с именем {source} - не существует");
+                        return;
+                    }
+
+                    Vertex? sinkVertex = GraphSearcher.FindVertexByName(sink, _graph);
+                    if (sinkVertex == null)
+                    {
+                        Console.WriteLine($"Вершины с именем {source} - не существует");
+                        return;
+                    }
+
+                    var maxflow = GraphSearcher.FindMaxFlow(_graph, source, sink);
+                    DisplayGraph();
+                    InfoTextBox.Text += $"\nМаксимальный поток - {maxflow}";
+                    MessageBox.Show(maxflow.ToString(), $"Максимальный поток", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }
-
-// TODO
-
-// 1. ShowList
-// 2. RemoveAtNth (GraphVoult)
-// 3. ChangeCurrentGraph
-
-// 1. SaveGraphToFile
-

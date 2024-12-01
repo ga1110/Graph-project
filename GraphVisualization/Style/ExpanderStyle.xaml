@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="Expander">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Expander">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Background="{TemplateBinding Background}">
+                        <StackPanel>
+                            <!-- ToggleButton для управления сворачиванием/разворачиванием -->
+                            <ToggleButton x:Name="HeaderToggleButton"
+                            IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+                            Focusable="False"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            HorizontalAlignment="Stretch"
+                            Padding="0">
+                                <ContentPresenter Content="{TemplateBinding Header}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Center">
+                                    <ContentPresenter.ContentTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}"
+                                                       FontSize="18"
+                                                       Foreground="White"
+                                                       HorizontalAlignment="Left" 
+                                                       Padding="0"
+                                                        />
+                                        </DataTemplate>
+                                    </ContentPresenter.ContentTemplate>
+                                </ContentPresenter>
+                            </ToggleButton>
+                            <!-- Содержимое Expander -->
+                            <ContentPresenter x:Name="ContentSite"
+                                ContentSource="Content"
+                                Margin="{TemplateBinding Padding}"
+                                Visibility="Collapsed" />
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="ContentSite" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

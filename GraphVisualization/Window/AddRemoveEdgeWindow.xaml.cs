@@ -8,6 +8,7 @@ namespace GraphVisualization
         public string StartVertex { get; private set; }
         public string EndVertex { get; private set; }
         public double? Weight { get; private set; }
+        public double? Capacity { get; private set; }
         private bool _toAdd {  get; set; }
 
         public AddRemoveEdgeWindow(bool toAdd)
@@ -36,6 +37,15 @@ namespace GraphVisualization
                 {
                     Weight = null;
                 }
+
+                if (double.TryParse(CapacityTextBox.Text.Trim(), out double capacity))
+                {
+                    Capacity = capacity;
+                }
+                else
+                {
+                    Capacity = null;
+                }
             }
             // Проверяем, что начальная и конечная вершины указаны
             if (string.IsNullOrEmpty(StartVertex) || string.IsNullOrEmpty(EndVertex))
@@ -55,6 +65,13 @@ namespace GraphVisualization
 
             WeightLabel.IsEnabled = true;
             WeightLabel.Visibility = Visibility.Visible;
+
+
+            CapacityTextBox.IsEnabled = true;
+            CapacityTextBox.Visibility = Visibility.Visible;
+
+            CapacityLabel.IsEnabled = true;
+            CapacityLabel.Visibility = Visibility.Visible;
         }
     }
 }

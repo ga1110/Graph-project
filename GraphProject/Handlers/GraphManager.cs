@@ -32,7 +32,7 @@ namespace GraphProject.Handlers
         }
 
         // Метод для добавления нового ребра в граф
-        public static void AddEdge(string sourceName, string destinationName, Graph graph, double? weight = null)
+        public static void AddEdge(string sourceName, string destinationName, Graph graph, double? weight = null, double? capacity = null)
         {
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
@@ -70,7 +70,7 @@ namespace GraphProject.Handlers
             else
             {
                 // Добавляем новое ребро в список ребер исходной вершины
-                graph.adjacencyList[source].Add(new Edge(source, destination, weight));
+                graph.adjacencyList[source].Add(new Edge(source, destination, weight, capacity));
             }
 
             // Если граф неориентированный, добавляем обратное ребро
@@ -84,7 +84,7 @@ namespace GraphProject.Handlers
                 }
                 else
                 {
-                    graph.adjacencyList[destination].Add(new Edge(destination, source, weight));
+                    graph.adjacencyList[destination].Add(new Edge(destination, source, weight, capacity));
                 }
             }
         }
