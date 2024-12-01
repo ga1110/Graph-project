@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 
-namespace Structures
+namespace GraphProject.Structures
 {
     public class Edge
     {

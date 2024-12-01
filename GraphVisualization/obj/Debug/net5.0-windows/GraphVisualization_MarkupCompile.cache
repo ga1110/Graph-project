@@ -1,0 +1,20 @@
+﻿GraphVisualization
+
+
+winexe
+C#
+.cs
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\
+GraphVisualization
+none
+false
+TRACE;DEBUG;NET;NET5_0;NETCOREAPP
+F:\Study\Теория графов\Graph-project\GraphVisualization\App.xaml
+81434251422
+
+12729422657
+1981008645804
+MainWindow.xaml;Window\AddRemoveEdgeWindow.xaml;Window\AddRemoveVertexWindow.xaml;Window\CreateGraphWindow.xaml;Window\FindVertexWindow.xaml;Window\GraphListWindow.xaml;Window\LoadGraphWindow.xaml;Window\VertexChooseWindow.xaml;
+
+False
+

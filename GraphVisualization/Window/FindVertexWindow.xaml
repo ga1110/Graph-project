@@ -5,62 +5,72 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <!-- Метка и текстовое поле для начальной вершины -->
         <Button x:Name="NonAdjacentVertex"
-                  Content="Вершины не смежные с данной"
-                  Width="Auto"
-                  Height="40"
-                  Click="DisplayNonAdjacentVertex_Click"
-                  Background="LightBlue"
-                  FontWeight="Bold"
-                  Grid.Row="0"
-                  Margin="10,10,10,10"
-                  Panel.ZIndex="2"
-              />
-        <Button x:Name="VerticesWithGreaterOutDegree"
-                  Content="Вершины с большей полуступенью исхода"
-                  Width="Auto"
-                  Height="40"
-                  Click="DisplayVerticesWithGreaterOutDegree_Click"
-                  Background="LightBlue"
-                  FontWeight="Bold"
-                  Grid.Row="1"
-                  Margin="10,10,10,10"
-                  Panel.ZIndex="2"
-              />
-        <Button x:Name="FindUnreachableVertices"
-                  Content="Недостижимые вершины"
-                  Width="Auto"
-                  Height="40"
-                  Click="FindUnreachableVertices_Click"
-                  Background="LightBlue"
-                  FontWeight="Bold"
-                  Grid.Row="2"
-                  Margin="10,10,10,10"
-                  Panel.ZIndex="2"
-              />
-        <Button x:Name="FindVerticesDistanceLessN"
-           Content="Вершины с дистанцией меньше чем N"
-           Width="Auto"
-           Height="40"
-           Click="FindVerticesDistanceLessN_Click"
-           Background="LightBlue"
-           FontWeight="Bold"
-           Grid.Row="3"
-           Margin="10,10,10,10"
-           Panel.ZIndex="2"
-       />
-        <!-- Метка и текстовое поле для веса -->
+          Content="Вершины не смежные с данной"
+          Width="Auto"
+          Height="40"
+          Click="DisplayNonAdjacentVertex_Click"
+          Background="LightBlue"
+          FontWeight="Bold"
+          Grid.Row="0"
+          Margin="10,10,10,10"
+          Panel.ZIndex="2" />
 
-        <!-- Кнопки -->
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
+        <Button x:Name="VerticesWithGreaterOutDegree"
+          Content="Вершины с большей полуступенью исхода"
+          Width="Auto"
+          Height="40"
+          Click="DisplayVerticesWithGreaterOutDegree_Click"
+          Background="LightBlue"
+          FontWeight="Bold"
+          Grid.Row="1"
+          Margin="10,10,10,10"
+          Panel.ZIndex="2"  />
+        <Button x:Name="FindUnreachableVertices"
+          Content="Недостижимые вершины"
+          Width="Auto"
+          Height="40"
+          Click="FindUnreachableVertices_Click"
+          Background="LightBlue"
+          FontWeight="Bold"
+          Grid.Row="2"
+          Margin="10,10,10,10"
+          Panel.ZIndex="2" />
+        <Button x:Name="FindVerticesDistanceLessN"
+            Content="Вершины с дистанцией меньше чем N"
+            Width="Auto"
+            Height="40"
+            Click="FindVerticesDistanceLessN_Click"
+            Background="LightBlue"
+            FontWeight="Bold"
+            Grid.Row="3"
+            Margin="10,10,10,10"
+            Panel.ZIndex="2" />
+        <Button x:Name="FindShortestPath"
+            Content="Кротчайшие пути от вершины"
+            Width="Auto"
+            Height="40"
+            Click="FindShortestPath_Click"
+            Background="LightBlue"
+            FontWeight="Bold"
+            Grid.Row="4"
+            Margin="10,10,10,10"
+            Panel.ZIndex="2" />
+
+        <!-- Кнопка "Назад" -->
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
             <Button Content="Назад" Width="75" Margin="5" IsDefault="True" Click="OkButton_Click" />
         </StackPanel>
     </Grid>

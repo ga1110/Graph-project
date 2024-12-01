@@ -37,7 +37,7 @@ namespace GraphVisualization
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            Vertex = VertexTextBox.Text.Trim();
+            Vertex = VertexTextBox.Text.ToUpper().Trim();
 
             // Проверяем, введен ли вес, и пытаемся преобразовать его в число
             if(_withN)

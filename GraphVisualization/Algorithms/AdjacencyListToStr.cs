@@ -1,10 +1,10 @@
-﻿using System;
+﻿using GraphProject.Handlers;
+using GraphProject.Structures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Handlers;
-using Structures;
 namespace GraphVisualization.Algorithms
 {
     public static class AdjacencyListToStr
@@ -34,7 +34,7 @@ namespace GraphVisualization.Algorithms
                 }
 
                 // Создаем список строк для представления ребер
-                List<string> edgeStrings = new List<string>();
+                List<string> edgeStrings = new();
 
                 // Проходим по каждому ребру в списке ребер
                 foreach (var edge in edges)

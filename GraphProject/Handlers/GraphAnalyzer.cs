@@ -4,9 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Algorithms;
-using Structures;
-namespace Handlers
+using GraphProject.Algorithms;
+using GraphProject.Structures;
+
+namespace GraphProject.Handlers
 {
     public static class GraphAnalyzer
     {
@@ -18,11 +19,11 @@ namespace Handlers
             var allVertex = graph.adjacencyList.Keys.ToList(); // Все вершины графа
             var contAllVertex = allVertex.ToList().Count;
 
-            List<List<Vertex>> traversalList = [];
+            List<List<Vertex>> traversalList = new();
 
             foreach (var vertex in allVertex)
             {
-                traversalList.Add([.. GraphTraversal.RecursiveGraphTraversal(graph, vertex).Keys]);
+                traversalList.Add(GraphTraversal.RecursiveGraphTraversal(graph, vertex).Keys.ToList());
             }
 
             foreach (var vertexList in traversalList)

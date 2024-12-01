@@ -1,0 +1,16 @@
+F:\Study\Теория графов\Graph-project\GraphProject\obj\Debug\net5.0\GraphProject.GeneratedMSBuildEditorConfig.editorconfig
+F:\Study\Теория графов\Graph-project\GraphProject\obj\Debug\net5.0\GraphProject.AssemblyInfoInputs.cache
+F:\Study\Теория графов\Graph-project\GraphProject\obj\Debug\net5.0\GraphProject.AssemblyInfo.cs
+F:\Study\Теория графов\Graph-project\GraphProject\obj\Debug\net5.0\GraphProject.csproj.CoreCompileInputs.cache
+F:\Study\Теория графов\Graph-project\GraphProject\obj\Debug\net5.0\GraphProject.sourcelink.json
+F:\Study\Теория графов\Graph-project\GraphProject\bin\Debug\net5.0\GraphProject.exe
+F:\Study\Теория графов\Graph-project\GraphProject\bin\Debug\net5.0\GraphProject.deps.json
+F:\Study\Теория графов\Graph-project\GraphProject\bin\Debug\net5.0\GraphProject.runtimeconfig.json
+F:\Study\Теория графов\Graph-project\GraphProject\bin\Debug\net5.0\GraphProject.runtimeconfig.dev.json
+F:\Study\Теория графов\Graph-project\GraphProject\bin\Debug\net5.0\GraphProject.dll
+F:\Study\Теория графов\Graph-project\GraphProject\bin\Debug\net5.0\GraphProject.pdb
+F:\Study\Теория графов\Graph-project\GraphProject\obj\Debug\net5.0\GraphProject.dll
+F:\Study\Теория графов\Graph-project\GraphProject\obj\Debug\net5.0\refint\GraphProject.dll
+F:\Study\Теория графов\Graph-project\GraphProject\obj\Debug\net5.0\GraphProject.pdb
+F:\Study\Теория графов\Graph-project\GraphProject\obj\Debug\net5.0\GraphProject.genruntimeconfig.cache
+F:\Study\Теория графов\Graph-project\GraphProject\obj\Debug\net5.0\ref\GraphProject.dll

@@ -1,11 +1,12 @@
 ﻿using System;
 
-namespace Structures
+namespace GraphProject.Structures
 {
     //Класс, представляющий вершину графа
     public class Vertex
     {
         public string Name { get; set; } //Имя вершины
+        public int Id { get; private set; } //Id 
 
         public Vertex(string name)
         {
@@ -17,6 +18,7 @@ namespace Structures
             }
 
             Name = name;
+            Id = -1;
         }
 
         public override bool Equals(object obj)
@@ -32,5 +34,11 @@ namespace Structures
         {
             return Name.ToLower().GetHashCode();
         }
+
+        public void SetId(int id)
+        {
+            this.Id = id; 
+        }
+
     }
 }

@@ -1,12 +1,12 @@
-﻿using Algorithms;
-using Structures;
+﻿using GraphProject.Algorithms;
+using GraphProject.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Handlers
+namespace GraphProject.Handlers
 {
     public static class GraphSearcher
     {
@@ -17,10 +17,7 @@ namespace Handlers
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
             // Получаем вершину по ее имени
-            Vertex? givenVertex = FindVertexByName(vertexName, graph);
-
-            if (givenVertex == null)
-                throw new ArgumentNullException($"Вершины {vertexName} не существует");
+            Vertex? givenVertex = FindVertexByName(vertexName, graph) ?? throw new ArgumentNullException($"Вершины {vertexName} не существует");
 
             // Проверяем, что вершина существует
             if (givenVertex == null)
@@ -32,7 +29,7 @@ namespace Handlers
             int givenVertexOutDegree = VertexAnalyzer.GetOutDegree(givenVertex, graph);
 
             // Список вершин с большей полустепенью исхода
-            List<Vertex> verticesWithGreaterOutDegree = new List<Vertex>();
+            List<Vertex> verticesWithGreaterOutDegree = new();
 
             // Проходим по всем вершинам в графе
             foreach (var vertex in graph.adjacencyList.Keys)
@@ -63,15 +60,11 @@ namespace Handlers
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
             // Получаем вершину по ее имени
-            Vertex? givenVertex = FindVertexByName(vertexName, graph);
-
-            // Проверяем, что вершина существует
-            if (givenVertex == null)
-                throw new ArgumentNullException($"Вершины {vertexName} не существует");
+            Vertex? givenVertex = FindVertexByName(vertexName, graph) ?? throw new ArgumentNullException($"Вершины {vertexName} не существует");
 
 
             // Список не смежных вершин
-            List<Vertex> nonAdjacentVertices = new List<Vertex>();
+            List<Vertex> nonAdjacentVertices = new();
 
             // Проходим по всем вершинам в графе
             foreach (var vertex in graph.adjacencyList.Keys)
@@ -145,7 +138,7 @@ namespace Handlers
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
             // Список для хранения рёбер, которые нужно удалить
-            List<Tuple<Vertex, Vertex>> leafsEdges = new List<Tuple<Vertex, Vertex>>();
+            List<Tuple<Vertex, Vertex>> leafsEdges = new();
 
             // Проходим по всем вершинам в графе
             foreach (var vertex in graph.adjacencyList.Keys.ToList()) // ToList() для предотвращения модификации коллекции во время итерации
@@ -217,18 +210,16 @@ namespace Handlers
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
             // Получаем вершину по ее имени
-            Vertex? givenVertex = FindVertexByName(vertexName, graph);
-
-            // Проверяем, что вершина существует
-            if (givenVertex == null)
-                throw new ArgumentNullException($"Вершины {vertexName} не существует");
-
-
+            Vertex givenVertex = FindVertexByName(vertexName, graph) ?? throw new ArgumentNullException($"Вершины {vertexName} не существует");
 
             // Список не смежных вершин
-            List<Vertex> unreachableVertices = [];
-            List<Vertex> reachableVertices = [.. GraphTraversal.RecursiveGraphTraversal(graph, givenVertex).Keys];
+            List<Vertex> unreachableVertices = new();
+            List<Vertex> reachableVertices = new();
 
+            foreach (var vertex in GraphTraversal.RecursiveGraphTraversal(graph, givenVertex).Keys)
+            {
+                reachableVertices.Add(vertex);
+            }
             foreach (var currentVertex in graph.adjacencyList.Keys.ToList()) // ToList() для предотвращения модификации коллекции во время итерации
             {
                 if (!reachableVertices.Contains(currentVertex) && currentVertex != givenVertex)
@@ -247,17 +238,14 @@ namespace Handlers
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
             // Получаем вершину по ее имени
-            Vertex? givenVertex = FindVertexByName(vertexName, graph);
-
-            // Проверяем, что вершина существует
-            if (givenVertex == null)
-                throw new ArgumentNullException($"Вершины {vertexName} не существует");
+            Vertex givenVertex = FindVertexByName(vertexName, graph) ?? throw new ArgumentNullException($"Вершины {vertexName} не существует");
 
             if (n == null)
+            {
                 n = 0;
+            }
 
             var vertices = DijkstraAlgorithm.Execute(graph, givenVertex);
-
             foreach (var vertex in vertices)
             {
                 if (vertex.Value > n || vertex.Key == givenVertex)
@@ -267,6 +255,59 @@ namespace Handlers
             }
 
             return vertices;
+        }
+
+        public static Dictionary<Vertex, double> FindShortestPathsFrom(string vertexName, Graph graph)
+        {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
+            // Получаем вершину по ее имени
+            Vertex givenVertex = FindVertexByName(vertexName, graph) ?? throw new ArgumentNullException($"Вершины {vertexName} не существует");
+
+            var distances = BellmanFord.Execute(graph, givenVertex);
+
+            // Удаляем начальную вершину
+            foreach (var vertex in distances.Keys)
+            {
+                if (vertex == givenVertex)
+                {
+                    distances.Remove(vertex);
+                }
+            }
+            return distances;
+        }
+
+        public static List<Vertex> FindNPeriphery(Graph graph, Vertex source, double N)
+        {
+            // Получаем все кратчайшие расстояния с помощью алгоритма Флойда-Уоршелла
+            var allDistances = Floyd_Warshall.Execute(graph);
+
+
+            var periphery = new List<Vertex>();
+
+            foreach (var target in GraphManager.GetAdj(graph).Keys) // Предполагается, что Graph имеет свойство Vertices
+            {
+                if (source.Equals(target))
+                    continue;
+
+                if (allDistances.TryGetValue((source, target), out double distance))
+                {
+                    if (distance > N)
+                    {
+                        periphery.Add(target);
+                    }
+                }
+                else
+                {
+                    // Если расстояние не найдено, это означает, что нет пути между source и target
+                    // В зависимости от требований, можно решить, как обрабатывать такие случаи
+                    // Например, можно считать расстояние бесконечным
+                    periphery.Add(target);
+                }
+            }
+
+            return periphery;
         }
     }
 }

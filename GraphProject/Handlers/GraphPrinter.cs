@@ -1,9 +1,9 @@
-﻿using Structures;
+﻿using GraphProject.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Handlers
+namespace GraphProject.Handlers
 {
     public static class GraphPrinter
     {

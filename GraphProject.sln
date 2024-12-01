@@ -5,7 +5,12 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphProject", "GraphProject\GraphProject.csproj", "{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphVisualization", "GraphVisualization\GraphVisualization.csproj", "{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphVisualization", "GraphVisualization\GraphVisualization.csproj", "{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{9CFB4C13-49E2-45DC-AF73-C15E1CB2ABAA}"
+	ProjectSection(SolutionItems) = preProject
+		TODO.md = TODO.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

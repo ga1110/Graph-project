@@ -15,16 +15,8 @@
         </Grid.ColumnDefinitions>
 
         <!-- Метка и текстовое поле для начальной вершины -->
-        <Label Grid.Row="0" Grid.Column="0" Content="Начальная вершина:" VerticalAlignment="Center" />
+        <Label Grid.Row="0" Grid.Column="0" Content="Имя вершины:" VerticalAlignment="Center" />
         <TextBox Grid.Row="0" Grid.Column="1" x:Name="StartVertexTextBox" Margin="5" />
-
-        <!-- Метка и текстовое поле для конечной вершины -->
-        <Label Grid.Row="1" Grid.Column="0" Content="Конечная вершина:" VerticalAlignment="Center" />
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="EndVertexTextBox" Margin="5" />
-
-        <!-- Метка и текстовое поле для веса -->
-        <Label Grid.Row="2" Grid.Column="0" Content="Вес (необязательно):" VerticalAlignment="Center" x:Name="WeightLabel" IsEnabled="False" Visibility="Hidden" />
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="WeightTextBox" Margin="5" IsEnabled="False" Visibility="Hidden" />
 
         <!-- Кнопки -->
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">

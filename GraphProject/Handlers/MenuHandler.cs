@@ -1,10 +1,8 @@
-﻿using Handlers;
-using Structures;
-using System;
-using Algorithms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System;
+using GraphProject.Algorithms;
+using GraphProject.Structures;
 
-namespace Handlers
+namespace GraphProject.Handlers
 {
     // Класс MenuHandler для взаимодействия с пользователем через меню
     public class MenuHandler

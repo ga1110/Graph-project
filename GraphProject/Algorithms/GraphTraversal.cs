@@ -1,15 +1,15 @@
-﻿using Structures;
+﻿using GraphProject.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Algorithms
+namespace GraphProject.Algorithms
 {
     public static class GraphTraversal
     {
         public static Dictionary<Vertex, int> RecursiveGraphTraversal(Graph graph, Vertex currentVertex)
         {
-            if (graph == null) 
+            if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - null");
 
             if (currentVertex == null)

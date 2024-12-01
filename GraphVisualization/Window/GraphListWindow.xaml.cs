@@ -1,5 +1,5 @@
-﻿using GraphVisualization;
-using Structures;
+﻿using GraphProject.Structures;
+using GraphVisualization;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

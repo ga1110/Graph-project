@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Structures;
+using GraphProject.Structures;
 
-namespace Algorithms
+namespace GraphProject.Algorithms
 {
     public static class DijkstraAlgorithm
     {
         public static Dictionary<Vertex, double> Execute(Graph graph, Vertex startVertex)
         {
-            if (graph == null) 
+            if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - null");
 
             if (!graph.adjacencyList.ContainsKey(startVertex))
@@ -16,38 +16,58 @@ namespace Algorithms
 
             var distances = new Dictionary<Vertex, double>();
             var visited = new HashSet<Vertex>();
+            var unvisited = new HashSet<Vertex>();
+
+            // Инициализация расстояний
             foreach (var vertex in graph.adjacencyList.Keys)
             {
                 distances[vertex] = double.MaxValue;
+                unvisited.Add(vertex);
             }
             distances[startVertex] = 0;
 
-            var priorityQueue = new PriorityQueue<Vertex, double>();
-            priorityQueue.Enqueue(startVertex, 0);
-
-            while (priorityQueue.Count != 0)
+            while (unvisited.Count > 0)
             {
-                var currentVertex = priorityQueue.Dequeue();
-                if (visited.Contains(currentVertex))
-                {
-                    continue;
-                }
+                // Найти вершину с минимальным расстоянием
+                var currentVertex = GetVertexWithMinDistance(unvisited, distances);
+                if (currentVertex == null)
+                    break;
 
+                unvisited.Remove(currentVertex);
                 visited.Add(currentVertex);
+
                 foreach (var edge in graph.adjacencyList[currentVertex])
                 {
                     var neighbor = edge.Destination;
-                    var distance = distances[currentVertex] + (edge.Weight ?? 0);
+                    if (visited.Contains(neighbor))
+                        continue;
 
-                    if (distance < distances[neighbor])
+                    var newDistance = distances[currentVertex] + (edge.Weight ?? 0);
+                    if (newDistance < distances[neighbor])
                     {
-                        distances[neighbor] = distance;
-                        priorityQueue.Enqueue(neighbor, distance);
+                        distances[neighbor] = newDistance;
                     }
                 }
             }
 
             return distances;
+        }
+
+        private static Vertex GetVertexWithMinDistance(HashSet<Vertex> unvisited, Dictionary<Vertex, double> distances)
+        {
+            Vertex minVertex = null;
+            double minDistance = double.MaxValue;
+
+            foreach (var vertex in unvisited)
+            {
+                if (distances[vertex] < minDistance)
+                {
+                    minDistance = distances[vertex];
+                    minVertex = vertex;
+                }
+            }
+
+            return minVertex;
         }
     }
 }

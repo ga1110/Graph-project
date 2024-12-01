@@ -1,11 +1,11 @@
-﻿using Structures;
+﻿using GraphProject.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithms
+namespace GraphProject.Algorithms
 {
     public static class KruskalAlgorithm
     {
@@ -34,7 +34,7 @@ namespace Algorithms
         // Основной метод для выполнения алгоритма Краскала
         public static Graph KruskalMST(Graph graph)
         {
-            if (graph == null) 
+            if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - null");
 
             List<Edge> result = new List<Edge>(); // Список для хранения MST

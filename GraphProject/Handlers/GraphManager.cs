@@ -1,9 +1,10 @@
-﻿using Structures;
+﻿using GraphProject.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
-namespace Handlers
+namespace GraphProject.Handlers
 {
     // Публичный класс GraphManager для управления графом
     public static class GraphManager
@@ -18,7 +19,6 @@ namespace Handlers
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
-            ArgumentNullException.ThrowIfNull(vertex);
             // Проверяем, содержит ли список смежности уже такую вершину
             if (!graph.adjacencyList.ContainsKey(vertex))
             {
@@ -176,13 +176,29 @@ namespace Handlers
             }
         }
 
-
         public static Dictionary<Vertex, List<Edge>> GetAdj (Graph graph)
         {
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
             return graph.adjacencyList;
+        }
+
+        public static void SetAllVertexID(Graph graph)
+        {
+            var index = 0;
+            foreach (var vertex in GraphManager.GetAdj(graph).Keys)
+            {
+                vertex.SetId(index++);
+            }
+        }
+
+        public static void DeleteAllVertexID(Graph graph)
+        {
+            foreach (var vertex in GraphManager.GetAdj(graph).Keys)
+            {
+                vertex.SetId(-1);
+            }
         }
     }
 }

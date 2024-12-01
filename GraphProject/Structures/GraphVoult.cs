@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using GraphProject.Structures;
 
-namespace Structures
+namespace GraphProject.Structures
 {
     public class GraphVoult
     {
@@ -28,7 +29,7 @@ namespace Structures
             else
             {
                 return _graphs[_currentGraph];
-            }    
+            }
         }
 
         // Метод получения номера текущего графа
@@ -79,20 +80,20 @@ namespace Structures
                 _currentGraph = newCurrentGrahp - 1;
                 return true;
             }
-            return false; 
+            return false;
         }
 
         // Метод удаления графа по номеру
         public void RemoveGraph(int graphToDelete)
         {
-            if(CheckUserInput(graphToDelete))
+            if (CheckUserInput(graphToDelete))
             {
                 _graphs.RemoveAt(graphToDelete - 1);
                 return;
             }
             throw new Exception("Не удалось удалить граф из списка");
         }
-        
+
         // Проверка ввода пользователя
         private bool CheckUserInput(int newCurrentGrahp)
         {

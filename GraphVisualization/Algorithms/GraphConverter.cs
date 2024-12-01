@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Structures;
-using Handlers;
 using Microsoft.Msagl.Drawing;
 using System.Windows.Media.Media3D;
 using Microsoft.Msagl.Core.Routing;
@@ -13,15 +11,17 @@ using static Microsoft.Msagl.Core.Layout.LgNodeInfo;
 using Microsoft.Msagl.Core.Geometry.Curves;
 using Microsoft.Msagl.WpfGraphControl;
 using System.Data;
+using GraphProject.Handlers;
+using GraphProject.Structures;
 
 namespace GraphVisualization.Algorithms
 {
     public static class GraphConverter
     {
-        public static Microsoft.Msagl.Drawing.Graph Execute(Structures.Graph myGraph)
+        public static Microsoft.Msagl.Drawing.Graph Execute(GraphProject.Structures.Graph myGraph)
         {
             // Необходимо для корректного отображения
-            List<Structures.Edge> edgesInGraph = new();
+            List<GraphProject.Structures.Edge> edgesInGraph = new();
 
             var adj = GraphManager.GetAdj(myGraph);
             Microsoft.Msagl.Drawing.Graph MsaglGraph = new();
@@ -34,12 +34,12 @@ namespace GraphVisualization.Algorithms
                 {
                     if (!myGraph.IsDirected)
                     {
-                        if (!isDublicate(edgesInGraph, edge))
+                        if (!IsDublicate(edgesInGraph, edge))
                         {
                             Microsoft.Msagl.Drawing.Edge MsaglEdge = MsaglGraph.AddEdge(edge.Source.Name
                                                                                          , edge.Weight.ToString()
                                                                                          , edge.Destination.Name);
-                            makeUndirected(MsaglEdge);
+                            MakeUndirected(MsaglEdge);
                             edgesInGraph.Add(edge);
                         }
                         else
@@ -56,7 +56,7 @@ namespace GraphVisualization.Algorithms
             }
             return MsaglGraph;
         }
-        private static bool isDublicate(List<Structures.Edge> edges, Structures.Edge currentEdge)
+        private static bool IsDublicate(List<GraphProject.Structures.Edge> edges, GraphProject.Structures.Edge currentEdge)
         {
             foreach (var edge in edges)
             {
@@ -65,7 +65,7 @@ namespace GraphVisualization.Algorithms
             }
             return false;
         }
-        private static void makeUndirected(Microsoft.Msagl.Drawing.Edge edge)
+        private static void MakeUndirected(Microsoft.Msagl.Drawing.Edge edge)
         {
             edge.Attr.ArrowheadAtTarget = ArrowStyle.None;
             edge.Attr.ArrowheadAtSource = ArrowStyle.None;

@@ -1,9 +1,10 @@
-﻿using Handlers;
+﻿using GraphProject.Handlers;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
-namespace Structures
+namespace GraphProject.Structures
 {
     // Публичный класс Graph, представляющий граф
     public class Graph

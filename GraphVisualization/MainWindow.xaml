@@ -5,9 +5,9 @@
     xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Class="GraphVisualization.MainWindow"
-    WindowState="Maximized"
+    Height="900" Width="1600"
+    WindowStyle="None"
     ResizeMode="NoResize"
-    Title="Graph Visualization" 
     xmlns:wpfgraphcontrol="http://mlsagl"
     mc:Ignorable="mc">
 
@@ -18,7 +18,7 @@
                 
                 <Button x:Name="CreateGraphButton"
                     Content="Создать граф"
-                    Width="130"
+                    Width="140"
                     Height="40"
                     Click="CreateGraphButton_Click"
                     Background="LightBlue"
@@ -29,7 +29,7 @@
                 
                 <Button x:Name="LoadGraphButton"
                     Content="Загрузить граф"
-                    Width="130"
+                    Width="140"
                     Height="40"
                     Click="LoadGraphButton_Click"
                     Background="LightBlue"
@@ -40,7 +40,7 @@
 
                 <Button x:Name="CopyGraphButton"
                     Content="Скопировать граф"
-                    Width="130"
+                    Width="140"
                     Height="40"
                     Click="CopyGraphButton_Click"
                     Background="LightBlue"
@@ -51,7 +51,7 @@
 
                 <Button x:Name="FindMST"
                     Content="Найти MST"
-                    Width="130"
+                    Width="140"
                     Height="40"
                     Click="FindMST_Click"
                     Background="LightBlue"
@@ -61,8 +61,8 @@
                 />
 
                 <Button x:Name="OpenGraphVoult"
-                    Content="Открыть список графов"
-                    Width="130"
+                    Content="Список графов"
+                    Width="140"
                     Height="40"
                     Click="OpenGraphVoult_Click"
                     Background="LightBlue"
@@ -76,7 +76,7 @@
                 
                 <Button x:Name="AddEdgeButton"
                     Content="Добавить ребро"
-                    Width="130"
+                    Width="140"
                     Height="40"
                     Click="AddEdgeButton_Click"
                     Background="LightBlue"
@@ -87,7 +87,7 @@
                 
                 <Button x:Name="RemoveEdgeButton"
                     Content="Удалить ребро"
-                    Width="130"
+                    Width="140"
                     Height="40"
                     Click="RemoveEdgeButton_Click"
                     Background="LightBlue"
@@ -98,7 +98,7 @@
                 
                 <Button x:Name="RemoveLeafEdgeButton"
                     Content="Удалить лист. ребра"
-                    Width="130"
+                    Width="140"
                     Height="40"
                     Click="RemoveLeafEdgeButton_Click"
                     Background="LightBlue"
@@ -113,7 +113,7 @@
                 
                 <Button x:Name="AddVertex"
                     Content="Добавить вершину"
-                    Width="130"
+                    Width="140"
                     Height="40"
                     Click="AddVertexButton_Click"
                     Background="LightBlue"
@@ -124,7 +124,7 @@
 
                 <Button x:Name="RemoveVertex"
                     Content="Удалить вершину"
-                    Width="130"
+                    Width="140"
                     Height="40"
                     Click="RemoveVertexButton_Click"
                     Background="LightBlue"
@@ -135,7 +135,7 @@
                 
                 <Button x:Name="FindVertex"
                     Content="Поиск вершин"
-                    Width="130"
+                    Width="140"
                     Height="40"
                     Click="FindVertex_Click"
                     Background="LightBlue"
@@ -184,6 +184,7 @@
                          Text="Список смежности графа:" 
             />
         </StackPanel>
+
         <ScrollViewer Height="200" Width="200" VerticalScrollBarVisibility="Auto">
             <StackPanel x:Name="radioButtonsPanel">
                 <!-- Радиокнопки будут добавляться сюда -->

@@ -1,6 +1,7 @@
-﻿using Structures;
+﻿using GraphProject.Structures;
+using System;
 
-namespace Handlers
+namespace GraphProject.Handlers
 {
     public static class VertexAnalyzer
     {

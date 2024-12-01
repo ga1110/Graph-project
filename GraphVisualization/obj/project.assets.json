@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {
+    "net5.0-windows7.0": {
       "AutomaticGraphLayout/1.1.12": {
         "type": "package",
         "compile": {
@@ -29,10 +29,10 @@
           "AutomaticGraphLayout.Drawing": "1.1.12"
         },
         "compile": {
-          "lib/net61/Microsoft.Msagl.GraphViewerGdi.dll": {}
+          "lib/netcoreapp3.1/Microsoft.Msagl.GraphViewerGdi.dll": {}
         },
         "runtime": {
-          "lib/net61/Microsoft.Msagl.GraphViewerGdi.dll": {}
+          "lib/netcoreapp3.1/Microsoft.Msagl.GraphViewerGdi.dll": {}
         }
       },
       "AutomaticGraphLayout.WpfGraphControl/1.1.12": {
@@ -52,7 +52,7 @@
       },
       "GraphProject/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
+        "framework": ".NETCoreApp,Version=v5.0",
         "compile": {
           "bin/placeholder/GraphProject.dll": {}
         },
@@ -122,7 +122,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": [
+    "net5.0-windows7.0": [
       "AutomaticGraphLayout >= 1.1.12",
       "AutomaticGraphLayout.Drawing >= 1.1.12",
       "AutomaticGraphLayout.GraphViewerGDI >= 1.1.12",
@@ -152,16 +152,15 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net8.0-windows"
+        "net5.0-windows"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0-windows7.0": {
-          "targetAlias": "net8.0-windows",
+        "net5.0-windows7.0": {
+          "targetAlias": "net5.0-windows",
           "projectReferences": {
             "F:\\Study\\Теория графов\\Graph-project\\GraphProject\\GraphProject.csproj": {
               "projectPath": "F:\\Study\\Теория графов\\Graph-project\\GraphProject\\GraphProject.csproj"
@@ -181,8 +180,8 @@
       }
     },
     "frameworks": {
-      "net8.0-windows7.0": {
-        "targetAlias": "net8.0-windows",
+      "net5.0-windows7.0": {
+        "targetAlias": "net5.0-windows",
         "dependencies": {
           "AutomaticGraphLayout": {
             "target": "Package",
@@ -212,6 +211,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.17, 5.0.17]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -220,7 +237,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

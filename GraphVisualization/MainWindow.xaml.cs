@@ -2,15 +2,16 @@
 using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.WpfGraphControl;
 using Microsoft.Msagl.Layout.MDS;
-using Structures;
-using Handlers;
-using Algorithms;
+using GraphProject.Algorithms;
 using System.Xml.Linq;
 using Microsoft.Msagl.Core.Geometry.Curves;
 using System.Windows.Controls;
 using System.Windows.Media;
 using GraphVisualization.Algorithms;
 using System;
+using System.Linq;
+using GraphProject.Structures;
+using GraphProject.Handlers;
 
 namespace GraphVisualization
 {
@@ -18,7 +19,7 @@ namespace GraphVisualization
     public partial class MainWindow : Window
     {
         private Microsoft.Msagl.Drawing.Graph _msaglGraph;
-        private Structures.Graph _graph;
+        private GraphProject.Structures.Graph _graph;
         private GraphVoult _graphVoult = new();
 
         public MainWindow()
@@ -158,7 +159,7 @@ namespace GraphVisualization
 
                 try
                 {
-                    _graph = new Structures.Graph(graphName, isDirected);
+                    _graph = new GraphProject.Structures.Graph(graphName, isDirected);
                     if (isAddToVoult)
                         _graphVoult.AddNewGraph(_graph);
                     DisplayGraph();
@@ -188,7 +189,7 @@ namespace GraphVisualization
 
                 try
                 {
-                    _graph = new Structures.Graph(filePath, graphName);
+                    _graph = new GraphProject.Structures.Graph(filePath, graphName);
                     if (_graphVoult.isVoultEmpty())
                     {
                         _graphVoult.AddNewGraph(_graph);
@@ -248,7 +249,7 @@ namespace GraphVisualization
                 {
                     return;
                 }
-                Structures.Graph tmpGraph = KruskalAlgorithm.KruskalMST(_graph);
+                GraphProject.Structures.Graph tmpGraph = KruskalAlgorithm.KruskalMST(_graph);
                 _graphVoult.AddNewGraph(tmpGraph);
                 _graph = tmpGraph;
                 DisplayGraph();

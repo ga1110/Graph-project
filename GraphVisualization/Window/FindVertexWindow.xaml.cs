@@ -1,5 +1,4 @@
-﻿using Handlers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Structures;
 using Microsoft.Msagl.Drawing;
+using GraphProject.Handlers;
+using GraphProject.Structures;
 namespace GraphVisualization
 {
     /// <summary>
@@ -21,16 +21,19 @@ namespace GraphVisualization
     /// </summary>
     public partial class FindVertexWindow : Window
     {
-        private Structures.Graph _graph;
-        public FindVertexWindow(Structures.Graph graph)
+        private GraphProject.Structures.Graph _graph;
+        private const bool NeedToInputN = true;
+
+        public FindVertexWindow(GraphProject.Structures.Graph graph)
         {
             _graph = graph;
             InitializeComponent();
         }
+
         private void DisplayNonAdjacentVertex_Click(object sender, RoutedEventArgs e)
         {
             // Создаем и отображаем диалоговое окно
-            VertexChooseWindow vertexChooseWindow = new(false)
+            VertexChooseWindow vertexChooseWindow = new(!NeedToInputN)
             {
                 Owner = this
             };
@@ -72,7 +75,7 @@ namespace GraphVisualization
         private void DisplayVerticesWithGreaterOutDegree_Click(object sender, RoutedEventArgs e)
         {
             // Создаем и отображаем диалоговое окно
-            VertexChooseWindow vertexChooseWindow = new(false)
+            VertexChooseWindow vertexChooseWindow = new(!NeedToInputN)
             {
                 Owner = this
             };
@@ -123,7 +126,7 @@ namespace GraphVisualization
         private void FindUnreachableVertices_Click(object sender, EventArgs e)
         {
             // Создаем и отображаем диалоговое окно
-            VertexChooseWindow vertexChooseWindow = new(false)
+            VertexChooseWindow vertexChooseWindow = new(!NeedToInputN)
             {
                 Owner = this
             };
@@ -158,11 +161,10 @@ namespace GraphVisualization
                 }
             }
         }
-
         private void FindVerticesDistanceLessN_Click(object sender, EventArgs e)
         {
             // Создаем и отображаем диалоговое окно
-            VertexChooseWindow vertexChooseWindow = new(true)
+            VertexChooseWindow vertexChooseWindow = new(NeedToInputN)
             {
                 Owner = this
             };
@@ -192,6 +194,38 @@ namespace GraphVisualization
                 }
             }
         }
+
+        private void FindShortestPath_Click(object sender, EventArgs e)
+        {
+            // Создаем и отображаем диалоговое окно
+            VertexChooseWindow vertexChooseWindow = new(!NeedToInputN)
+            {
+                Owner = this
+            };
+
+            if (vertexChooseWindow.ShowDialog() == true)
+            {
+                // Получаем данные от пользователя
+                string vertexName = vertexChooseWindow.Vertex;
+                string output = "";
+                try
+                {
+                    var distances = GraphSearcher.FindShortestPathsFrom(vertexName, _graph);
+                    output += $"Длинны кратчайших путей от {vertexName}:" + "\n";
+                    int index = 1;
+                    foreach (var vertex in distances)
+                    {
+                        output += $"{index++}. {vertex.Key} - {vertex.Value}" + "\n";
+                    }
+                    MessageBox.Show(output, $"Длинны кратчайших путей от {vertexName}", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;

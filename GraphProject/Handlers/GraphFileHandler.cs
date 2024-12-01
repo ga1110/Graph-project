@@ -1,9 +1,9 @@
-﻿using Structures;
+﻿using GraphProject.Structures;
 using System;
 using System.IO;
 using System.Linq;
 
-namespace Handlers
+namespace GraphProject.Handlers
 {
     // Класс-обработчик для работы с файлами графов (загрузка и сохранение)
     public static class GraphFileHandler
@@ -82,7 +82,7 @@ namespace Handlers
         {
             // Получаем путь к директории, где находится исполняемый файл
             string exePath = AppDomain.CurrentDomain.BaseDirectory;
-            DirectoryInfo directory = new DirectoryInfo(exePath);
+            DirectoryInfo directory = new(exePath);
 
             // Ищем файл проекта (.csproj), поднимаясь вверх по дереву директорий
             while (directory != null && !directory.GetFiles("*.sln").Any())
@@ -110,7 +110,7 @@ namespace Handlers
                 fileName += ".txt";
             }
 
-            string projectDirectory = GraphFileHandler.GetProjectDirectory();
+            string projectDirectory = GetProjectDirectory();
 
             // Создаем полный путь к файлу внутри папки SavedGraphs
             string filePath = Path.Combine(projectDirectory, "SavedGraphs", fileName);
