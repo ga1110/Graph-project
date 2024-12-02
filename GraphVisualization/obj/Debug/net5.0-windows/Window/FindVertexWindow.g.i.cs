@@ -92,7 +92,7 @@ namespace GraphVisualization {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GraphVisualization;component/window/findvertexwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GraphVisualization;V1.0.0.0;component/window/findvertexwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Window\FindVertexWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -68,7 +68,7 @@ namespace GraphVisualization {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GraphVisualization;component/window/maxflowvertexchoose.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GraphVisualization;V1.0.0.0;component/window/maxflowvertexchoose.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Window\MaxFlowVertexChoose.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

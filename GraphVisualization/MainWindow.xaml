@@ -135,12 +135,6 @@
                                     Margin="10"
                                     Style="{StaticResource CustomButtonStyle}"
                                     />
-                            <Button x:Name="FindVertex"
-                                    Content="Поиск вершин"
-                                    Click="FindVertex_Click"
-                                    Margin="10"
-                                    Style="{StaticResource CustomButtonStyle}"
-                                    />
                         </StackPanel>
                     </Expander>
                     

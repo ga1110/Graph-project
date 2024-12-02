@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\window\\addremoveedgewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\window\\addremoveedgewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\window\\maxflowvertexchoose.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -221,7 +221,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 261,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -233,8 +233,7 @@
               "RelativeToolTip": "GraphVisualization\\Window\\MaxFlowVertexChoose.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-01T21:59:34.308Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T21:59:34.308Z"
             },
             {
               "$type": "Document",
@@ -246,12 +245,11 @@
               "RelativeToolTip": "GraphVisualization\\Window\\FindVertexWindow.xaml.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAAKIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T12:29:35.642Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T12:29:35.642Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "AddRemoveEdgeWindow.xaml.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\AddRemoveEdgeWindow.xaml.cs",
               "RelativeDocumentMoniker": "GraphVisualization\\Window\\AddRemoveEdgeWindow.xaml.cs",
@@ -259,12 +257,11 @@
               "RelativeToolTip": "GraphVisualization\\Window\\AddRemoveEdgeWindow.xaml.cs",
               "ViewState": "AgIAADIAAAAAAAAAAAAuwEwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T12:30:01.01Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T12:30:01.01Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\MainWindow.xaml",
               "RelativeDocumentMoniker": "GraphVisualization\\MainWindow.xaml",
@@ -276,32 +273,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "GraphVisualization\\MainWindow.xaml.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\MainWindow.xaml.cs",
               "RelativeToolTip": "GraphVisualization\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAFQCAAAAAAAAAAAAAGoCAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAQwGoCAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-29T22:44:11.953Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AddRemoveEdgeWindow.xaml",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\AddRemoveEdgeWindow.xaml",
               "RelativeDocumentMoniker": "GraphVisualization\\Window\\AddRemoveEdgeWindow.xaml",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\AddRemoveEdgeWindow.xaml",
               "RelativeToolTip": "GraphVisualization\\Window\\AddRemoveEdgeWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-01T19:11:39.468Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T19:11:39.468Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MaxFlowAlgorithm.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\MaxFlowAlgorithm.cs",
               "RelativeDocumentMoniker": "GraphProject\\Algorithms\\MaxFlowAlgorithm.cs",
@@ -309,8 +305,7 @@
               "RelativeToolTip": "GraphProject\\Algorithms\\MaxFlowAlgorithm.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-01T21:23:28.752Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T21:23:28.752Z"
             },
             {
               "$type": "Document",
@@ -321,8 +316,7 @@
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\MaxFlowVertexChoose.xaml",
               "RelativeToolTip": "GraphVisualization\\Window\\MaxFlowVertexChoose.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-01T21:58:05.575Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T21:58:05.575Z"
             },
             {
               "$type": "Document",
@@ -333,8 +327,7 @@
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\LoadGraphWindow.xaml",
               "RelativeToolTip": "GraphVisualization\\Window\\LoadGraphWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-01T19:12:59.245Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T19:12:59.245Z"
             },
             {
               "$type": "Document",
@@ -346,8 +339,7 @@
               "RelativeToolTip": "GraphVisualization\\Window\\GraphListWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T12:30:25.963Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T12:30:25.963Z"
             },
             {
               "$type": "Document",
@@ -358,8 +350,7 @@
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\CreateGraphWindow.xaml",
               "RelativeToolTip": "GraphVisualization\\Window\\CreateGraphWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-01T19:12:35.724Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T19:12:35.724Z"
             },
             {
               "$type": "Document",
@@ -370,8 +361,7 @@
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\GraphListWindow.xaml",
               "RelativeToolTip": "GraphVisualization\\Window\\GraphListWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-01T19:12:53.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T19:12:53.321Z"
             },
             {
               "$type": "Document",
@@ -382,8 +372,7 @@
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\VertexChooseWindow.xaml",
               "RelativeToolTip": "GraphVisualization\\Window\\VertexChooseWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-01T19:11:14.39Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T19:11:14.39Z"
             },
             {
               "$type": "Document",
@@ -395,8 +384,7 @@
               "RelativeToolTip": "GraphVisualization\\Window\\AddRemoveVertexWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T12:30:14.219Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T12:30:14.219Z"
             },
             {
               "$type": "Document",
@@ -407,8 +395,7 @@
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\AddRemoveVertexWindow.xaml",
               "RelativeToolTip": "GraphVisualization\\Window\\AddRemoveVertexWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-30T12:33:12.451Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T12:33:12.451Z"
             },
             {
               "$type": "Document",
@@ -420,8 +407,7 @@
               "RelativeToolTip": "GraphProject\\Handlers\\GraphManager.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAjwEgAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T04:33:55.22Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T04:33:55.22Z"
             },
             {
               "$type": "Document",
@@ -433,8 +419,7 @@
               "RelativeToolTip": "GraphProject\\Handlers\\GraphSearcher.cs",
               "ViewState": "AgIAAAoBAAAAAAAAAAAcwEMBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T04:44:40.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T04:44:40.267Z"
             },
             {
               "$type": "Document",
@@ -446,8 +431,7 @@
               "RelativeToolTip": "GraphVisualization\\Algorithms\\GraphConverter.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAgwDAAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T08:31:20.164Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T08:31:20.164Z"
             },
             {
               "$type": "Document",
@@ -459,8 +443,7 @@
               "RelativeToolTip": "GraphProject\\Structures\\Graph.cs",
               "ViewState": "AgIAAJMAAAAAAAAAAAAcwLgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T04:48:52.057Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T04:48:52.057Z"
             },
             {
               "$type": "Document",
@@ -472,8 +455,7 @@
               "RelativeToolTip": "GraphProject\\Structures\\Vertex.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAA5wCsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T04:49:00.142Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T04:49:00.142Z"
             },
             {
               "$type": "Document",
@@ -485,8 +467,7 @@
               "RelativeToolTip": "GraphProject\\Handlers\\GraphPrinter.cs",
               "ViewState": "AgIAAI4AAAAAAAAAAAAWwK4AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T04:38:17.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T04:38:17.118Z"
             },
             {
               "$type": "Document",
@@ -509,8 +490,7 @@
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\FindVertexWindow.xaml",
               "RelativeToolTip": "GraphVisualization\\Window\\FindVertexWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-30T12:34:36.639Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-30T12:34:36.639Z"
             },
             {
               "$type": "Document",
@@ -522,8 +502,7 @@
               "RelativeToolTip": "GraphProject\\Structures\\Edge.cs",
               "ViewState": "AgIAACAAAAAAAAAAAAAAwBgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T04:29:07.837Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T04:29:07.837Z"
             },
             {
               "$type": "Document",
