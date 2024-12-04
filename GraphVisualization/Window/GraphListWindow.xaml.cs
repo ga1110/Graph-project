@@ -63,17 +63,24 @@ namespace GraphVisualization
             var selectedItem = listBox.SelectedItem as GraphItem;
             if (selectedItem != null)
             {
-                // Удаляем граф из GraphVoult
-                GraphVoult.RemoveGraph(selectedItem.Number);
+                try
+                {
+                    // Удаляем граф из GraphVoult
+                    GraphVoult.RemoveGraph(selectedItem.Number);
 
-                // Удаляем элемент из коллекции GraphItems
-                GraphItems.Remove(selectedItem);
+                    // Удаляем элемент из коллекции GraphItems
+                    GraphItems.Remove(selectedItem);
 
-                // Переиндексация оставшихся элементов
-                ReindexGraphItems();
+                    // Переиндексация оставшихся элементов
+                    ReindexGraphItems();
 
-                // Обновляем выбранный элемент
-                listBox.SelectedItem = null;
+                    // Обновляем выбранный элемент
+                    listBox.SelectedItem = null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else
             {

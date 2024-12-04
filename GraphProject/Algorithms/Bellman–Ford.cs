@@ -42,7 +42,7 @@ namespace GraphProject.Algorithms
                     foreach (var edge in graph.adjacencyList[vertex])
                     {
                         var neighbor = edge.Destination; // Получаем конечную вершину ребра
-                        var weight = edge.Weight ?? 0;   // Вес ребра (если null, заменяем на 0)
+                        var weight = edge.Weight ?? throw new Exception($"У вершины {edge.ToString()} не указан вес");   // Вес ребра (если null, заменяем на 0)
 
                         // Если расстояние до текущей вершины не бесконечность и найден более короткий путь
                         if (distances[vertex] != Inf && distances[vertex] + weight < distances[neighbor])
@@ -60,7 +60,7 @@ namespace GraphProject.Algorithms
                 foreach (var edge in graph.adjacencyList[vertex])
                 {
                     var neighbor = edge.Destination; // Конечная вершина ребра
-                    var weight = edge.Weight ?? 0;   // Вес ребра
+                    var weight = edge.Weight ?? throw new Exception($"У вершины {edge.ToString()} не указан вес"); ;   // Вес ребра
 
                     // Если можно уменьшить расстояние, значит в графе есть отрицательный цикл
                     if (distances[vertex] != Inf && distances[vertex] + weight < distances[neighbor])
@@ -69,7 +69,6 @@ namespace GraphProject.Algorithms
                     }
                 }
             }
-
             // Возвращаем словарь минимальных расстояний
             return distances;
         }

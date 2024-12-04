@@ -41,7 +41,7 @@ namespace GraphProject.Structures
             }
             else
             {
-                return _currentGraph + 1;
+                return _currentGraph;
             }
         }
 
@@ -69,7 +69,7 @@ namespace GraphProject.Structures
         {
             Graph tmpGraph = new Graph(_graphs[_currentGraph]);
             _graphs.Add(tmpGraph);
-            _currentGraph = _graphs.Count() - 1;
+            _currentGraph = _graphs.Count();
         }
 
         // Метод смены текущего графа
@@ -77,7 +77,7 @@ namespace GraphProject.Structures
         {
             if (CheckUserInput(newCurrentGrahp))
             {
-                _currentGraph = newCurrentGrahp - 1;
+                _currentGraph = newCurrentGrahp;
                 return true;
             }
             return false;
@@ -88,7 +88,11 @@ namespace GraphProject.Structures
         {
             if (CheckUserInput(graphToDelete))
             {
-                _graphs.RemoveAt(graphToDelete - 1);
+                if(_graphs.Count() - 1 == 0)
+                {
+                    throw new Exception("Нельзя удалить последний граф");
+                }    
+                _graphs.RemoveAt(graphToDelete);
                 return;
             }
             throw new Exception("Не удалось удалить граф из списка");
@@ -97,7 +101,7 @@ namespace GraphProject.Structures
         // Проверка ввода пользователя
         private bool CheckUserInput(int newCurrentGrahp)
         {
-            if (newCurrentGrahp - 1 < 0 || newCurrentGrahp - 1 >= _graphs.Count() || newCurrentGrahp < 0)
+            if (newCurrentGrahp < 0 || newCurrentGrahp >= _graphs.Count())
             {
                 return false;
             }

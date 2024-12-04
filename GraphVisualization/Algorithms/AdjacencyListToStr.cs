@@ -12,7 +12,7 @@ namespace GraphVisualization.Algorithms
         public static string ToStr(Graph graph)
         {
             var adjacencyList = GraphManager.GetAdj(graph);
-            string adjacencyStr = "Список смежности графа:\n\n";
+            string adjacencyStr = "";
 
             // Проходим по каждому элементу списка смежности графа
             foreach (var vertex in adjacencyList)
@@ -23,7 +23,7 @@ namespace GraphVisualization.Algorithms
                 var edges = vertex.Value;
 
                 // Выводим имя вершины
-                adjacencyStr += $"{vertexName}: ";
+                adjacencyStr += $"{vertexName}-> ";
 
                 // Если список ребер пустой или равен null
                 if (edges == null || edges.Count == 0)
@@ -35,12 +35,14 @@ namespace GraphVisualization.Algorithms
 
                 // Создаем список строк для представления ребер
                 List<string> edgeStrings = new();
-
+                
+                int index = 0;
                 // Проходим по каждому ребру в списке ребер
                 foreach (var edge in edges)
                 {
                     // Инициализируем строку представления ребра с именем вершины назначения
-                    string edgeStr = "(" + edge.Destination.Name;
+                    string edgeStr = index == 0 ? "" : " | "; 
+                    edgeStr += edge.Destination.Name;
 
                     // Если у ребра задан вес
                     if (edge.Weight.HasValue)
@@ -49,15 +51,13 @@ namespace GraphVisualization.Algorithms
                         edgeStr += $", Вес: {edge.Weight.Value}";
                     }
 
-                    // Закрываем скобку в строке представления ребра
-                    edgeStr += ")";
-
                     // Добавляем строку ребра в список строк ребер
                     edgeStrings.Add(edgeStr);
+                    index++;
                 }
 
                 // Выводим список ребер, объединенных пробелом
-                adjacencyStr += string.Join(" ", edgeStrings) + "\n";
+                adjacencyStr += string.Join(" ", edgeStrings) + "\n\n";
             }
 
             return adjacencyStr;

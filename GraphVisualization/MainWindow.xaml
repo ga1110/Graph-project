@@ -6,9 +6,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Class="GraphVisualization.MainWindow"
     Height="900" Width="1600"
+    MinHeight="900" MinWidth="1600"
     WindowStyle="ToolWindow"
     xmlns:wpfgraphcontrol="http://mlsagl"
     Background="Transparent"
+    KeyDown="Window_KeyDown"
     AllowsTransparency="False"
     mc:Ignorable="mc">
     <Window.Resources>
@@ -31,27 +33,21 @@
                 <RowDefinition/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-
-            <TextBlock
-                Grid.Row="0"
-                Grid.Column="0"
-                Text ="Graph Visualization"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Left"
-                Margin="65,0,0,0"
-                FontSize="25"
-                Foreground="White"
-                FontWeight="Bold"
-             >
-            </TextBlock>
-            <Image Source="Resources\logo.png"
+            <Border Grid.Row="0" Grid.Column ="0" Grid.ColumnSpan="3" CornerRadius="0">
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                    <Image Source="Resources\logo.png"
                    Height="50" Width="50"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
-                   Margin="10,0,0,0"
-                   Grid.Row="0"
-                   Grid.Column="0">
-            </Image>
+                   Margin="10,0,0,0">
+                    </Image>
+                    <TextBlock Text ="Graph Visualization"
+                               FontSize="25"
+                               Foreground="White"
+                               FontWeight="Bold" Width="230" Height="34"
+                               />  
+                </StackPanel>
+            </Border>
             <ScrollViewer VerticalScrollBarVisibility="Hidden"
                           Grid.Row="1"
                           Grid.Column="0">
@@ -72,6 +68,12 @@
                             <Button x:Name="LoadGraphButton"
                                     Content="Загрузить граф"
                                     Click="LoadGraphButton_Click"
+                                    Margin="10"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    />
+                            <Button x:Name="SaveGraphToFileButton"
+                                    Content="Записать в файл"
+                                    Click="SaveGraphToFileButton_Click"
                                     Margin="10"
                                     Style="{StaticResource CustomButtonStyle}"
                                     />
@@ -137,7 +139,7 @@
                                     />
                         </StackPanel>
                     </Expander>
-                    
+
                     <!-- Четвертый Expander-->
                     <Expander Header="Поиск вершин" 
                               IsExpanded="False" 
@@ -182,7 +184,7 @@
                                     />
                         </StackPanel>
                     </Expander>
-                    
+
                     <Expander Header="Разное" 
                               IsExpanded="False" 
                               Margin="10"
@@ -217,11 +219,10 @@
                                  TextWrapping="Wrap"
                                  VerticalScrollBarVisibility="Hidden"
                                  HorizontalScrollBarVisibility="Disabled"
-                                 Background="LightGray"
+                                 Background="White"
                                  BorderBrush="Black"  
                                  BorderThickness="2"
                                  FontSize="15"
-                                 Panel.ZIndex="2"
                                  />
                     </Expander>
                     <Expander Header="Список смежности графа" 
@@ -233,27 +234,50 @@
                                  TextWrapping="Wrap"
                                  VerticalScrollBarVisibility="Hidden"
                                  HorizontalScrollBarVisibility="Disabled"
-                                 Background="LightGray"
+                                 Background="White"
                                  BorderBrush="Black"  
                                  BorderThickness="2"
                                  FontSize="15"
-                                 Panel.ZIndex="2"
+                                 />
+                    </Expander>
+                    <Expander Header="История действий" 
+                              Margin="10"
+                              IsExpanded="False">
+                        <TextBox x:Name="HistoryTextBox"
+                                 Margin="10"  
+                                 IsReadOnly="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Hidden"
+                                 HorizontalScrollBarVisibility="Disabled"
+                                 Background="White"
+                                 BorderBrush="Black"  
+                                 BorderThickness="2"
+                                 FontSize="13"
                                  />
                     </Expander>
                 </StackPanel>
             </ScrollViewer>
-            <Border Background="White" Grid.Row="1" Grid.Column="1">
-            <wpfgraphcontrol:AutomaticGraphLayoutControl x:Name="graphControl"
-                                                        Grid.Row="1"
-                                                        Grid.Column="1"
-                                                        Margin="10"
-                                                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                                        ClipToBounds="False" 
-
-                                                    />
-                </Border>
+            <Border Background="White" Grid.Row="1" Grid.Column="1" CornerRadius="5">
+                <wpfgraphcontrol:AutomaticGraphLayoutControl x:Name="graphControl"
+                                                             Grid.Row="1"
+                                                             Grid.Column="1"
+                                                             Margin="10"
+                                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                             ClipToBounds="False" 
+                                                             />
+            </Border>
+            
+            <Label Grid.Row="3" 
+                   Grid.Column="0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Foreground = "White"
+                   Content ="Для получения справки по управлению нажмите  I">
+                
+            </Label>
         </Grid>
+
     </Border>
-    
+
 </Window>

@@ -1,0 +1,13 @@
+Undirected
+A B
+A C
+A D
+B E
+B T
+B Q
+C W
+C R
+C G
+D S
+D V
+D X

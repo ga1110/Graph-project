@@ -1,0 +1,97 @@
+Directed
+Alpha Bravo
+Alpha Kilo
+Bravo Charlie
+Bravo Lima
+Kilo Lima
+Kilo Uniform
+Charlie Delta
+Charlie Mike
+Lima Mike
+Lima Victor
+Delta Echo
+Delta November
+Mike November
+Mike Whiskey
+Echo Foxtrot
+Echo Oscar
+November Oscar
+November Xray
+Foxtrot Golf
+Foxtrot Papa
+Oscar Papa
+Oscar Yankee
+Golf Hotel
+Golf Quebec
+Papa Quebec
+Papa Zulu
+Hotel India
+Hotel Romeo
+Quebec Romeo
+Quebec AlphaAlpha
+India Juliett
+India Sierra
+Romeo Sierra
+Romeo BravoBravo
+Juliett Alpha
+Juliett Tango
+Sierra Tango
+Sierra CharlieCharlie
+Tango Kilo
+Tango DeltaDelta
+Uniform Victor
+Uniform EchoEcho
+Victor Whiskey
+Victor FoxtrotFoxtrot
+Whiskey Xray
+Whiskey GolfGolf
+Xray Yankee
+Xray HotelHotel
+Yankee Zulu
+Yankee IndiaIndia
+Zulu AlphaAlpha
+Zulu JuliettJuliett
+AlphaAlpha BravoBravo
+AlphaAlpha KiloKilo
+BravoBravo CharlieCharlie
+BravoBravo LimaLima
+CharlieCharlie DeltaDelta
+CharlieCharlie MikeMike
+DeltaDelta EchoEcho
+DeltaDelta NovemberNovember
+EchoEcho FoxtrotFoxtrot
+EchoEcho OscarOscar
+FoxtrotFoxtrot GolfGolf
+FoxtrotFoxtrot PapaPapa
+GolfGolf HotelHotel
+GolfGolf QuebecQuebec
+HotelHotel IndiaIndia
+HotelHotel RomeoRomeo
+IndiaIndia JuliettJuliett
+IndiaIndia SierraSierra
+JuliettJuliett AlphaAlpha
+JuliettJuliett TangoTango
+KiloKilo LimaLima
+KiloKilo UniformUniform
+LimaLima MikeMike
+LimaLima VictorVictor
+MikeMike NovemberNovember
+MikeMike WhiskeyWhiskey
+NovemberNovember OscarOscar
+NovemberNovember XrayXray
+OscarOscar PapaPapa
+OscarOscar YankeeYankee
+PapaPapa QuebecQuebec
+PapaPapa ZuluZulu
+QuebecQuebec RomeoRomeo
+QuebecQuebec AlphaAlphaAlpha
+RomeoRomeo
+SierraSierra
+TangoTango
+UniformUniform
+VictorVictor
+WhiskeyWhiskey
+XrayXray
+YankeeYankee
+ZuluZulu
+AlphaAlphaAlpha

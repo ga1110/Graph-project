@@ -11,72 +11,61 @@ namespace GraphProject.Handlers
         // Метод для сохранения графа в файл
         public static void SaveToFile(Graph graph, string filename)
         {
-            try
+            // Проверяем и добавляем расширение .txt, если его нет
+            if (!filename.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
             {
-                // Проверяем и добавляем расширение .txt, если его нет
-                if (!filename.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
+                filename += ".txt";
+            }
+
+            // Получаем путь к папке проекта
+            string projectDirectory = GetProjectDirectory();
+
+            // Создаем путь к папке SavedGraphs внутри папки проекта
+            string saveDirectory = Path.Combine(projectDirectory, "SavedGraphs");
+
+            // Проверяем, существует ли папка SavedGraphs, если нет — создаем ее
+            if (!Directory.Exists(saveDirectory))
+            {
+                Directory.CreateDirectory(saveDirectory);
+            }
+
+            // Создаем полный путь к файлу внутри папки SavedGraphs
+            string filePath = Path.Combine(saveDirectory, filename);
+
+            // Открываем файл для записи
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                // Записываем тип графа (ориентированный или неориентированный) на первую строку
+                writer.WriteLine(graph.IsDirected ? "Directed" : "Undirected");
+
+
+                // Проходим по каждой вершине и её рёбрам
+                foreach (var adjacencyListElement in graph.adjacencyList)
                 {
-                    filename += ".txt";
-                }
+                    string sourceVertexName = adjacencyListElement.Key.Name;
+                    var edges = adjacencyListElement.Value;
 
-                // Получаем путь к папке проекта
-                string projectDirectory = GetProjectDirectory();
-
-                // Создаем путь к папке SavedGraphs внутри папки проекта
-                string saveDirectory = Path.Combine(projectDirectory, "SavedGraphs");
-
-                // Проверяем, существует ли папка SavedGraphs, если нет — создаем ее
-                if (!Directory.Exists(saveDirectory))
-                {
-                    Directory.CreateDirectory(saveDirectory);
-                }
-
-                // Создаем полный путь к файлу внутри папки SavedGraphs
-                string filePath = Path.Combine(saveDirectory, filename);
-
-                // Открываем файл для записи
-                using (StreamWriter writer = new StreamWriter(filePath))
-                {
-                    // Записываем тип графа (ориентированный или неориентированный) на первую строку
-                    writer.WriteLine(graph.IsDirected ? "Directed" : "Undirected");
-
-                    // Проходим по каждой вершине и её рёбрам
-                    foreach (var adjacencyListElement in graph.adjacencyList)
+                    // Для каждого ребра записываем исходную и конечную вершины, а также опционально вес
+                    foreach (var edge in edges)
                     {
-                        string sourceVertexName = adjacencyListElement.Key.Name;
-                        var edges = adjacencyListElement.Value;
+                        string line = $"{sourceVertexName} {edge.Destination.Name}";
 
-                        // Для каждого ребра записываем исходную и конечную вершины, а также опционально вес
-                        foreach (var edge in edges)
-                        {
-                            string line = $"{sourceVertexName} {edge.Destination.Name}";
+                        // Добавляем вес, если он указан
+                        if (edge.Weight.HasValue)
+                            line += $" {edge.Weight.Value}";
 
-                            // Добавляем вес, если он указан
-                            if (edge.Weight.HasValue)
-                                line += $" {edge.Weight.Value}";
+                        // Записываем строку в файл
+                        writer.WriteLine(line);
+                    }
 
-                            // Записываем строку в файл
-                            writer.WriteLine(line);
-                        }
-
-                        // Если у вершины нет рёбер, записываем только её имя
-                        if (edges.Count == 0)
-                        {
-                            writer.WriteLine($"{sourceVertexName}");
-                        }
+                    // Если у вершины нет рёбер, записываем только её имя
+                    if (edges.Count == 0)
+                    {
+                        writer.WriteLine($"{sourceVertexName}");
                     }
                 }
-
-                // Выводим сообщение об успешном сохранении графа
-                Console.WriteLine($"Граф успешно сохранён в файл '{filePath}'.");
-            }
-            catch (Exception ex)
-            {
-                // В случае ошибки выводим сообщение об ошибке
-                Console.WriteLine($"Ошибка при сохранении графа: {ex.Message}");
             }
         }
-
         // Метод для получения пути к папке проекта
         private static string GetProjectDirectory()
         {

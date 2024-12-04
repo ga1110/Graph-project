@@ -1,113 +1,117 @@
-﻿using GraphProject.Structures;
-using System;
+﻿using GraphProject.Handlers;
+using GraphProject.Structures;
 using System.Collections.Generic;
-using GraphProject.Handlers;
+using System;
 
 public static class MaxFlowSolver
 {
-    // Метод для нахождения максимального потока в графе от источника (source) к стоку (sink)
     public static double FindMaxFlow(Graph graph, Vertex source, Vertex sink)
     {
-        double maxFlow = 0; // Инициализируем максимальный поток значением 0
-        var edgeToParent = new Dictionary<Vertex, Edge>(); // Словарь для хранения пути увеличения: вершина -> ребро, по которому мы пришли в эту вершину
-        var adjacencyList = GraphManager.GetAdj(graph); // Получаем список смежности графа
+        if (graph == null)
+            throw new ArgumentNullException(nameof(graph));
+        if (source == null || sink == null)
+            throw new ArgumentNullException("Источник или сток не могут быть null");
 
-        // Пока существует путь увеличения от источника к стоку
-        while (BFS(graph, source, sink, edgeToParent))
+        double maxFlow = 0;
+        var adjacencyList = GraphManager.GetAdj(graph);
+
+        // Инициализируем потоки по всем ребрам
+        foreach (var edges in adjacencyList.Values)
         {
-            // Инициализируем поток вдоль пути максимальным возможным значением
-            double pathFlow = double.MaxValue;
-
-            // Проходим по найденному пути от стока к источнику, чтобы найти минимальную остаточную емкость (узкое место)
-            for (Vertex v = sink ; v != source ;)
+            foreach (var edge in edges)
             {
-                Edge edge = edgeToParent[v]; // Получаем ребро, по которому пришли в вершину v
-                double edgeResidualCapacity = edge.ResidualCapacity ?? throw new Exception($"У ребра {edge} не задана емкость"); // Остаточная емкость ребра
-                pathFlow = Math.Min(pathFlow, edgeResidualCapacity); // Обновляем pathFlow до минимальной остаточной емкости на пути
-                v = edge.Source; // Переходим к предыдущей вершине в пути
+                edge.Flow = 0;
             }
-
-            // Обновляем потоки по ребрам на найденном пути
-            for (Vertex v = sink ; v != source ;)
-            {
-                Edge edge = edgeToParent[v]; // Получаем ребро, по которому пришли в вершину v
-                edge.Flow += pathFlow; // Увеличиваем поток по ребру на значение pathFlow
-
-                // Ищем обратное ребро для корректного подсчета остаточных емкостей
-                Edge reverseEdge = null;
-
-                // Получаем список ребер, исходящих из вершины edge.Destination (текущей вершины в обратном обходе)
-                if (adjacencyList.TryGetValue(edge.Destination, out var edges))
-                {
-                    // Ищем среди них ребро, ведущее к edge.Source (обратное ребро)
-                    reverseEdge = edges.Find(e => e.Destination.Equals(edge.Source));
-                }
-
-                if (reverseEdge == null)
-                {
-                    // Если обратного ребра нет, создаем его с нулевой емкостью
-                    reverseEdge = new Edge(edge.Destination, edge.Source, 0);
-
-                    // Добавляем новое ребро в список смежности
-                    if (!adjacencyList.ContainsKey(edge.Destination))
-                    {
-                        adjacencyList[edge.Destination] = new List<Edge>();
-                    }
-                    adjacencyList[edge.Destination].Add(reverseEdge);
-                }
-
-                reverseEdge.Flow -= pathFlow; // Уменьшаем поток по обратному ребру на значение pathFlow
-                v = edge.Source; // Переходим к предыдущей вершине в пути
-            }
-
-            maxFlow += pathFlow; // Увеличиваем общий максимальный поток на значение pathFlow
-
-            // Очищаем словарь edgeToParent для следующей итерации
-            edgeToParent.Clear();
         }
 
-        return maxFlow; // Возвращаем вычисленный максимальный поток
+        var parentMap = new Dictionary<Vertex, Edge>();
+
+        while (BFS(graph, source, sink, parentMap))
+        {
+            // Находим минимальную остаточную емкость по пути
+            double pathFlow = double.MaxValue;
+
+            for (Vertex v = sink ; v != source ;)
+            {
+                Edge edge = parentMap[v];
+                var edgeFlow = edge.Flow;
+                var edgeCapacity = edge.Capacity ?? throw new Exception($"{edge.ToString()} - не имеет ёмкости");
+                pathFlow = Math.Min(pathFlow, edgeCapacity - edgeFlow);
+                v = edge.Source;
+            }
+
+            // Обновляем потоки и остаточные емкости по пути
+            for (Vertex v = sink ; v != source ;)
+            {
+                Edge edge = parentMap[v];
+                edge.Flow += pathFlow;
+
+                // Обработка обратного ребра
+                Edge reverseEdge = FindEdge(adjacencyList, edge.Destination, edge.Source);
+                if (reverseEdge == null)
+                {
+                    // Создаем обратное ребро с нулевым потоком и емкостью, равной потоку прямого ребра
+                    reverseEdge = new Edge(edge.Destination, edge.Source, 0);
+                    reverseEdge.Flow = 0;
+                    adjacencyList[edge.Destination].Add(reverseEdge);
+                }
+                reverseEdge.Flow -= pathFlow;
+
+                v = edge.Source;
+            }
+
+            maxFlow += pathFlow;
+            parentMap.Clear();
+        }
+
+        return maxFlow;
     }
 
-    // Метод для поиска пути увеличения с помощью поиска в ширину (BFS)
-    private static bool BFS(Graph graph, Vertex source, Vertex sink, Dictionary<Vertex, Edge> edgeToParent)
+    private static bool BFS(Graph graph, Vertex source, Vertex sink, Dictionary<Vertex, Edge> parentMap)
     {
-        var adjacencyList = GraphManager.GetAdj(graph); // Получаем список смежности графа
-        var visited = new HashSet<Vertex>(); // Множество посещенных вершин
-        var queue = new Queue<Vertex>(); // Очередь для реализации BFS
+        var adjacencyList = GraphManager.GetAdj(graph);
+        var visited = new HashSet<Vertex>();
+        var queue = new Queue<Vertex>();
 
-        queue.Enqueue(source); // Добавляем источник в очередь
-        visited.Add(source); // Помечаем источник как посещенный
+        queue.Enqueue(source);
+        visited.Add(source);
 
         while (queue.Count > 0)
         {
-            Vertex u = queue.Dequeue(); // Извлекаем вершину из очереди
+            Vertex u = queue.Dequeue();
 
-            // Получаем список ребер, исходящих из вершины u
             if (adjacencyList.TryGetValue(u, out var edges))
             {
                 foreach (Edge edge in edges)
                 {
-                    Vertex v = edge.Destination; // Получаем вершину назначения ребра
+                    Vertex v = edge.Destination;
 
-                    // Если вершина v не посещена и остаточная емкость ребра больше 0
-                    if (!visited.Contains(v) && edge.ResidualCapacity > 0)
+                    // Проверяем остаточную емкость
+                    if (!visited.Contains(v) && edge.Capacity - edge.Flow > 0)
                     {
-                        visited.Add(v); // Помечаем вершину v как посещенную
-                        edgeToParent[v] = edge; // Сохраняем ребро, по которому мы пришли в v
+                        visited.Add(v);
+                        parentMap[v] = edge;
 
-                        // Если достигли стока, возвращаем true (путь найден)
                         if (v.Equals(sink))
                         {
                             return true;
                         }
 
-                        queue.Enqueue(v); // Добавляем вершину v в очередь для дальнейшего поиска
+                        queue.Enqueue(v);
                     }
                 }
             }
         }
 
-        return false; // Если путь до стока не найден, возвращаем false
+        return false;
+    }
+
+    private static Edge FindEdge(Dictionary<Vertex, List<Edge>> adjacencyList, Vertex source, Vertex destination)
+    {
+        if (adjacencyList.TryGetValue(source, out var edges))
+        {
+            return edges.Find(e => e.Destination.Equals(destination));
+        }
+        return null;
     }
 }

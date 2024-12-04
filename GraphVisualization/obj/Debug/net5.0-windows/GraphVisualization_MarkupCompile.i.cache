@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 F:\Study\Теория графов\Graph-project\GraphVisualization\App.xaml
 11672388405
 
-151765298838
+161779133232
 1981008645804
 MainWindow.xaml;Style\ButtonStyle.xaml;Style\ExpanderStyle.xaml;Window\AddRemoveEdgeWindow.xaml;Window\AddRemoveVertexWindow.xaml;Window\CreateGraphWindow.xaml;Window\FindVertexWindow.xaml;Window\GraphListWindow.xaml;Window\LoadGraphWindow.xaml;Window\MaxFlowVertexChoose.xaml;Window\VertexChooseWindow.xaml;
 
-True
+False
 

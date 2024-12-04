@@ -1,0 +1,11 @@
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\GraphVisualization.exe
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\GraphVisualization.dll
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\GraphVisualization.deps.json
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\GraphVisualization.runtimeconfig.json
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\GraphVisualization.pdb
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\AutomaticGraphLayout.dll
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\AutomaticGraphLayout.Drawing.dll
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\Microsoft.Msagl.GraphViewerGdi.dll
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\Microsoft.Msagl.WpfGraphControl.dll
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\GraphProject.dll
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Release\net5.0-windows\publish\GraphProject.pdb

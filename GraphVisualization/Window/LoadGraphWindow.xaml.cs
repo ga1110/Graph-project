@@ -2,6 +2,7 @@
 using GraphVisualization;
 using Microsoft.Win32;
 using System;
+using System.Linq;
 
 namespace GraphVisualization
 {
@@ -24,6 +25,10 @@ namespace GraphVisualization
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             GraphName = GraphNameTextBox.Text.Trim();
+            if(GraphName == null || GraphName.Length == 0)
+            {
+                GraphName = (FilePath.Split('\\').Last()).Split('.').First();
+            }
             FilePath = FilePathTextBox.Text.Trim();
             IsAddToVoult = AddToVoult.IsChecked ?? false;
             this.DialogResult = true;
@@ -34,7 +39,7 @@ namespace GraphVisualization
             // Создаем экземпляр OpenFileDialog
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Выберите файл";
-            openFileDialog.Filter = "Все файлы (*.*)|*.*"; // Можно настроить фильтр файлов
+            openFileDialog.Filter = "Все файлы (*.txt)|*.*"; // Можно настроить фильтр файлов
 
             // Открываем диалог и проверяем, что файл выбран
             if (openFileDialog.ShowDialog() == true)

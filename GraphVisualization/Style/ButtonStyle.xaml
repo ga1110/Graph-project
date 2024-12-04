@@ -6,9 +6,9 @@
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="Padding" Value="10,0,0,0" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="Height" Value="40" />
 
         <!-- Анимация при наведении -->
         <Setter Property="Template">
@@ -24,8 +24,13 @@
                                     Background="LightGray" 
                                     Opacity="0" />
                         </Border>
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        <TextBlock Text="{TemplateBinding Content}" 
+                                   Foreground="{TemplateBinding Foreground}" 
+                                   FontSize="{TemplateBinding FontSize}" 
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                   Margin="5,0,0,0">
+                        </TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <!-- Триггер для наведения -->
