@@ -76,7 +76,8 @@ namespace GraphProject.Handlers
             // Ищем файл проекта (.csproj), поднимаясь вверх по дереву директорий
             while (directory != null && !directory.GetFiles("*.sln").Any())
             {
-                directory = directory.Parent;
+                // Возвращает путь к директории, где находится исполняемый файл
+                return AppDomain.CurrentDomain.BaseDirectory;
             }
 
             // Если не удалось найти папку проекта, выбрасываем исключение
