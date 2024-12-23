@@ -132,9 +132,6 @@ namespace GraphProject.Structures
                     }
                 }
             }
-
-            // Выводим сообщение об успешной загрузке графа
-            Console.WriteLine($"Граф успешно загружен из файла '{filePath}'. Тип графа: {(IsDirected ? "Ориентированный" : "Неориентированный")}.");
         }
 
         /// <summary>

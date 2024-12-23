@@ -16,5 +16,5 @@ F:\Study\Теория графов\Graph-project\GraphVisualization\App.xaml
 199-1236618368
 MainWindow.xaml;Style\ButtonStyle.xaml;Style\ExpanderStyle.xaml;Window\AddRemoveEdgeWindow.xaml;Window\AddRemoveVertexWindow.xaml;Window\CreateGraphWindow.xaml;Window\FindVertexWindow.xaml;Window\GraphListWindow.xaml;Window\LoadGraphWindow.xaml;Window\MaxFlowVertexChoose.xaml;Window\VertexChooseWindow.xaml;
 
-True
+False
 

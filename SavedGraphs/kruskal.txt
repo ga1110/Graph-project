@@ -1,8 +1,8 @@
 Undirected
-A B 3
-A E 1
-B C 5
-B E 4
-C E 6
-D C 2
-E D 7
+A => B, w: 3
+A => E, w: 1
+B => C, w: 5
+B => E, w: 4
+C => E, w: 6
+D => C, w: 2
+E => D, w: 7

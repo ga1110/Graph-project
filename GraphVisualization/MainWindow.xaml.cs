@@ -451,19 +451,18 @@ namespace GraphVisualization
                     int givenVertexOutDegree = VertexAnalyzer.GetOutDegree(currVertex, _graph);
                     if (verticesWithGreaterOutDegree.Count > 0)
                     {
-                        output += $"Вершины, полустепень исхода которых больше, чем у вершины '{vertexName}' (исходящая степень {givenVertexOutDegree}):" + "\n";
                         int index = 1;
                         foreach (var vertex in verticesWithGreaterOutDegree)
                         {
                             int outDegree = VertexAnalyzer.GetOutDegree(vertex, _graph);
-                            output += ($"{index++} {vertex.Name} (исходящая степень {outDegree})") + "\n";
+                            output += ($"{index++}. {vertex.Name} (исходящая степень {outDegree})") + "\n";
                         }
                     }
                     else
                     {
-                        output += $"Нет вершин с полустепенью исхода, большей чем у вершины '{vertexName}' (исходящая степень {givenVertexOutDegree})." + "\n";
+                        output += $"Нет вершин таких вершин" + "\n";
                     }
-                    Logger.Add($"Вершины с большей полустепенью исхода {vertexName}");
+                    Logger.Add($"Вершины с большей полустепенью исхода {vertexName} (исходящая степень {givenVertexOutDegree}): \n{output}");
                 }
                 catch (Exception ex)
                 {
@@ -492,7 +491,7 @@ namespace GraphVisualization
                     int index = 1;
                     if (unreachableVertices != null && unreachableVertices.Count() != 0)
                     {
-                        output += $"Cписок вершин не достижимых из {vertexName}:" + "\n";
+                        output += $"Cписок вершин недостижимых из {vertexName}:" + "\n";
                         foreach (var vertex in unreachableVertices)
                         {
                             output += $"{index}. {vertex.Name}" + "\n";
@@ -501,7 +500,7 @@ namespace GraphVisualization
                     }
                     else
                     {
-                        output += $"Нет вершин не достижимых из {vertexName}." + "\n";
+                        output += $"Нет вершин недостижимых из {vertexName}." + "\n";
                     }
                     Logger.Add(output);
                 }

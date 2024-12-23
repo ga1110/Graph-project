@@ -9,7 +9,7 @@ namespace GraphProject.Handlers
     public static class GraphSearcher
     {
         /// <summary>
-        /// Метод поиска вершин у которых степень полуисхода больше чем у заданной
+        /// Метод поиска вершин у которых полустепень больше чем у заданной
         /// </summary>
         /// <param name="vertexName">Имя вершины</param>
         /// <param name="graph">Граф</param>

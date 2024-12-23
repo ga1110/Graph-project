@@ -39,8 +39,7 @@ namespace GraphProject.Handlers
             return true;
         }
 
-
-        /// <summary>
+        
         /// Метод для поиска вершин на периферии графа на расстоянии больше или равном N от заданной вершины
         /// </summary>
         /// <param name="graph">Граф</param>
