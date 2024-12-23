@@ -9,6 +9,19 @@ namespace GraphProject.Algorithms
         // Константа для обозначения "бесконечности"
         const double Inf = double.PositiveInfinity;
 
+        /// <summary>
+        /// Выполняет алгоритм Беллмана-Форда для нахождения кратчайших путей от начальной вершины
+        /// до всех остальных вершин в графе.
+        /// </summary>
+        /// <param name="graph">Граф, в котором необходимо выполнить алгоритм.</param>
+        /// <param name="startVertex">Начальная вершина для поиска кратчайших путей.</param>
+        /// <returns>
+        /// Словарь, в котором ключами являются вершины, а значениями - минимальные расстояния
+        /// от начальной вершины до каждой из вершин.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
+        /// <exception cref="ArgumentException">Если начальная вершина не существует в графе.</exception>
+        /// <exception cref="InvalidOperationException">Если граф содержит отрицательные циклы.</exception>
         public static Dictionary<Vertex, double> Execute(Graph graph, Vertex startVertex)
         {
             // Проверяем, что граф не равен null

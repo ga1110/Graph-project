@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GraphVisualization")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0301aadf313c99978162fb43f7c65a2878e7d252")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67a89278bf2cf6e9e3c32158a6811788112d5a7f")]
 [assembly: System.Reflection.AssemblyProductAttribute("GraphVisualization")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GraphVisualization")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

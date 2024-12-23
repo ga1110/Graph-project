@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Microsoft.Msagl.Drawing;
 using GraphProject.Handlers;
 using GraphProject.Structures;
+
 namespace GraphVisualization
 {
     /// <summary>
@@ -185,7 +176,6 @@ namespace GraphVisualization
                     }
 
                     var vertexList = GraphSearcher.FindVerticesDistanceLessOrEqualN(vertexName, _graph, parsedN);
-                    GraphPrinter.DisplayVertexDistanceLessN(vertexList, vertexName, parsedN);
                     MessageBox.Show(output, $"Вершины с большей полустепенью исхода {vertexName}", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)

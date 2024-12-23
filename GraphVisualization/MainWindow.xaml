@@ -267,7 +267,7 @@
                                                              ClipToBounds="False" 
                                                              />
             </Border>
-            
+            <Image x:Name="GraphImage" Grid.Row="1" Grid.Column="1" Stretch="Uniform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             <Label Grid.Row="3" 
                    Grid.Column="0"
                    HorizontalAlignment="Left"

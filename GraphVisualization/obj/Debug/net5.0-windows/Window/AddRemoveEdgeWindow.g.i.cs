@@ -100,7 +100,7 @@ namespace GraphVisualization {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GraphVisualization;component/window/addremoveedgewindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GraphVisualization;V1.0.0.0;component/window/addremoveedgewindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Window\AddRemoveEdgeWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

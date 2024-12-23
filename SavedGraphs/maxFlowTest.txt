@@ -1,11 +1,6 @@
 Directed
-A B
-A C
-B C
-B E
-C E
-C D
-E D
-E F
-D F
-F
+A => B, c: 7 | C, c: 4
+B => E, c: 2 | C, c: 4
+C => E, c: 8 | D, c: 4
+E => D, c: 4 | F, c: 5
+D => F, c: 12

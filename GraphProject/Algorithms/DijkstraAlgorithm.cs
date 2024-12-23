@@ -6,6 +6,18 @@ namespace GraphProject.Algorithms
 {
     public static class DijkstraAlgorithm
     {
+        /// <summary>
+        /// Выполняет алгоритм Дейкстры для нахождения кратчайших путей от начальной вершины
+        /// до всех остальных вершин в графе.
+        /// </summary>
+        /// <param name="graph">Граф, в котором необходимо выполнить алгоритм.</param>
+        /// <param name="startVertex">Начальная вершина.</param>
+        /// <returns>
+        /// Словарь, в котором ключами являются вершины, а значениями - минимальные расстояния
+        /// от начальной вершины до каждой из вершин.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
+        /// <exception cref="ArgumentException">Если начальная вершина не существует в графе.</exception>
         public static Dictionary<Vertex, double> Execute(Graph graph, Vertex startVertex)
         {
             if (graph == null)
@@ -18,7 +30,6 @@ namespace GraphProject.Algorithms
             var visited = new HashSet<Vertex>();
             var unvisited = new HashSet<Vertex>();
 
-            // Инициализация расстояний
             foreach (var vertex in graph.adjacencyList.Keys)
             {
                 distances[vertex] = double.MaxValue;
@@ -28,7 +39,6 @@ namespace GraphProject.Algorithms
 
             while (unvisited.Count > 0)
             {
-                // Найти вершину с минимальным расстоянием
                 var currentVertex = GetVertexWithMinDistance(unvisited, distances);
                 if (currentVertex == null)
                     break;
@@ -53,6 +63,12 @@ namespace GraphProject.Algorithms
             return distances;
         }
 
+        /// <summary>
+        /// Находит вершину с минимальным расстоянием среди непосещенных вершин.
+        /// </summary>
+        /// <param name="unvisited">Непосещенные вершины.</param>
+        /// <param name="distances">Словарь расстояний от начальной вершины до всех вершин.</param>
+        /// <returns>Вершина с минимальным расстоянием.</returns>
         private static Vertex GetVertexWithMinDistance(HashSet<Vertex> unvisited, Dictionary<Vertex, double> distances)
         {
             Vertex minVertex = null;

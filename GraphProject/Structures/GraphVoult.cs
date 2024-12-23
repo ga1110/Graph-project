@@ -1,25 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using GraphProject.Structures;
 
 namespace GraphProject.Structures
 {
+    /// <summary>
+    /// Класс, представляющий хранилище графов.
+    /// </summary>
     public class GraphVoult
     {
+        /// <summary>
+        /// Список графов.
+        /// </summary>
         private List<Graph> _graphs = new List<Graph>();
+
+        /// <summary>
+        /// Индекс текущего графа.
+        /// </summary>
         private int _currentGraph = 0;
 
-        // Метод получения списка графов
+        /// <summary>
+        /// Метод получения списка графов.
+        /// </summary>
+        /// <returns>Список графов.</returns>
         public List<Graph> GetGrahpsList()
         {
             return _graphs;
         }
 
-        // Метод получения текущего графа
+        /// <summary>
+        /// Метод получения текущего графа.
+        /// </summary>
+        /// <returns>Текущий граф.</returns>
         public Graph? GetCurrentGraph()
         {
             if (_graphs.Count() == 0)
@@ -32,7 +44,10 @@ namespace GraphProject.Structures
             }
         }
 
-        // Метод получения номера текущего графа
+        /// <summary>
+        /// Метод получения номера текущего графа.
+        /// </summary>
+        /// <returns>Номер текущего графа.</returns>
         public int? GetCurrentGraphIndex()
         {
             if (_graphs.Count() == 0)
@@ -45,7 +60,10 @@ namespace GraphProject.Structures
             }
         }
 
-        // Метод добавления нового графа в список
+        /// <summary>
+        /// Метод добавления нового графа в список.
+        /// </summary>
+        /// <param name="graph">Граф, который нужно добавить.</param>
         public void AddNewGraph(Graph graph)
         {
             if (graph == null)
@@ -55,7 +73,10 @@ namespace GraphProject.Structures
             _currentGraph = _graphs.Count() - 1;
         }
 
-        // Метод который заменяет текущий граф 
+        /// <summary>
+        /// Метод замены текущего графа.
+        /// </summary>
+        /// <param name="graph">Граф, на который нужно заменить текущий.</param>
         public void ReplaceCurrentGraph(Graph graph)
         {
             if (graph == null)
@@ -64,7 +85,9 @@ namespace GraphProject.Structures
             _graphs[_currentGraph] = graph;
         }
 
-        // Метод копирования текущего графа
+        /// <summary>
+        /// Метод копирования текущего графа.
+        /// </summary>
         public void CopyCurrentGrahp()
         {
             Graph tmpGraph = new Graph(_graphs[_currentGraph]);
@@ -72,7 +95,11 @@ namespace GraphProject.Structures
             _currentGraph = _graphs.Count();
         }
 
-        // Метод смены текущего графа
+        /// <summary>
+        /// Метод смены текущего графа.
+        /// </summary>
+        /// <param name="newCurrentGrahp">Новый текущий граф.</param>
+        /// <returns>Результат смены текущего графа.</returns>
         public bool ChangeCurrentGraph(int newCurrentGrahp)
         {
             if (CheckUserInput(newCurrentGrahp))
@@ -83,22 +110,29 @@ namespace GraphProject.Structures
             return false;
         }
 
-        // Метод удаления графа по номеру
+        /// <summary>
+        /// Метод удаления графа по номеру.
+        /// </summary>
+        /// <param name="graphToDelete">Номер графа, который нужно удалить.</param>
         public void RemoveGraph(int graphToDelete)
         {
             if (CheckUserInput(graphToDelete))
             {
-                if(_graphs.Count() - 1 == 0)
+                if (_graphs.Count() - 1 == 0)
                 {
                     throw new Exception("Нельзя удалить последний граф");
-                }    
+                }
                 _graphs.RemoveAt(graphToDelete);
                 return;
             }
             throw new Exception("Не удалось удалить граф из списка");
         }
 
-        // Проверка ввода пользователя
+        /// <summary>
+        /// Проверка ввода пользователя.
+        /// </summary>
+        /// <param name="newCurrentGrahp">Номер графа, который нужно проверить.</param>
+        /// <returns>Результат проверки.</returns>
         private bool CheckUserInput(int newCurrentGrahp)
         {
             if (newCurrentGrahp < 0 || newCurrentGrahp >= _graphs.Count())
@@ -108,10 +142,14 @@ namespace GraphProject.Structures
             return true;
         }
 
-        // Проверка пустой ли список
-        public bool isVoultEmpty()
+        /// <summary>
+        /// Проверка пустой ли список.
+        /// </summary>
+        /// <returns>Результат проверки.</returns>
+        public bool IsEmpty()
         {
             return !(_graphs.Count() > 0);
         }
     }
+
 }

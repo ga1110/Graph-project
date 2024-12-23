@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Msagl.Drawing;
-using System.Windows.Media.Media3D;
-using Microsoft.Msagl.Core.Routing;
-using Microsoft.Msagl.Layout.Layered;
-using static Microsoft.Msagl.Core.Layout.LgNodeInfo;
-using Microsoft.Msagl.Core.Geometry.Curves;
-using Microsoft.Msagl.WpfGraphControl;
-using System.Data;
 using GraphProject.Handlers;
-using GraphProject.Structures;
 
 namespace GraphVisualization.Algorithms
 {
     public static class GraphConverter
     {
+        /// <summary>
+        /// Метод для преобразования графа в формате GraphProject.Structures.Graph в граф в формате Microsoft.Msagl.Drawing.Graph
+        /// </summary>
+        /// <param name="myGraph">Граф в формате GraphProject.Structures.Graph</param>
+        /// <returns>Граф в формате Microsoft.Msagl.Drawing.Graph</returns>
         public static Microsoft.Msagl.Drawing.Graph Execute(GraphProject.Structures.Graph myGraph)
         {
             // Необходимо для корректного отображения
@@ -34,18 +27,23 @@ namespace GraphVisualization.Algorithms
                 foreach (var edge in edges)
                 {
                     var edgeFlow = "";
+                    var edgeWeight = "";
                     if (edge.Capacity != null)
                     {
-                        edgeFlow = $"{edge.Flow} / {edge.Capacity}";
+                        edgeFlow = $"Поток: {edge.Flow} / {edge.Capacity}";
                     }
-                    var mark = $"{edge.Weight}" + edgeFlow;
+                    if (edge.Weight != null)
+                    {
+                        edgeWeight = $"Вес: {edge.Weight}";
+                    }
+                    var mark = edgeWeight + " " + edgeFlow;
                     if (!myGraph.IsDirected)
                     {
                         if (!IsDublicate(edgesInGraph, edge))
                         {
                             Microsoft.Msagl.Drawing.Edge MsaglEdge = MsaglGraph.AddEdge(edge.Source.Name
-                                                                                         , mark
-                                                                                         , edge.Destination.Name);
+                                                                                             , mark
+                                                                                             , edge.Destination.Name);
                             MakeUndirected(MsaglEdge);
                             edgesInGraph.Add(edge);
                         }
@@ -55,14 +53,21 @@ namespace GraphVisualization.Algorithms
                     else
                     {
                         Microsoft.Msagl.Drawing.Edge MsaglEdge = MsaglGraph.AddEdge(edge.Source.Name
-                                                                                     , mark
-                                                                                     , edge.Destination.Name);
+                                                                                         , mark
+                                                                                         , edge.Destination.Name);
                         edgesInGraph.Add(edge);
                     }
                 }
             }
             return MsaglGraph;
         }
+
+        /// <summary>
+        /// Метод для проверки наличия дубликата ребра в списке ребер
+        /// </summary>
+        /// <param name="edges">Список ребер</param>
+        /// <param name="currentEdge">Текущее ребро</param>
+        /// <returns>True, если ребро является дубликатом, иначе False</returns>
         private static bool IsDublicate(List<GraphProject.Structures.Edge> edges, GraphProject.Structures.Edge currentEdge)
         {
             foreach (var edge in edges)
@@ -72,6 +77,11 @@ namespace GraphVisualization.Algorithms
             }
             return false;
         }
+
+        /// <summary>
+        /// Метод для установки атрибутов ребра в неориентированный вид
+        /// </summary>
+        /// <param name="edge">Ребро</param>
         private static void MakeUndirected(Microsoft.Msagl.Drawing.Edge edge)
         {
             edge.Attr.ArrowheadAtTarget = ArrowStyle.None;

@@ -1,14 +1,16 @@
 ﻿using GraphProject.Handlers;
 using GraphProject.Structures;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 namespace GraphVisualization.Algorithms
 {
     public static class AdjacencyListToStr
     {
+        /// <summary>
+        /// Метод для преобразования списка смежности графа в строку
+        /// </summary>
+        /// <param name="graph">Граф</param>
+        /// <returns>Строка, представляющая список смежности графа</returns>
         public static string ToStr(Graph graph)
         {
             var adjacencyList = GraphManager.GetAdj(graph);
@@ -35,13 +37,13 @@ namespace GraphVisualization.Algorithms
 
                 // Создаем список строк для представления ребер
                 List<string> edgeStrings = new();
-                
+
                 int index = 0;
                 // Проходим по каждому ребру в списке ребер
                 foreach (var edge in edges)
                 {
                     // Инициализируем строку представления ребра с именем вершины назначения
-                    string edgeStr = index == 0 ? "" : " | "; 
+                    string edgeStr = index == 0 ? "" : " | ";
                     edgeStr += edge.Destination.Name;
 
                     // Если у ребра задан вес
@@ -50,7 +52,12 @@ namespace GraphVisualization.Algorithms
                         // Добавляем информацию о весе к строке представления ребра
                         edgeStr += $", Вес: {edge.Weight.Value}";
                     }
-
+                    // Если у ребра задан вес
+                    if (edge.Capacity.HasValue)
+                    {
+                        // Добавляем информацию о весе к строке представления ребра
+                        edgeStr += $", Поток: {edge.Flow} / {edge.Capacity}";
+                    }
                     // Добавляем строку ребра в список строк ребер
                     edgeStrings.Add(edgeStr);
                     index++;

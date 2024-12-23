@@ -8,79 +8,85 @@ namespace GraphProject.Handlers
     // Класс-обработчик для работы с файлами графов (загрузка и сохранение)
     public static class GraphFileHandler
     {
-        // Метод для сохранения графа в файл
+        /// <summary>
+        /// Сохраняет граф в файл.
+        /// </summary>
+        /// <param name="graph">Граф, который необходимо сохранить.</param>
+        /// <param name="filename">Имя файла для сохранения графа.</param>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
         public static void SaveToFile(Graph graph, string filename)
         {
-            // Проверяем и добавляем расширение .txt, если его нет
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
             if (!filename.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
             {
                 filename += ".txt";
             }
 
-            // Получаем путь к папке проекта
             string projectDirectory = GetProjectDirectory();
-
-            // Создаем путь к папке SavedGraphs внутри папки проекта
             string saveDirectory = Path.Combine(projectDirectory, "SavedGraphs");
 
-            // Проверяем, существует ли папка SavedGraphs, если нет — создаем ее
             if (!Directory.Exists(saveDirectory))
             {
                 Directory.CreateDirectory(saveDirectory);
             }
 
-            // Создаем полный путь к файлу внутри папки SavedGraphs
             string filePath = Path.Combine(saveDirectory, filename);
 
-            // Открываем файл для записи
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-                // Записываем тип графа (ориентированный или неориентированный) на первую строку
                 writer.WriteLine(graph.IsDirected ? "Directed" : "Undirected");
 
-
-                // Проходим по каждой вершине и её рёбрам
                 foreach (var adjacencyListElement in graph.adjacencyList)
                 {
                     string sourceVertexName = adjacencyListElement.Key.Name;
                     var edges = adjacencyListElement.Value;
 
-                    // Для каждого ребра записываем исходную и конечную вершины, а также опционально вес
-                    foreach (var edge in edges)
-                    {
-                        string line = $"{sourceVertexName} {edge.Destination.Name}";
-
-                        // Добавляем вес, если он указан
-                        if (edge.Weight.HasValue)
-                            line += $" {edge.Weight.Value}";
-
-                        // Записываем строку в файл
-                        writer.WriteLine(line);
-                    }
-
-                    // Если у вершины нет рёбер, записываем только её имя
                     if (edges.Count == 0)
                     {
                         writer.WriteLine($"{sourceVertexName}");
                     }
+                    else
+                    {
+                        int index = 0;
+                        string line = $"{sourceVertexName} => ";
+
+                        foreach (var edge in edges)
+                        {
+                            line = $"{edge.Destination.Name}";
+
+                            if (edge.Weight.HasValue)
+                                line += $", w: {edge.Weight.Value}";
+
+                            if (edge.Capacity.HasValue)
+                                line += $", c: {edge.Capacity.Value}";
+
+                            if (index < edges.Count - 1)
+                                line += "|";
+
+                            index++;
+                        }
+                        writer.WriteLine(line);
+                    }
                 }
             }
         }
-        // Метод для получения пути к папке проекта
+
+        /// <summary>
+        /// Возвращает путь к папке проекта.
+        /// </summary>
+        /// <returns>Путь к папке проекта.</returns>
         private static string GetProjectDirectory()
         {
-            // Получаем путь к директории, где находится исполняемый файл
             string exePath = AppDomain.CurrentDomain.BaseDirectory;
             DirectoryInfo directory = new(exePath);
 
-            // Ищем файл проекта (.csproj), поднимаясь вверх по дереву директорий
             while (directory != null && !directory.GetFiles("*.sln").Any())
             {
-                // Возвращает путь к директории, где находится исполняемый файл
                 return AppDomain.CurrentDomain.BaseDirectory;
             }
 
-            // Если не удалось найти папку проекта, выбрасываем исключение
             if (directory == null)
             {
                 throw new DirectoryNotFoundException("Не удалось определить путь к папке проекта.");
@@ -89,23 +95,26 @@ namespace GraphProject.Handlers
             return directory.FullName;
         }
 
+        /// <summary>
+        /// Создает полный путь к файлу внутри папки SavedGraphs.
+        /// </summary>
+        /// <param name="fileName">Имя файла.</param>
+        /// <returns>Полный путь к файлу.</returns>
+        /// <exception cref="ArgumentNullException">Если имя файла пустое и/или равно null.</exception>
+        /// <exception cref="FileNotFoundException">Если указанный файл не найден.</exception>
         public static string CreateFilePath(string fileName)
         {
             if (fileName == null)
                 throw new ArgumentNullException("Имя файла пустое и/или null");
 
-            // Проверяем и добавляем расширение .txt, если его нет
             if (!fileName.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
             {
                 fileName += ".txt";
             }
 
             string projectDirectory = GetProjectDirectory();
-
-            // Создаем полный путь к файлу внутри папки SavedGraphs
             string filePath = Path.Combine(projectDirectory, "SavedGraphs", fileName);
 
-            // Проверяем, существует ли указанный файл
             if (!File.Exists(filePath))
             {
                 throw new FileNotFoundException($"Файл '{filePath}' не найден.");

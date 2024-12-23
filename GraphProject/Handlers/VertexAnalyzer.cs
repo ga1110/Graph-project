@@ -5,7 +5,12 @@ namespace GraphProject.Handlers
 {
     public static class VertexAnalyzer
     {
-        // Метод для получения полустепени исхода вершины
+        /// <summary>
+        /// Метод для получения полустепени исхода вершины
+        /// </summary>
+        /// <param name="vertex">Вершина</param>
+        /// <param name="graph">Граф</param>
+        /// <returns>Полустепень исхода вершины</returns>
         public static int GetOutDegree(Vertex vertex, Graph graph)
         {
             if (graph == null)
@@ -23,7 +28,12 @@ namespace GraphProject.Handlers
             }
         }
 
-        // Метод для получения полустепени захода вершины
+        /// <summary>
+        /// Метод для получения полустепени захода вершины
+        /// </summary>
+        /// <param name="vertex">Вершина</param>
+        /// <param name="graph">Граф</param>
+        /// <returns>Полустепень захода вершины</returns>
         public static int GetInDegree(Vertex vertex, Graph graph)
         {
             if (graph == null)
@@ -44,4 +54,5 @@ namespace GraphProject.Handlers
             return count;
         }
     }
+
 }

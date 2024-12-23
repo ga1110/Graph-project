@@ -2,27 +2,29 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace GraphProject.Handlers
 {
     // Публичный класс GraphManager для управления графом
     public static class GraphManager
     {
-        // Метод для добавления новой вершины в граф
+        /// <summary>
+        /// Добавляет новую вершину в граф.
+        /// </summary>
+        /// <param name="vertex">Вершина, которую необходимо добавить.</param>
+        /// <param name="graph">Граф, в который необходимо добавить вершину.</param>
+        /// <exception cref="Exception">Если переданная вершина равна null или вершина уже существует в графе.</exception>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
         public static void AddVertex(Vertex vertex, Graph graph)
         {
-            // Проверяем, что переданная вершина не равна null
             if (vertex == null)
                 throw new Exception("Вершина не существует");
 
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
-            // Проверяем, содержит ли список смежности уже такую вершину
             if (!graph.adjacencyList.ContainsKey(vertex))
             {
-                // Добавляем новую вершину в список смежности с пустым списком ребер
                 graph.adjacencyList[vertex] = new List<Edge>();
             }
             else
@@ -31,7 +33,17 @@ namespace GraphProject.Handlers
             }
         }
 
-        // Метод для добавления нового ребра в граф
+        /// <summary>
+        /// Добавляет новое ребро в граф.
+        /// </summary>
+        /// <param name="sourceName">Имя исходной вершины.</param>
+        /// <param name="destinationName">Имя конечной вершины.</param>
+        /// <param name="graph">Граф, в который необходимо добавить ребро.</param>
+        /// <param name="weight">Вес ребра (опционально).</param>
+        /// <param name="capacity">Емкость ребра (опционально).</param>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
+        /// <exception cref="Exception">Если имя исходной или конечной вершины пустое или равно null.</exception>
+        /// <exception cref="ArgumentException">Если ребро от исходной вершины к конечной вершине уже существует.</exception>
         public static void AddEdge(string sourceName, string destinationName, Graph graph, double? weight = null, double? capacity = null)
         {
             if (graph == null)
@@ -43,25 +55,21 @@ namespace GraphProject.Handlers
             if (string.IsNullOrEmpty(destinationName))
                 throw new Exception("Имя вершины не может быть null");
 
-            // Получаем объекты вершин по их именам
             var source = GraphSearcher.FindVertexByName(sourceName, graph);
             var destination = GraphSearcher.FindVertexByName(destinationName, graph);
 
-            // Проверяем, существует ли исходная вершина
             if (source == null)
             {
                 source = new Vertex(sourceName.ToUpper().Trim());
                 AddVertex(source, graph);
             }
 
-            // Проверяем, существует ли конечная вершина
             if (destination == null)
             {
                 destination = new Vertex(destinationName.ToUpper().Trim());
                 AddVertex(destination, graph);
             }
 
-            // Проверяем, существует ли уже ребро от source к destination
             var existingEdge = graph.adjacencyList[source].FirstOrDefault(e => e.Destination == destination);
             if (existingEdge != null)
             {
@@ -69,14 +77,11 @@ namespace GraphProject.Handlers
             }
             else
             {
-                // Добавляем новое ребро в список ребер исходной вершины
                 graph.adjacencyList[source].Add(new Edge(source, destination, weight, capacity));
             }
 
-            // Если граф неориентированный, добавляем обратное ребро
             if (!graph.IsDirected)
             {
-                // Проверяем, существует ли уже обратное ребро
                 var existingReverseEdge = graph.adjacencyList[destination].FirstOrDefault(e => e.Destination == source);
                 if (existingReverseEdge != null)
                 {
@@ -89,60 +94,112 @@ namespace GraphProject.Handlers
             }
         }
 
-        // Метод для удаления вершины из графа
+        /// <summary>
+        /// Добавляет новое ребро в граф.
+        /// </summary>
+        /// <param name="sourceName">Имя исходной вершины.</param>
+        /// <param name="destinationName">Имя конечной вершины.</param>
+        /// <param name="graph">Граф, в который необходимо добавить ребро.</param>
+        /// <param name="weight">Вес ребра (опционально).</param>
+        /// <param name="capacity">Емкость ребра (опционально).</param>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
+        /// <exception cref="Exception">Если имя исходной или конечной вершины пустое или равно null.</exception>
+        /// <exception cref="ArgumentException">Если ребро от исходной вершины к конечной вершине уже существует.</exception>
+        public static void AddEdge(Edge edge, Graph graph)
+        {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
+            if (edge == null)
+                throw new Exception("Вершина не может быть null");
+
+            var source = edge.Source;
+            var destination = edge.Destination;
+
+            var existingEdge = graph.adjacencyList[source].FirstOrDefault(e => e.Destination == destination);
+
+            if (FindEdge(graph, source, destination) != null)
+            {
+                throw new ArgumentException($"Ребро от '{source.Name}' к '{destination.Name}' уже существует");
+            }
+            else
+            {
+                graph.adjacencyList[source].Add(edge);
+            }
+
+            if (!graph.IsDirected)
+            {
+                var existingReverseEdge = graph.adjacencyList[destination].FirstOrDefault(e => e.Destination == source);
+                if (existingReverseEdge != null)
+                {
+                    throw new ArgumentException($"Ребро от '{source.Name}' к '{destination.Name}' уже существует");
+                }
+                else
+                {
+                    graph.adjacencyList[destination].Add(edge);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Удаляет вершину из графа.
+        /// </summary>
+        /// <param name="vertexName">Имя вершины, которую необходимо удалить.</param>
+        /// <param name="graph">Граф, из которого необходимо удалить вершину.</param>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
+        /// <exception cref="ArgumentNullException">Если вершина не найдена.</exception>
         public static void RemoveVertex(string vertexName, Graph graph)
         {
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
-            // Получаем объект вершины по имени
+
             var vertex = GraphSearcher.FindVertexByName(vertexName, graph);
 
-            // Проверяем, существует ли такая вершина
             if (vertex == null)
             {
                 throw new ArgumentNullException($"Вершина '{vertexName}' не существует.");
             }
 
-            // Удаляем вершину из списка смежности
             graph.adjacencyList.Remove(vertex);
 
-            // Проходим по всем спискам ребер и удаляем ребра, ведущие к удаленной вершине
             foreach (var edges in graph.adjacencyList.Values)
             {
                 edges.RemoveAll(e => e.Destination.Equals(vertex));
             }
         }
 
-        // Метод для удаления ребра из графа
+        /// <summary>
+        /// Удаляет ребро из графа.
+        /// </summary>
+        /// <param name="sourceName">Имя исходной вершины.</param>
+        /// <param name="destinationName">Имя конечной вершины.</param>
+        /// <param name="graph">Граф, из которого необходимо удалить ребро.</param>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
+        /// <exception cref="ArgumentException">Если исходная или конечная вершина не найдена.</exception>
+        /// <exception cref="ArgumentNullException">Если ребро не найдено.</exception>
         public static void RemoveEdge(string sourceName, string destinationName, Graph graph)
         {
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
-            // Получаем объекты вершин по их именам
             var source = GraphSearcher.FindVertexByName(sourceName, graph);
             var destination = GraphSearcher.FindVertexByName(destinationName, graph);
 
-            // Проверяем, существует ли исходная вершина
             if (source == null)
             {
                 throw new ArgumentException($"Вершина '{sourceName}' не существует");
             }
 
-            // Проверяем, существует ли конечная вершина
             if (destination == null)
             {
                 throw new ArgumentException($"Вершина '{destinationName}' не существует");
             }
 
-            // Удаляем ребра из списка исходной вершины, ведущие к конечной вершине
             bool removed = graph.adjacencyList[source].RemoveAll(e => e.Destination.Equals(destination)) > 0;
 
-            // Выводим сообщение об успешном удалении или отсутствии ребра
             if (!removed)
                 throw new ArgumentNullException($"Ребро от '{source.Name}' к '{destination.Name}' не найдено");
 
-            // Если граф неориентированный, удаляем обратное ребро
             if (!graph.IsDirected)
             {
                 bool removedReverse = graph.adjacencyList[destination].RemoveAll(e => e.Destination.Equals(source)) > 0;
@@ -151,7 +208,15 @@ namespace GraphProject.Handlers
             }
         }
 
-        // Метод для удаления ребра из графа
+        /// <summary>
+        /// Удаляет ребро из графа.
+        /// </summary>
+        /// <param name="source">Исходная вершина.</param>
+        /// <param name="destination">Конечная вершина.</param>
+        /// <param name="graph">Граф, из которого необходимо удалить ребро.</param>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
+        /// <exception cref="ArgumentNullException">Если исходная или конечная вершина равна null.</exception>
+        /// <exception cref="ArgumentNullException">Если ребро не найдено.</exception>
         public static void RemoveEdge(Vertex source, Vertex destination, Graph graph)
         {
             if (graph == null)
@@ -160,14 +225,11 @@ namespace GraphProject.Handlers
             if (source == null || destination == null)
                 throw new ArgumentNullException("Вершина не найдена");
 
-            // Удаляем ребра из списка исходной вершины, ведущие к конечной вершине
             bool removed = graph.adjacencyList[source].RemoveAll(e => e.Destination.Equals(destination)) > 0;
 
-            // Выводим сообщение об успешном удалении или отсутствии ребра
             if (!removed)
                 throw new ArgumentNullException($"Ребро от '{destination.Name}' к '{source.Name}' не найдено");
 
-            // Если граф неориентированный, удаляем обратное ребро
             if (!graph.IsDirected)
             {
                 bool removedReverse = graph.adjacencyList[destination].RemoveAll(e => e.Destination.Equals(source)) > 0;
@@ -176,7 +238,30 @@ namespace GraphProject.Handlers
             }
         }
 
-        public static Dictionary<Vertex, List<Edge>> GetAdj (Graph graph)
+        /// <summary>
+        /// Находит ребро в графе.
+        /// </summary>
+        /// <param name="graph">Граф, в котором необходимо найти ребро.</param>
+        /// <param name="source">Исходная вершина.</param>
+        /// <param name="destination">Конечная вершина.</param>
+        /// <returns>Ребро, если оно найдено, иначе - null.</returns>
+        public static Edge? FindEdge(Graph graph, Vertex source, Vertex destination)
+        {
+            var adjacencyList = GetAdj(graph);
+            if (adjacencyList.TryGetValue(source, out var edges))
+            {
+                return edges.Find(e => e.Destination.Equals(destination));
+            }
+            return null;
+        }
+    
+        /// <summary>
+        /// Возвращает список смежности графа.
+        /// </summary>
+        /// <param name="graph">Граф, для которого необходимо получить список смежности.</param>
+        /// <returns>Список смежности графа.</returns>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
+        public static Dictionary<Vertex, List<Edge>> GetAdj(Graph graph)
         {
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
@@ -184,18 +269,34 @@ namespace GraphProject.Handlers
             return graph.adjacencyList;
         }
 
+        /// <summary>
+        /// Добавление ID вершинам.
+        /// </summary>
+        /// <param name="graph">Граф, который содержит вершины.</param>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
         public static void SetAllVertexID(Graph graph)
         {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+            
             var index = 0;
-            foreach (var vertex in GraphManager.GetAdj(graph).Keys)
+            foreach (var vertex in GetAdj(graph).Keys)
             {
                 vertex.SetId(index++);
             }
         }
 
+        /// <summary>
+        /// Удаляет (утсанавлеливает как -1) ID у всех вершин.
+        /// </summary>
+        /// <param name="graph">Граф, который содержит вершины.</param>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
         public static void DeleteAllVertexID(Graph graph)
         {
-            foreach (var vertex in GraphManager.GetAdj(graph).Keys)
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
+            foreach (var vertex in GetAdj(graph).Keys)
             {
                 vertex.SetId(-1);
             }

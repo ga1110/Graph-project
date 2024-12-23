@@ -2,13 +2,20 @@
 using GraphProject.Structures;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
 
 namespace GraphProject.Algorithms
 {
+    /// <summary>
+    /// Класс GraphTraversal содержит методы для обхода графа.
+    /// </summary>
     public static class GraphTraversal
     {
+        /// <summary>
+        /// Метод RecursiveGraphTraversal выполняет рекурсивный обход графа и возвращает словарь посещенных вершин.
+        /// </summary>
+        /// <param name="graph">Граф для обхода.</param>
+        /// <param name="currentVertex">Текущая вершина.</param>
+        /// <returns>Словарь посещенных вершин.</returns>
         public static Dictionary<Vertex, int> RecursiveGraphTraversal(Graph graph, Vertex currentVertex)
         {
             if (graph == null)
@@ -24,6 +31,13 @@ namespace GraphProject.Algorithms
             return visitedDictionary;
         }
 
+        /// <summary>
+        /// Вспомогательный метод для рекурсивного обхода графа.
+        /// </summary>
+        /// <param name="graph">Граф для обхода.</param>
+        /// <param name="currentVertex">Текущая вершина.</param>
+        /// <param name="visitedDictionary">Словарь посещенных вершин.</param>
+        /// <param name="n">Уровень обхода.</param>
         private static void recursiveGraphTraversalHelp(Graph graph, Vertex currentVertex, Dictionary<Vertex, int> visitedDictionary, int n = 0)
         {
             // Проверяем, была ли вершина уже посещена
@@ -44,6 +58,12 @@ namespace GraphProject.Algorithms
             }
         }
 
+        /// <summary>
+        /// Метод BFS выполняет обход графа в ширину и возвращает список вершин в порядке обхода.
+        /// </summary>
+        /// <param name="graph">Граф для обхода.</param>
+        /// <param name="startVertex">Начальная вершина.</param>
+        /// <returns>Список вершин в порядке обхода.</returns>
         public static List<Vertex> BFS(Graph graph, Vertex startVertex)
         {
             if (graph == null)
@@ -74,7 +94,13 @@ namespace GraphProject.Algorithms
             return bfs;
         }
 
-        private static List<Vertex> FindAdjacentVertices(Graph graph, Vertex currentVertex)
+        /// <summary>
+        /// Метод FindAdjacentVertices возвращает список смежных вершин для заданной вершины.
+        /// </summary>
+        /// <param name="graph">Граф.</param>
+        /// <param name="currentVertex">Текущая вершина.</param>
+        /// <returns>Список смежных вершин.</returns>
+        public static List<Vertex> FindAdjacentVertices(Graph graph, Vertex currentVertex)
         {
             var adjacentList = GraphManager.GetAdj(graph);
             List<Vertex> adjacentVertices = new();
@@ -90,7 +116,5 @@ namespace GraphProject.Algorithms
             }
             return adjacentVertices;
         }
-
-
     }
 }

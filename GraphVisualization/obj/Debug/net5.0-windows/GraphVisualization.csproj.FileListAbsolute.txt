@@ -22,10 +22,6 @@ F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\ne
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\App.g.cs
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\GraphVisualization_MarkupCompile.cache
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\GraphVisualization_MarkupCompile.lref
-F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Debug\net5.0-windows\GraphProject.deps.json
-F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Debug\net5.0-windows\GraphProject.runtimeconfig.json
-F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Debug\net5.0-windows\GraphProject.runtimeconfig.dev.json
-F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Debug\net5.0-windows\GraphProject.exe
 F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Debug\net5.0-windows\GraphVisualization.exe
 F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Debug\net5.0-windows\GraphVisualization.deps.json
 F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Debug\net5.0-windows\GraphVisualization.runtimeconfig.json
@@ -51,3 +47,5 @@ F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\ne
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\GraphVisualization.pdb
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\GraphVisualization.genruntimeconfig.cache
 F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\ref\GraphVisualization.dll
+F:\Study\Теория графов\Graph-project\GraphVisualization\obj\Debug\net5.0-windows\GraphVisualization_Content.g.cs
+F:\Study\Теория графов\Graph-project\GraphVisualization\bin\Debug\net5.0-windows\System.Drawing.Common.dll

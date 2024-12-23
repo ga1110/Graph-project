@@ -8,6 +8,9 @@ using GraphProject.Structures;
 using GraphProject.Handlers;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Microsoft.Msagl.Drawing;
+using Microsoft.Msagl.GraphViewerGdi;
+using System.Drawing;
 namespace GraphVisualization
 {
 
@@ -126,7 +129,7 @@ namespace GraphVisualization
             // Создаем и отображаем диалоговое окно
             AddRemoveEdgeWindow addRemoveEdgeWindow = new AddRemoveEdgeWindow(true);
             addRemoveEdgeWindow.Owner = this;
-
+            var test = graphControl;
             if (addRemoveEdgeWindow.ShowDialog() == true)
             {
                 // Получаем данные от пользователя
@@ -178,7 +181,7 @@ namespace GraphVisualization
         private void CreateGraphButton_Click(object sender, RoutedEventArgs e)
         {
             // Создаем и отображаем диалоговое окно
-            CreateGraphWindow createGraphWindow = new(!_graphVoult.isVoultEmpty())
+            CreateGraphWindow createGraphWindow = new(!_graphVoult.IsEmpty())
             {
                 Owner = this
             };
@@ -212,7 +215,7 @@ namespace GraphVisualization
         private void LoadGraphButton_Click(object sender, RoutedEventArgs e)
         {
             // Создаем и отображаем диалоговое окно
-            LoadGraphWindow loadGraphWindow = new(!_graphVoult.isVoultEmpty())
+            LoadGraphWindow loadGraphWindow = new(!_graphVoult.IsEmpty())
             {
                 Owner = this
             };
@@ -227,7 +230,7 @@ namespace GraphVisualization
                 try
                 {
                     _graph = new GraphProject.Structures.Graph(filePath, graphName);
-                    if (_graphVoult.isVoultEmpty())
+                    if (_graphVoult.IsEmpty())
                     {
                         _graphVoult.AddNewGraph(_graph);
                     }
@@ -276,7 +279,7 @@ namespace GraphVisualization
         {
             try
             {
-                if (_graphVoult.isVoultEmpty() || _graph == null)
+                if (_graphVoult.IsEmpty() || _graph == null)
                 {
                     Logger.Add($"Ошибка!\nНельзя скопировать null-граф");
                     return;

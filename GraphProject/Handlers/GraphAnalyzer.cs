@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GraphProject.Algorithms;
 using GraphProject.Structures;
 
@@ -11,12 +8,18 @@ namespace GraphProject.Handlers
 {
     public static class GraphAnalyzer
     {
+        /// <summary>
+        /// Проверяет, является ли граф связным.
+        /// </summary>
+        /// <param name="graph">Граф, который необходимо проверить.</param>
+        /// <returns>True, если граф связный, иначе - false.</returns>
+        /// <exception cref="ArgumentNullException">Если переданный граф равен null.</exception>
         public static bool IsGraphConnected(Graph graph)
         {
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
 
-            var allVertex = graph.adjacencyList.Keys.ToList(); // Все вершины графа
+            var allVertex = graph.adjacencyList.Keys.ToList();
             var contAllVertex = allVertex.ToList().Count;
 
             List<List<Vertex>> traversalList = new();
@@ -35,6 +38,5 @@ namespace GraphProject.Handlers
             }
             return true;
         }
-
     }
 }

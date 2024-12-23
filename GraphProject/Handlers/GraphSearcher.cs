@@ -3,14 +3,17 @@ using GraphProject.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraphProject.Handlers
 {
     public static class GraphSearcher
     {
-        // Метод поиска вершин у которых степень полуисхода больше чем у заданной
+        /// <summary>
+        /// Метод поиска вершин у которых степень полуисхода больше чем у заданной
+        /// </summary>
+        /// <param name="vertexName">Имя вершины</param>
+        /// <param name="graph">Граф</param>
+        /// <returns>Список вершин с большей полустепенью исхода</returns>
         public static List<Vertex>? FindVerticesWithGreaterOutDegree(string vertexName, Graph graph)
         {
             if (graph == null)
@@ -53,7 +56,12 @@ namespace GraphProject.Handlers
             return verticesWithGreaterOutDegree;
         }
 
-        // Метод для поиска вершин, которые не смежные с заданной
+        /// <summary>
+        /// Метод для поиска вершин, которые не смежные с заданной
+        /// </summary>
+        /// <param name="vertexName">Имя вершины</param>
+        /// <param name="graph">Граф</param>
+        /// <returns>Список не смежных вершин</returns>
         public static List<Vertex>? FindNonAdjacentVertices(string vertexName, Graph graph)
         {
             if (graph == null)
@@ -61,7 +69,6 @@ namespace GraphProject.Handlers
 
             // Получаем вершину по ее имени
             Vertex? givenVertex = FindVertexByName(vertexName, graph) ?? throw new ArgumentNullException($"Вершины {vertexName} не существует");
-
 
             // Список не смежных вершин
             List<Vertex> nonAdjacentVertices = new();
@@ -131,7 +138,11 @@ namespace GraphProject.Handlers
             return nonAdjacentVertices;
         }
 
-        // Метод для поиска ребер ведущих к листьям 
+        /// <summary>
+        /// Метод для поиска ребер ведущих к листьям 
+        /// </summary>
+        /// <param name="graph">Граф</param>
+        /// <returns>Список рёбер, которые нужно удалить</returns>
         public static List<Tuple<Vertex, Vertex>> FindLeafsEdges(Graph graph)
         {
             if (graph == null)
@@ -178,7 +189,12 @@ namespace GraphProject.Handlers
             return leafsEdges;
         }
 
-        // Метод для получения вершины по ее имени
+        /// <summary>
+        /// Метод для получения вершины по ее имени
+        /// </summary>
+        /// <param name="vertexName">Имя вершины</param>
+        /// <param name="graph">Граф</param>
+        /// <returns>Вершина</returns>
         public static Vertex? FindVertexByName(string vertexName, Graph graph)
         {
             if (graph == null)
@@ -202,8 +218,12 @@ namespace GraphProject.Handlers
             return null;
         }
 
-
-        // Метод поиска недостижимых вершин из данной 
+        /// <summary>
+        /// Метод поиска недостижимых вершин из данной 
+        /// </summary>
+        /// <param name="vertexName">Имя вершины</param>
+        /// <param name="graph">Граф</param>
+        /// <returns>Список недостижимых вершин</returns>
         public static List<Vertex>? FindUnreachableVertices(string vertexName, Graph graph)
         {
             if (graph == null)
@@ -230,8 +250,13 @@ namespace GraphProject.Handlers
 
             return unreachableVertices.Distinct().ToList();
         }
-
-        // Метод поиска недостижимых вершин из данной 
+        /// <summary>
+        /// Метод поиска вершин на расстоянии меньше или равном N от заданной вершины
+        /// </summary>
+        /// <param name="vertexName">Имя вершины</param>
+        /// <param name="graph">Граф</param>
+        /// <param name="n">Максимальное расстояние</param>
+        /// <returns>Словарь вершин и их расстояний от заданной вершины, удовлетворяющих условию</returns>
         public static Dictionary<Vertex, double>? FindVerticesDistanceLessOrEqualN(string vertexName, Graph graph, double n)
         {
             if (graph == null)
@@ -257,6 +282,13 @@ namespace GraphProject.Handlers
             return vertices;
         }
 
+
+        /// <summary>
+        /// Метод для поиска кратчайших путей от заданной вершины до всех остальных вершин в графе
+        /// </summary>
+        /// <param name="vertexName">Имя вершины</param>
+        /// <param name="graph">Граф</param>
+        /// <returns>Словарь вершин и их расстояний от заданной вершины</returns>
         public static Dictionary<Vertex, double> FindShortestPathsFrom(string vertexName, Graph graph)
         {
             if (graph == null)
@@ -278,11 +310,18 @@ namespace GraphProject.Handlers
             return distances;
         }
 
+
+        /// <summary>
+        /// Метод для поиска вершин на периферии графа на расстоянии больше или равном N от заданной вершины
+        /// </summary>
+        /// <param name="graph">Граф</param>
+        /// <param name="source">Исходная вершина</param>
+        /// <param name="N">Минимальное расстояние</param>
+        /// <returns>Список вершин на периферии графа</returns>
         public static List<Vertex> FindNPeriphery(Graph graph, Vertex source, double N)
         {
             // Получаем все кратчайшие расстояния с помощью алгоритма Флойда-Уоршелла
             var allDistances = Floyd_Warshall.Execute(graph);
-
 
             var periphery = new List<Vertex>();
 
@@ -310,14 +349,21 @@ namespace GraphProject.Handlers
             return periphery;
         }
 
+        /// <summary>
+        /// Метод для поиска максимального потока в графе от заданной исходной вершины к заданной конечной вершине
+        /// </summary>
+        /// <param name="graph">Граф</param>
+        /// <param name="sourceName">Имя исходной вершины</param>
+        /// <param name="sinkName">Имя конечной вершины</param>
+        /// <returns>Максимальный поток</returns>
         public static double FindMaxFlow(Graph graph, string sourceName, string sinkName)
         {
-
             // Получаем вершину по ее имени
             Vertex source = FindVertexByName(sourceName, graph) ?? throw new ArgumentNullException($"Вершины {sourceName} не существует");
             // Получаем вершину по ее имени
             Vertex sink = FindVertexByName(sinkName, graph) ?? throw new ArgumentNullException($"Вершины {sinkName} не существует");
-            return MaxFlowSolver.FindMaxFlow(graph, source, sink);
+            return FordFulkerson.MaxFlow(graph, source, sink);
         }
+
     }
 }

@@ -7,17 +7,31 @@ using System.Linq;
 namespace GraphProject.Structures
 {
     // Публичный класс Graph, представляющий граф
+    /// <summary>
+    /// Класс, представляющий граф.
+    /// </summary>
     public class Graph
     {
-        // Внутреннее поле adjacencyList, хранящее список смежности графа
+        /// <summary>
+        /// Внутреннее поле adjacencyList, хранящее список смежности графа.
+        /// </summary>
         internal Dictionary<Vertex, List<Edge>> adjacencyList;
 
+        /// <summary>
+        /// Свойство, содержащее имя графа.
+        /// </summary>
         public string GraphName { get; set; }
 
-        // Публичное свойство IsDirected, определяющее, является ли граф ориентированным
+        /// <summary>
+        /// Свойство, определяющее, является ли граф ориентированным.
+        /// </summary>
         public bool IsDirected { get; private set; }
 
-        // Инициализирует новый пустой граф с указанным направлением (ориентированный или неориентированный)
+        /// <summary>
+        /// Инициализирует новый пустой граф с указанным направлением (ориентированный или неориентированный).
+        /// </summary>
+        /// <param name="name">Имя графа.</param>
+        /// <param name="isDirected">Флаг, указывающий, является ли граф ориентированным.</param>
         public Graph(string name, bool isDirected = false)
         {
             GraphName = string.IsNullOrEmpty(name) ? "NamelessGraph" : name;
@@ -25,11 +39,16 @@ namespace GraphProject.Structures
             adjacencyList = new Dictionary<Vertex, List<Edge>>();
         }
 
-        // Конструктор графа из файла
+        /// <summary>
+        /// Конструктор графа из файла.
+        /// </summary>
+        /// <param name="filePath">Путь к файлу.</param>
+        /// <param name="name">Имя графа.</param>
         public Graph(string filePath, string name)
         {
             GraphName = string.IsNullOrEmpty(name) ? "NamelessGraph" : name;
             adjacencyList = new Dictionary<Vertex, List<Edge>>();
+
             // Открываем файл для чтения
             using (StreamReader reader = new(filePath))
             {
@@ -39,7 +58,7 @@ namespace GraphProject.Structures
                 // Если файл пустой, вызываем исключение
                 if (firstLine == null)
                 {
-                    throw new InvalidDataException("Файл пуст.");
+                    throw new InvalidDataException("Файл пуст");
                 }
 
                 // Проверяем, является ли граф ориентированным
@@ -50,56 +69,66 @@ namespace GraphProject.Structures
                 // Читаем файл построчно до конца
                 while ((currentLine = reader.ReadLine()) != null)
                 {
-                    // Разбиваем строку на имена вершин и опционально вес
-                    var lineElems = currentLine.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                    var lineElems = currentLine.Split("=>"); // Разбили строку
 
-                    // Пропускаем пустые строки
                     if (lineElems.Length == 0)
                     {
                         continue;
                     }
-
-                    // Получаем имя исходной вершины
-                    string sourceVertexName = lineElems[0];
-                    
-                    // Ищем вершину по имени или создаём новую, если она не найдена
-                    Vertex sourceVertex = GraphSearcher.FindVertexByName(sourceVertexName, this);
-                    
-                    if (sourceVertex == null)
+                    else
                     {
-                        sourceVertex = new Vertex(sourceVertexName);
-                        GraphManager.AddVertex(sourceVertex, this);
-                    }
+                        var sourceVertexName = lineElems[0].Trim().ToUpper();
+                        var edges = lineElems[1].Trim();
 
-                    // Если в строке указана вторая вершина (ребро)
-                    if (lineElems.Length > 1)
-                    {
-                        // Получаем имя конечной вершины
-                        string destinationVertexName = lineElems[1];
-                        Vertex destinationVertex = GraphSearcher.FindVertexByName(destinationVertexName, this);
+                        Vertex sourceVertex = GraphSearcher.FindVertexByName(sourceVertexName, this);
 
-                        // Если конечная вершина не найдена, создаём и добавляем её
-                        if (destinationVertex == null)
+                        if (sourceVertex == null)
                         {
-                            destinationVertex = new Vertex(destinationVertexName);
-                            GraphManager.AddVertex(destinationVertex, this);
+                            sourceVertex = new Vertex(sourceVertexName);
+                            GraphManager.AddVertex(sourceVertex, this);
                         }
 
-                        // Вес ребра (опциональный параметр)
-                        double? weight = null;
-
-                        // Если в строке указан вес
-                        if (lineElems.Length > 2)
+                        // Если строка содержит другие вершины.
+                        if (lineElems.Length > 1)
                         {
-                            // Пытаемся распарсить третий элемент как вес ребра
-                            if (double.TryParse(lineElems[2], out double parsedWeight))
+                            var splittedEdges = edges.Trim().Split("|");
+                            foreach (var edge in splittedEdges)
                             {
-                                weight = parsedWeight;
+                                if (edge.ToString().Length == 0)
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    var splittedEdge = edge.ToString().Replace(" ", "").Trim().Split(",");
+                                    string destinationVertexName = splittedEdge[0].ToString();
+
+                                    Vertex destinationVertex = GraphSearcher.FindVertexByName(destinationVertexName, this);
+
+                                    // Если конечная вершина не найдена, создаём и добавляем её
+                                    if (destinationVertex == null)
+                                    {
+                                        destinationVertex = new Vertex(destinationVertexName);
+                                        GraphManager.AddVertex(destinationVertex, this);
+                                    }
+
+                                    double? weight = null;
+                                    double? capacity = null;
+                                    if (splittedEdge.Length > 1)
+                                    {
+                                        for (int i = 1; i < splittedEdge.Length; i++)
+                                        {
+                                            var curElem = splittedEdge[i].ToString().ToLower();
+                                            if (curElem.StartsWith("w:"))
+                                                weight = double.TryParse(curElem.Substring(2), out double w) ? w : null;
+                                            else if (curElem.StartsWith("c:"))
+                                                capacity = double.TryParse(curElem.Substring(2), out double c) ? c : null;
+                                        }
+                                    }
+                                    GraphManager.AddEdge(sourceVertexName, destinationVertexName, this, weight, capacity);
+                                }
                             }
                         }
-
-                        // Добавляем ребро в граф с указанными параметрами через GraphManager
-                        GraphManager.AddEdge(sourceVertexName, destinationVertexName, this, weight);
                     }
                 }
             }
@@ -108,10 +137,14 @@ namespace GraphProject.Structures
             Console.WriteLine($"Граф успешно загружен из файла '{filePath}'. Тип графа: {(IsDirected ? "Ориентированный" : "Неориентированный")}.");
         }
 
-        // Конструктор копирования
+        /// <summary>
+        /// Конструктор копирования.
+        /// </summary>
+        /// <param name="other">Граф, который нужно скопировать.</param>
         public Graph(Graph other)
         {
             GraphName = other.GraphName + "_copy";
+
             // Проверяем, что переданный граф не равен null
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
@@ -146,6 +179,12 @@ namespace GraphProject.Structures
             }
         }
 
+        /// <summary>
+        /// Конструктор графа из списка ребер.
+        /// </summary>
+        /// <param name="edges">Список ребер.</param>
+        /// <param name="graphName">Имя графа.</param>
+        /// <param name="isDirected">Флаг, указывающий, является ли граф ориентированным.</param>
         public Graph(List<Edge> edges, string graphName, bool isDirected)
         {
             GraphName = graphName + "_MST";
@@ -155,7 +194,7 @@ namespace GraphProject.Structures
 
             // Инициализируем новый пустой список смежности
             adjacencyList = new Dictionary<Vertex, List<Edge>>();
-            
+
             List<Vertex> vertices = new List<Vertex>();
 
             foreach (var edge in edges)
@@ -175,11 +214,12 @@ namespace GraphProject.Structures
             foreach (var edge in edges)
             {
                 adjacencyList[edge.Source].Add(new Edge(edge.Source, edge.Destination, edge.Weight));
-                if(!isDirected)
+                if (!isDirected)
                 {
                     adjacencyList[edge.Destination].Add(new Edge(edge.Destination, edge.Source, edge.Weight));
                 }
             }
         }
     }
+
 }

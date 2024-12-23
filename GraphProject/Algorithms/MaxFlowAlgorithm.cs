@@ -1,117 +1,170 @@
 ﻿using GraphProject.Handlers;
 using GraphProject.Structures;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
 
-public static class MaxFlowSolver
+namespace GraphProject.Algorithms
 {
-    public static double FindMaxFlow(Graph graph, Vertex source, Vertex sink)
+    public class FordFulkerson
     {
-        if (graph == null)
-            throw new ArgumentNullException(nameof(graph));
-        if (source == null || sink == null)
-            throw new ArgumentNullException("Источник или сток не могут быть null");
-
-        double maxFlow = 0;
-        var adjacencyList = GraphManager.GetAdj(graph);
-
-        // Инициализируем потоки по всем ребрам
-        foreach (var edges in adjacencyList.Values)
+        public static double MaxFlow(Graph graph, Vertex source, Vertex sink)
         {
-            foreach (var edge in edges)
+            if (graph == null || source == null || sink == null)
+                throw new ArgumentNullException("Граф, исток или сток не должны быть null");
+
+            if (source.Equals(sink))
+                throw new ArgumentException("Исток и сток не должны совпадать");
+
+            IsGraphCorrectToAlgorithm(graph); // проверяем граф на корректность
+            GraphManager.SetAllVertexID(graph);
+            var adjacencyList = GraphManager.GetAdj(graph);
+            int n = 0;
+            foreach (var vertex in adjacencyList.Keys)
             {
-                edge.Flow = 0;
+                n++;
             }
-        }
-
-        var parentMap = new Dictionary<Vertex, Edge>();
-
-        while (BFS(graph, source, sink, parentMap))
-        {
-            // Находим минимальную остаточную емкость по пути
-            double pathFlow = double.MaxValue;
-
-            for (Vertex v = sink ; v != source ;)
+            foreach (var edgeList in adjacencyList.Values)
             {
-                Edge edge = parentMap[v];
-                var edgeFlow = edge.Flow;
-                var edgeCapacity = edge.Capacity ?? throw new Exception($"{edge.ToString()} - не имеет ёмкости");
-                pathFlow = Math.Min(pathFlow, edgeCapacity - edgeFlow);
-                v = edge.Source;
-            }
-
-            // Обновляем потоки и остаточные емкости по пути
-            for (Vertex v = sink ; v != source ;)
-            {
-                Edge edge = parentMap[v];
-                edge.Flow += pathFlow;
-
-                // Обработка обратного ребра
-                Edge reverseEdge = FindEdge(adjacencyList, edge.Destination, edge.Source);
-                if (reverseEdge == null)
+                foreach (var edge in edgeList)
                 {
-                    // Создаем обратное ребро с нулевым потоком и емкостью, равной потоку прямого ребра
-                    reverseEdge = new Edge(edge.Destination, edge.Source, 0);
-                    reverseEdge.Flow = 0;
-                    adjacencyList[edge.Destination].Add(reverseEdge);
+                    edge.Flow = 0;
                 }
-                reverseEdge.Flow -= pathFlow;
+            }
+            List<List<double>> residualGraph = new();
 
-                v = edge.Source;
+            for (int i = 0; i < n; i++)
+            {
+                residualGraph.Add(new List<double>());
+                for (int j = 0; j < n; j++)
+                {
+                    residualGraph[i].Add(0);
+                }
             }
 
-            maxFlow += pathFlow;
-            parentMap.Clear();
+
+
+            using (StreamWriter writer = new StreamWriter("F:\\Study\\Теория графов\\Graph-project\\Path.txt", true))
+            {
+                foreach(var vertex in adjacencyList.Keys)
+                {
+                    writer.WriteLine(vertex.ToString() + " = " + vertex.Id + "\n");
+                }
+            }
+            WriteInFile(residualGraph);
+
+
+
+            foreach (var element in adjacencyList)
+            {
+                var vertex = element.Key;
+                foreach (var edge in element.Value)
+                {
+                    residualGraph[vertex.Id][edge.Destination.Id] = edge.Capacity ?? throw new ArgumentNullException("Ребро не содержит емкость");
+                }
+            }
+            List<int> parent = Enumerable.Repeat(-1, n).ToList();
+            double maxFlow = 0;
+            List<List<List<double>>> residualGraphList = new();
+            while (BFS(residualGraph, source.Id, sink.Id, parent))
+            {
+                // Находим минимальный поток на найденном пути
+                double pathFlow = double.MaxValue;
+                for (int v = sink.Id; v != source.Id; v = parent[v])
+                {
+                    int u = parent[v];
+                    pathFlow = Math.Min(pathFlow, residualGraph[u][v]);
+                }
+
+                // Обновляем остаточную сеть
+                for (int v = sink.Id; v != source.Id; v = parent[v])
+                {
+                    int u = parent[v];
+                    residualGraph[u][v] -= pathFlow;
+                    residualGraph[v][u] += pathFlow;
+                }
+
+                maxFlow += pathFlow;
+
+                // Создаем глубокую копию residualGraph
+                var residualGraphCopy = new List<List<double>>();
+                foreach (var row in residualGraph)
+                {
+                    residualGraphCopy.Add(new List<double>(row)); // Копируем каждую строку
+                }
+                WriteInFile(residualGraph);
+                // Добавляем копию в residualGraphList
+                residualGraphList.Add(residualGraphCopy);
+            }
+            
+            return maxFlow;
         }
 
-        return maxFlow;
-    }
-
-    private static bool BFS(Graph graph, Vertex source, Vertex sink, Dictionary<Vertex, Edge> parentMap)
-    {
-        var adjacencyList = GraphManager.GetAdj(graph);
-        var visited = new HashSet<Vertex>();
-        var queue = new Queue<Vertex>();
-
-        queue.Enqueue(source);
-        visited.Add(source);
-
-        while (queue.Count > 0)
+        private static void IsGraphCorrectToAlgorithm(Graph graph)
         {
-            Vertex u = queue.Dequeue();
-
-            if (adjacencyList.TryGetValue(u, out var edges))
+            var adjacencyList = GraphManager.GetAdj(graph);
+            foreach (var element in adjacencyList)
             {
-                foreach (Edge edge in edges)
+                foreach (var edge in element.Value)
                 {
-                    Vertex v = edge.Destination;
-
-                    // Проверяем остаточную емкость
-                    if (!visited.Contains(v) && edge.Capacity - edge.Flow > 0)
+                    if (edge.Capacity == null)
                     {
-                        visited.Add(v);
-                        parentMap[v] = edge;
-
-                        if (v.Equals(sink))
-                        {
-                            return true;
-                        }
-
-                        queue.Enqueue(v);
+                        throw new ArgumentNullException($"Вершина {edge} не имеет свойство Capacity");
                     }
                 }
             }
         }
 
-        return false;
-    }
-
-    private static Edge FindEdge(Dictionary<Vertex, List<Edge>> adjacencyList, Vertex source, Vertex destination)
-    {
-        if (adjacencyList.TryGetValue(source, out var edges))
+        private static bool BFS(List<List<double>> residualGraph, int source, int sink, List<int> parent)
         {
-            return edges.Find(e => e.Destination.Equals(destination));
+            int n = residualGraph.Count;
+            var visited = new bool[n];
+
+            var queue = new Queue<int>();
+            queue.Enqueue(source);
+            visited[source] = true;
+            parent[source] = -1;
+
+            while (queue.Count > 0)
+            {
+                int u = queue.Dequeue();
+
+                for (int v = 0; v < n; ++v)
+                {
+                    if (!visited[v] && residualGraph[u][v] > 0)
+                    {
+                        queue.Enqueue(v);
+                        parent[v] = u;
+                        visited[v] = true;
+
+                        if (v == sink)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
-        return null;
+
+        private static void WriteInFile(List<List<double>> residualGraph)
+        {
+            var strGraph = "";
+            foreach (var elementList in residualGraph)
+            {
+                foreach (var element in elementList)
+                {
+                    strGraph += element + " ";
+                }
+                strGraph += "\n";
+            }
+            strGraph += "\n";
+            using (StreamWriter writer = new StreamWriter("F:\\Study\\Теория графов\\Graph-project\\Path.txt", true))
+            {
+                writer.WriteLine(string.Join(", ", strGraph));
+            }
+        }
     }
 }
+// Создать словарь формата Dictionory <Vertex, Vertex> который проверяет существует ли путь из вершины A в B (нужно для вычеркивания лишних путей)
