@@ -8,9 +8,7 @@ using GraphProject.Structures;
 using GraphProject.Handlers;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Microsoft.Msagl.Drawing;
-using Microsoft.Msagl.GraphViewerGdi;
-using System.Drawing;
+using System.IO;
 namespace GraphVisualization
 {
 
@@ -18,10 +16,15 @@ namespace GraphVisualization
     {
         private Microsoft.Msagl.Drawing.Graph _msaglGraph;
         private GraphProject.Structures.Graph _graph;
+        private GraphProject.Structures.Graph _graphTMP;
         private GraphVoult _graphVoult = new();
         public Logger Logger = new Logger();
         private const bool NeedToInputN = true;
         private bool isFullScreen = false;
+
+        private bool _stepByStep = false;
+        private List<Graph> _flowGraphs;
+        private int _currentGraphInFlowList = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -30,9 +33,16 @@ namespace GraphVisualization
 
         private void DisplayGraph()
         {
-            _msaglGraph = GraphConverter.Execute(_graph);
-            graphControl.Graph = _msaglGraph;
-            UpdateInfo();
+            if (_graph == null)
+            {
+                return;
+            }
+            else
+            {
+                _msaglGraph = GraphConverter.Execute(_graph);
+                graphControl.Graph = _msaglGraph;
+                UpdateInfo();
+            }
         }
 
         private void UpdateInfo()
@@ -42,7 +52,7 @@ namespace GraphVisualization
             {
                 return;
             }
-            InfoTextBox.Text += $"Имя графа: {_graph.GraphName}";
+            InfoTextBox.Text += $"Имя графа: {_graph.Name}";
             InfoTextBox.Text += $"\nНомер графа: {_graphVoult.GetCurrentGraphIndex()}";
             InfoTextBox.Text += $"\nГраф - {(GraphAnalyzer.IsGraphConnected(_graph) ? "связный" : "не связный")}";
 
@@ -265,8 +275,8 @@ namespace GraphVisualization
                 if (_graph == null)
                     throw new Exception("Нельзя сохранить пустой граф в файл");
 
-                GraphFileHandler.SaveToFile(_graph, _graph.GraphName);
-                Logger.Add($"Граф - {_graph.GraphName} успешно сохранен в файл ");
+                GraphFileHandler.SaveToFile(_graph, _graph.Name);
+                Logger.Add($"Граф - {_graph.Name} успешно сохранен в файл ");
             }
             catch (Exception ex)
             {
@@ -287,7 +297,7 @@ namespace GraphVisualization
 
                 _graphVoult.CopyCurrentGrahp();
 
-                Logger.Add($"Граф - {_graph.GraphName} успешно скопирован");
+                Logger.Add($"Граф - {_graph.Name} успешно скопирован");
 
                 DisplayGraph();
 
@@ -305,13 +315,13 @@ namespace GraphVisualization
             {
                 if (!KruskalAlgorithm.IsGraphCorrectForMST(_graph))
                 {
-                    Logger.Add($"Граф - {_graph.GraphName} не подходит для алгоритма поиска MST");
+                    Logger.Add($"Граф - {_graph.Name} не подходит для алгоритма поиска MST");
                     return;
                 }
                 GraphProject.Structures.Graph tmpGraph = KruskalAlgorithm.KruskalMST(_graph);
                 _graphVoult.AddNewGraph(tmpGraph);
                 _graph = tmpGraph;
-                Logger.Add($"Для графа - {_graph.GraphName} MST успешно найденно");
+                Logger.Add($"Для графа - {_graph.Name} MST успешно найденно");
                 DisplayGraph();
             }
             catch (Exception ex)
@@ -605,7 +615,7 @@ namespace GraphVisualization
                         throw new Exception($"Вершины с именем {vertexName} - не существует");
                     }
 
-                    var periphery = GraphSearcher.FindNPeriphery(_graph, vertex, parsedN);
+                    var periphery = GraphAnalyzer.FindNPeriphery(_graph, vertex, parsedN);
                     if (periphery == null || periphery.Count() == 0)
                     {
                         output += "N-переферия не существует \n";
@@ -642,27 +652,36 @@ namespace GraphVisualization
                 // Получаем данные от пользователя
                 string source = maxFlowVertexChoose.SourceVertex;
                 string sink = maxFlowVertexChoose.SinkVertex;
-
+                bool view = maxFlowVertexChoose.View;
                 try
                 {
                     Vertex? sourceVertex = GraphSearcher.FindVertexByName(source, _graph);
+                    if (_graph == null)
+                    {
+                        throw new Exception($"Граф - null");
+                    }
                     if (sourceVertex == null)
                     {
-                        Console.WriteLine($"Вершины с именем {source} - не существует");
-                        return;
+                        throw new Exception($"Вершины с именем {source} - не существует");
                     }
 
                     Vertex? sinkVertex = GraphSearcher.FindVertexByName(sink, _graph);
                     if (sinkVertex == null)
                     {
-                        Console.WriteLine($"Вершины с именем {source} - не существует");
-                        return;
+                        throw new Exception($"Вершины с именем {source} - не существует");
                     }
+                    var maxflow = GraphAnalyzer.FindMaxFlow(_graph, source, sink);
+                    InfoTextBox.Text += $"\nМаксимальный поток - {maxflow.Item1}";
+                    Logger.Add($"Максимальный поток - {maxflow.Item1}");
 
-                    var maxflow = GraphSearcher.FindMaxFlow(_graph, source, sink);
-                    DisplayGraph();
-                    InfoTextBox.Text += $"\nМаксимальный поток - {maxflow}";
-                    Logger.Add($"Максимальный поток - {maxflow}");
+                    if (view)
+                    {
+                        _stepByStep = true;
+                        _graphTMP = new GraphProject.Structures.Graph(_graph);
+                        _graph = maxflow.Item2[0];
+                        _flowGraphs = maxflow.Item2;
+                        DisableExpanders();
+                    }
 
                 }
                 catch (Exception ex)
@@ -675,9 +694,47 @@ namespace GraphVisualization
 
         private void ShowHints()
         {
-            string hint = "Q - Вернуть граф в исходное положение\nEsc - закрыть приложение\nTab - переключение полноэкранного режима";
+            string hint = "'Q' - Вернуть граф в исходное положение\n" +
+                          "'Esc' - закрыть приложение\n" +
+                          "'Tab' - переключение полноэкранного режима\n";
+            if(_stepByStep)
+            {
+                hint += "'[' - предыдущий шаг алгоритма\n" +
+                        "']' - следующий шаг алгоритма\n";
+            }
+
             MessageBox.Show(hint);
         }
+        private void DisableExpanders()
+        {
+            FirstExpander.IsEnabled = false;
+            SecondExpander.IsEnabled = false;
+            ThirdExpander.IsEnabled = false;
+            FourthExpander.IsEnabled = false;
+            FifthExpander.IsEnabled = false;
+
+            FirstExpander.Visibility = Visibility.Hidden;
+            SecondExpander.Visibility = Visibility.Hidden;
+            ThirdExpander.Visibility = Visibility.Hidden;
+            FourthExpander.Visibility = Visibility.Hidden;
+            FifthExpander.Visibility = Visibility.Hidden;
+        }
+
+        private void EnableExpanders()
+        {
+            FirstExpander.IsEnabled = true;
+            SecondExpander.IsEnabled = true;
+            ThirdExpander.IsEnabled = true;
+            FourthExpander.IsEnabled = true;
+            FifthExpander.IsEnabled = true;
+
+            FirstExpander.Visibility = Visibility.Visible;
+            SecondExpander.Visibility = Visibility.Visible;
+            ThirdExpander.Visibility = Visibility.Visible;
+            FourthExpander.Visibility = Visibility.Visible;
+            FifthExpander.Visibility = Visibility.Visible;
+        }
+
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Q)
@@ -713,6 +770,53 @@ namespace GraphVisualization
             if (e.Key == Key.I)
             {
                 ShowHints();
+                return;
+            }
+            if (e.Key == Key.OemOpenBrackets)
+            {
+                if(_stepByStep)
+                {
+                    if (!(_currentGraphInFlowList - 1 < 0))
+                    {
+                        _currentGraphInFlowList -= 1;
+                        _graph = _flowGraphs[_currentGraphInFlowList];
+                        DisplayGraph();
+                        return;
+                    }
+                }    
+                return;
+            }
+
+            if (e.Key == Key.OemCloseBrackets)
+            {
+                if (_stepByStep)
+                {
+                    if (_currentGraphInFlowList + 1 == _flowGraphs.Count - 1)
+                    {
+                        MessageBox.Show("Последний шаг алгоритма");
+                        _currentGraphInFlowList += 1;
+                        _graph = _flowGraphs[_currentGraphInFlowList];
+                        DisplayGraph();
+                        return;
+                    }
+
+                    if (_currentGraphInFlowList == _flowGraphs.Count - 1)
+                    {
+                        _currentGraphInFlowList = 0;
+                        _stepByStep = false;
+                        _flowGraphs = null;
+                        _graph = new Graph(_graphTMP);
+                        _graphTMP = null;
+                        EnableExpanders();
+                        DisplayGraph();
+                        return;
+                    }
+
+                    _currentGraphInFlowList += 1;
+                    _graph = _flowGraphs[_currentGraphInFlowList];
+                    DisplayGraph();
+                    return;
+                }
                 return;
             }
         }

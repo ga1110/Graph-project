@@ -118,7 +118,7 @@ namespace GraphProject.Handlers
 
             var existingEdge = graph.adjacencyList[source].FirstOrDefault(e => e.Destination == destination);
 
-            if (FindEdge(graph, source, destination) != null)
+            if (GraphSearcher.FindEdge(graph, source, destination) != null)
             {
                 throw new ArgumentException($"Ребро от '{source.Name}' к '{destination.Name}' уже существует");
             }
@@ -236,23 +236,6 @@ namespace GraphProject.Handlers
                 if (!removedReverse)
                     throw new ArgumentNullException($"Ребро от '{destination.Name}' к '{source.Name}' не найдено");
             }
-        }
-
-        /// <summary>
-        /// Находит ребро в графе.
-        /// </summary>
-        /// <param name="graph">Граф, в котором необходимо найти ребро.</param>
-        /// <param name="source">Исходная вершина.</param>
-        /// <param name="destination">Конечная вершина.</param>
-        /// <returns>Ребро, если оно найдено, иначе - null.</returns>
-        public static Edge? FindEdge(Graph graph, Vertex source, Vertex destination)
-        {
-            var adjacencyList = GetAdj(graph);
-            if (adjacencyList.TryGetValue(source, out var edges))
-            {
-                return edges.Find(e => e.Destination.Equals(destination));
-            }
-            return null;
         }
     
         /// <summary>

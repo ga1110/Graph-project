@@ -9,7 +9,7 @@ namespace GraphProject.Algorithms
 {
     public class FordFulkerson
     {
-        public static double MaxFlow(Graph graph, Vertex source, Vertex sink)
+        public static Tuple<double, List<Graph>> MaxFlow(Graph graph, Vertex source, Vertex sink)
         {
             if (graph == null || source == null || sink == null)
                 throw new ArgumentNullException("Граф, исток или сток не должны быть null");
@@ -21,17 +21,12 @@ namespace GraphProject.Algorithms
             GraphManager.SetAllVertexID(graph);
             var adjacencyList = GraphManager.GetAdj(graph);
             int n = 0;
+
             foreach (var vertex in adjacencyList.Keys)
             {
                 n++;
             }
-            foreach (var edgeList in adjacencyList.Values)
-            {
-                foreach (var edge in edgeList)
-                {
-                    edge.Flow = 0;
-                }
-            }
+
             List<List<double>> residualGraph = new();
 
             for (int i = 0; i < n; i++)
@@ -42,19 +37,6 @@ namespace GraphProject.Algorithms
                     residualGraph[i].Add(0);
                 }
             }
-
-
-
-            using (StreamWriter writer = new StreamWriter("F:\\Study\\Теория графов\\Graph-project\\Path.txt", true))
-            {
-                foreach(var vertex in adjacencyList.Keys)
-                {
-                    writer.WriteLine(vertex.ToString() + " = " + vertex.Id + "\n");
-                }
-            }
-            WriteInFile(residualGraph);
-
-
 
             foreach (var element in adjacencyList)
             {
@@ -67,6 +49,9 @@ namespace GraphProject.Algorithms
             List<int> parent = Enumerable.Repeat(-1, n).ToList();
             double maxFlow = 0;
             List<List<List<double>>> residualGraphList = new();
+
+            UpdateGraphList(residualGraph, residualGraphList);
+
             while (BFS(residualGraph, source.Id, sink.Id, parent))
             {
                 // Находим минимальный поток на найденном пути
@@ -87,18 +72,12 @@ namespace GraphProject.Algorithms
 
                 maxFlow += pathFlow;
 
-                // Создаем глубокую копию residualGraph
-                var residualGraphCopy = new List<List<double>>();
-                foreach (var row in residualGraph)
-                {
-                    residualGraphCopy.Add(new List<double>(row)); // Копируем каждую строку
-                }
-                WriteInFile(residualGraph);
-                // Добавляем копию в residualGraphList
-                residualGraphList.Add(residualGraphCopy);
+                UpdateGraphList(residualGraph, residualGraphList);
             }
-            
-            return maxFlow;
+
+            List<Graph> graphList = ConvertToGraphList(residualGraphList, graph);
+            Tuple<double, List<Graph>> pair = new Tuple<double, List<Graph>>(maxFlow, graphList);
+            return pair;
         }
 
         private static void IsGraphCorrectToAlgorithm(Graph graph)
@@ -148,22 +127,54 @@ namespace GraphProject.Algorithms
             return false;
         }
 
-        private static void WriteInFile(List<List<double>> residualGraph)
+        private static void UpdateGraphList(List<List<double>> residualGraph, List<List<List<double>>> residualGraphList)
         {
-            var strGraph = "";
-            foreach (var elementList in residualGraph)
+            // Создаем глубокую копию residualGraph
+            var residualGraphCopy = new List<List<double>>();
+            foreach (var row in residualGraph)
             {
-                foreach (var element in elementList)
+                residualGraphCopy.Add(new List<double>(row)); // Копируем каждую строку
+            }
+            // Добавляем копию в residualGraphList
+            residualGraphList.Add(residualGraphCopy);
+        }
+
+        private static List<Graph> ConvertToGraphList(List<List<List<double>>> residualGraphList, Graph graph)
+        {
+            var graphList = new List<Graph>();
+            foreach (var residualGraph in residualGraphList)
+            {
+                Graph graphInList = new Graph(graph.Name, graph.IsDirected);
+                for (int i = 0; i < residualGraph.Count; ++i)
                 {
-                    strGraph += element + " ";
+                    for (int j = 0 ; j < residualGraph.Count ; ++j)
+                    {
+                        if ((i != j) && (residualGraph[i][j] != 0))
+                        {
+                            var vertexSourceInSourceGraph = GraphSearcher.FindVertexByID(i, graph); // вершина в исходном графе
+                            var vertexDestinationInSourceGraph = GraphSearcher.FindVertexByID(j, graph); // вершина в исходном графе
+                            var edgeInSourceGraph = GraphSearcher.FindEdge(graph, vertexSourceInSourceGraph, vertexDestinationInSourceGraph);
+
+                            if (GraphSearcher.FindVertexByName(vertexSourceInSourceGraph.Name, graphInList) == null)
+                            {
+                                GraphManager.AddVertex(new Vertex(vertexSourceInSourceGraph.Name), graphInList);
+                            }
+                            if (GraphSearcher.FindVertexByName(vertexDestinationInSourceGraph.Name, graphInList) == null)
+                            {
+                                GraphManager.AddVertex(new Vertex(vertexDestinationInSourceGraph.Name), graphInList);
+                            }
+
+                            GraphManager.AddEdge(vertexSourceInSourceGraph.Name, 
+                                                 vertexDestinationInSourceGraph.Name, 
+                                                 graphInList, 
+                                                 null,
+                                                 residualGraph[i][j]);
+                        }
+                    }
                 }
-                strGraph += "\n";
+                graphList.Add(graphInList);
             }
-            strGraph += "\n";
-            using (StreamWriter writer = new StreamWriter("F:\\Study\\Теория графов\\Graph-project\\Path.txt", true))
-            {
-                writer.WriteLine(string.Join(", ", strGraph));
-            }
+            return graphList;
         }
     }
 }

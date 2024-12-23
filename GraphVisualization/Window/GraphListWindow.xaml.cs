@@ -33,7 +33,7 @@ namespace GraphVisualization
                     GraphItems.Add(new GraphItem
                     {
                         Number = i,
-                        GraphName = graphs[i].GraphName
+                        GraphName = graphs[i].Name
                     });
                 }
             }

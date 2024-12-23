@@ -30,7 +30,7 @@ namespace GraphVisualization.Algorithms
                     var edgeWeight = "";
                     if (edge.Capacity != null)
                     {
-                        edgeFlow = $"Поток: {edge.Flow} / {edge.Capacity}";
+                        edgeFlow = $"Поток: {edge.Capacity}";
                     }
                     if (edge.Weight != null)
                     {

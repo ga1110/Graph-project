@@ -23,11 +23,6 @@ namespace GraphProject.Structures
         public double? Capacity { get; set; }
 
         /// <summary>
-        /// Представляет текущий поток по ребру.
-        /// </summary>
-        public double Flow { get; set; }
-
-        /// <summary>
         /// Представляет вес ребра; если вес не задан, свойство будет равно null.
         /// </summary>
         public double? Weight { get; set; }
@@ -44,7 +39,6 @@ namespace GraphProject.Structures
             Source = source;
             Destination = destination ?? throw new ArgumentNullException(nameof(destination));
             Weight = weight;
-            Flow = 0;
             Capacity = capacity;
         }
 
@@ -60,7 +54,7 @@ namespace GraphProject.Structures
                 result += $", Вес: {Weight.Value}";
 
             if (Capacity != null)
-                result += $", Поток: {this.Flow}/{Capacity.Value}";
+                result += $", Поток: {Capacity.Value}";
 
             return result;
         }

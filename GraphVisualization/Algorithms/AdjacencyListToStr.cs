@@ -56,7 +56,7 @@ namespace GraphVisualization.Algorithms
                     if (edge.Capacity.HasValue)
                     {
                         // Добавляем информацию о весе к строке представления ребра
-                        edgeStr += $", Поток: {edge.Flow} / {edge.Capacity}";
+                        edgeStr += $", Поток: {edge.Capacity}";
                     }
                     // Добавляем строку ребра в список строк ребер
                     edgeStrings.Add(edgeStr);

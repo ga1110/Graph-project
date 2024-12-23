@@ -20,7 +20,7 @@ namespace GraphProject.Structures
         /// <summary>
         /// Свойство, содержащее имя графа.
         /// </summary>
-        public string GraphName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Свойство, определяющее, является ли граф ориентированным.
@@ -34,7 +34,7 @@ namespace GraphProject.Structures
         /// <param name="isDirected">Флаг, указывающий, является ли граф ориентированным.</param>
         public Graph(string name, bool isDirected = false)
         {
-            GraphName = string.IsNullOrEmpty(name) ? "NamelessGraph" : name;
+            Name = string.IsNullOrEmpty(name) ? "NamelessGraph" : name;
             IsDirected = isDirected;
             adjacencyList = new Dictionary<Vertex, List<Edge>>();
         }
@@ -46,7 +46,7 @@ namespace GraphProject.Structures
         /// <param name="name">Имя графа.</param>
         public Graph(string filePath, string name)
         {
-            GraphName = string.IsNullOrEmpty(name) ? "NamelessGraph" : name;
+            Name = string.IsNullOrEmpty(name) ? "NamelessGraph" : name;
             adjacencyList = new Dictionary<Vertex, List<Edge>>();
 
             // Открываем файл для чтения
@@ -143,7 +143,7 @@ namespace GraphProject.Structures
         /// <param name="other">Граф, который нужно скопировать.</param>
         public Graph(Graph other)
         {
-            GraphName = other.GraphName + "_copy";
+            Name = other.Name + "_copy";
 
             // Проверяем, что переданный граф не равен null
             if (other == null)
@@ -173,7 +173,7 @@ namespace GraphProject.Structures
                 foreach (var edge in kvp.Value)
                 {
                     var destinationCopy = vertexMapping[edge.Destination];
-                    var edgeCopy = new Edge(sourceCopy, destinationCopy, edge.Weight);
+                    var edgeCopy = new Edge(sourceCopy, destinationCopy, edge.Weight, edge.Capacity);
                     adjacencyList[sourceCopy].Add(edgeCopy);
                 }
             }
@@ -187,7 +187,7 @@ namespace GraphProject.Structures
         /// <param name="isDirected">Флаг, указывающий, является ли граф ориентированным.</param>
         public Graph(List<Edge> edges, string graphName, bool isDirected)
         {
-            GraphName = graphName + "_MST";
+            Name = graphName + "_MST";
 
             // Копируем значение свойства IsDirected из другого графа
             IsDirected = isDirected;

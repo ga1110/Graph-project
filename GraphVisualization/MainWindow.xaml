@@ -53,7 +53,8 @@
                           Grid.Column="0">
                 <StackPanel>
                     <!-- Первый Expander -->
-                    <Expander Header="Управление графом" 
+                    <Expander x:Name="FirstExpander"
+                              Header="Управление графом" 
                               Margin="10,0,10,10"
                               IsExpanded="False"
                               Expanded="Expander_Expanded"
@@ -93,7 +94,8 @@
                     </Expander>
 
                     <!-- Второй Expander -->
-                    <Expander Header="Операции с рёбрами" 
+                    <Expander x:Name="SecondExpander"
+                              Header="Операции с рёбрами" 
                               IsExpanded="False" 
                               Margin="10"
                               Expanded="Expander_Expanded">
@@ -120,7 +122,8 @@
                     </Expander>
 
                     <!-- Третий Expander -->
-                    <Expander Header="Операции с вершинами" 
+                    <Expander x:Name="ThirdExpander"
+                              Header="Операции с вершинами" 
                               IsExpanded="False" 
                               Margin="10"
                               Expanded="Expander_Expanded">
@@ -141,7 +144,8 @@
                     </Expander>
 
                     <!-- Четвертый Expander-->
-                    <Expander Header="Поиск вершин" 
+                    <Expander x:Name="FourthExpander"
+                              Header="Поиск вершин" 
                               IsExpanded="False" 
                               Margin="10"
                               Expanded="Expander_Expanded">
@@ -185,7 +189,8 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Header="Разное" 
+                    <Expander x:Name="FifthExpander"
+                              Header="Разное" 
                               IsExpanded="False" 
                               Margin="10"
                               Expanded="Expander_Expanded">

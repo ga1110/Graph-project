@@ -21,7 +21,7 @@ namespace GraphVisualization
     {
         public string SourceVertex { get; private set; }
         public string SinkVertex { get; private set; }
-
+        public bool View { get; private set; }
         public MaxFlowVertexChoose()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace GraphVisualization
         {
             SourceVertex = StartVertexTextBox.Text.Trim();
             SinkVertex = EndVertexTextBox.Text.Trim();
-
+            View = ViewBox.IsChecked ?? false;
             // Проверяем, что начальная и конечная вершины указаны
             if (string.IsNullOrEmpty(SourceVertex) || string.IsNullOrEmpty(SinkVertex))
             {

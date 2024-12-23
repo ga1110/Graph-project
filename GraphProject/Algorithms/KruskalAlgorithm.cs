@@ -82,7 +82,7 @@ namespace GraphProject.Algorithms
                 }
             }
 
-            return new Graph(result, graph.GraphName, graph.IsDirected);
+            return new Graph(result, graph.Name, graph.IsDirected);
         }
 
         /// <summary>

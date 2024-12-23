@@ -219,6 +219,35 @@ namespace GraphProject.Handlers
         }
 
         /// <summary>
+        /// Метод для получения вершины по ее ID
+        /// </summary>
+        /// <param name="vertexName">ID вершины</param>
+        /// <param name="graph">Граф</param>
+        /// <returns>Вершина</returns>
+        public static Vertex? FindVertexByID(int vertexID, Graph graph)
+        {
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph), "Граф - пустой и/или равен null");
+
+            if (graph.adjacencyList != null)
+            {
+                // Проходим по всем вершинам в списке смежности
+                foreach (var vertex in graph.adjacencyList.Keys)
+                {
+                    if (vertex.Id == -1)
+                        throw new Exception("ID - не заданы");
+
+                    // Если имя вершины совпадает с заданным (без учета регистра)
+                    if (vertex.Id == vertexID)
+                        return vertex; // Возвращаем найденную вершину
+                }
+            }
+
+            // Если вершина не найдена, выбрасываем исключение
+            return null;
+        }
+
+        /// <summary>
         /// Метод поиска недостижимых вершин из данной 
         /// </summary>
         /// <param name="vertexName">Имя вершины</param>
@@ -310,60 +339,21 @@ namespace GraphProject.Handlers
             return distances;
         }
 
-
         /// <summary>
-        /// Метод для поиска вершин на периферии графа на расстоянии больше или равном N от заданной вершины
+        /// Находит ребро в графе.
         /// </summary>
-        /// <param name="graph">Граф</param>
-        /// <param name="source">Исходная вершина</param>
-        /// <param name="N">Минимальное расстояние</param>
-        /// <returns>Список вершин на периферии графа</returns>
-        public static List<Vertex> FindNPeriphery(Graph graph, Vertex source, double N)
+        /// <param name="graph">Граф, в котором необходимо найти ребро.</param>
+        /// <param name="source">Исходная вершина.</param>
+        /// <param name="destination">Конечная вершина.</param>
+        /// <returns>Ребро, если оно найдено, иначе - null.</returns>
+        public static Edge? FindEdge(Graph graph, Vertex source, Vertex destination)
         {
-            // Получаем все кратчайшие расстояния с помощью алгоритма Флойда-Уоршелла
-            var allDistances = Floyd_Warshall.Execute(graph);
-
-            var periphery = new List<Vertex>();
-
-            foreach (var target in GraphManager.GetAdj(graph).Keys) // Предполагается, что Graph имеет свойство Vertices
+            var adjacencyList = graph.adjacencyList;
+            if (adjacencyList.TryGetValue(source, out var edges))
             {
-                if (source.Equals(target))
-                    continue;
-
-                if (allDistances.TryGetValue((source, target), out double distance))
-                {
-                    if (distance > N)
-                    {
-                        periphery.Add(target);
-                    }
-                }
-                else
-                {
-                    // Если расстояние не найдено, это означает, что нет пути между source и target
-                    // В зависимости от требований, можно решить, как обрабатывать такие случаи
-                    // Например, можно считать расстояние бесконечным
-                    periphery.Add(target);
-                }
+                return edges.Find(e => e.Destination.Equals(destination));
             }
-
-            return periphery;
+            return null;
         }
-
-        /// <summary>
-        /// Метод для поиска максимального потока в графе от заданной исходной вершины к заданной конечной вершине
-        /// </summary>
-        /// <param name="graph">Граф</param>
-        /// <param name="sourceName">Имя исходной вершины</param>
-        /// <param name="sinkName">Имя конечной вершины</param>
-        /// <returns>Максимальный поток</returns>
-        public static double FindMaxFlow(Graph graph, string sourceName, string sinkName)
-        {
-            // Получаем вершину по ее имени
-            Vertex source = FindVertexByName(sourceName, graph) ?? throw new ArgumentNullException($"Вершины {sourceName} не существует");
-            // Получаем вершину по ее имени
-            Vertex sink = FindVertexByName(sinkName, graph) ?? throw new ArgumentNullException($"Вершины {sinkName} не существует");
-            return FordFulkerson.MaxFlow(graph, source, sink);
-        }
-
     }
 }

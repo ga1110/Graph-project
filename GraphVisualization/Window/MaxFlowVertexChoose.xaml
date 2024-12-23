@@ -7,6 +7,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -20,8 +21,12 @@
         <!-- Метка и текстовое поле для конечной вершины -->
         <Label Grid.Row="1" Grid.Column="0" Content="Вершина сток:" VerticalAlignment="Center" />
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="EndVertexTextBox" Margin="5" />
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Просмотреть пошагово?" VerticalAlignment="Center" />
+        <CheckBox Grid.Row="2" Grid.Column="1" x:Name="ViewBox" Margin="5" />
+
         <!-- Кнопки -->
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
             <Button Content="OK" Width="75" Margin="5" IsDefault="True" Click="OkButton_Click" />
             <Button Content="Отмена" Width="75" Margin="5" IsCancel="True" />
         </StackPanel>
