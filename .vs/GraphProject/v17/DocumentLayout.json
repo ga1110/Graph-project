@@ -3,24 +3,48 @@
   "WorkspaceRootPath": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\algorithms\\maxflowalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\algorithms\\maxflowalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\structures\\graph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\structures\\graph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\window\\creategraphwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\window\\creategraphwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphsearcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphsearcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\graphvisualization.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\graphvisualization.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\algorithms\\maxflowalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\algorithms\\maxflowalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\algorithms\\floyd\u2013warshall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\algorithms\\floyd\u2013warshall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\algorithms\\bellman\u2013ford.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\algorithms\\bellman\u2013ford.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\algorithms\\dijkstraalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\algorithms\\dijkstraalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\algorithms\\kruskalalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\algorithms\\kruskalalgorithm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphsearcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphsearcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\vertexanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,10 +57,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\handlers\\graphmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\handlers\\graphmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\structures\\graph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\structures\\graph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\window\\maxflowvertexchoose.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,10 +74,6 @@
       "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\window\\maxflowvertexchoose.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\window\\creategraphwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\window\\creategraphwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\window\\loadgraphwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\window\\loadgraphwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -72,10 +88,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphproject\\structures\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{84EEFE45-56CD-4BF0-9E6F-9CCD0D065CE0}|GraphProject\\GraphProject.csproj|solutionrelative:graphproject\\structures\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|f:\\study\\\u0442\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\graph-project\\graphvisualization\\graphvisualization.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{77D0D78F-B9E4-49E3-8C79-A66DDDC5BE39}|GraphVisualization\\GraphVisualization.csproj|solutionrelative:graphvisualization\\graphvisualization.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -85,24 +97,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 261,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 15,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Floyd\u2013Warshall.cs",
+              "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\Floyd\u2013Warshall.cs",
+              "RelativeDocumentMoniker": "GraphProject\\Algorithms\\Floyd\u2013Warshall.cs",
+              "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\Floyd\u2013Warshall.cs",
+              "RelativeToolTip": "GraphProject\\Algorithms\\Floyd\u2013Warshall.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T09:47:24.285Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "Bellman\u2013Ford.cs",
+              "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\Bellman\u2013Ford.cs",
+              "RelativeDocumentMoniker": "GraphProject\\Algorithms\\Bellman\u2013Ford.cs",
+              "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\Bellman\u2013Ford.cs",
+              "RelativeToolTip": "GraphProject\\Algorithms\\Bellman\u2013Ford.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAgwFcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T09:46:07.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DijkstraAlgorithm.cs",
+              "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\DijkstraAlgorithm.cs",
+              "RelativeDocumentMoniker": "GraphProject\\Algorithms\\DijkstraAlgorithm.cs",
+              "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\DijkstraAlgorithm.cs",
+              "RelativeToolTip": "GraphProject\\Algorithms\\DijkstraAlgorithm.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwD8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T09:45:45.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "AdjacencyListToStr.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Algorithms\\AdjacencyListToStr.cs",
               "RelativeDocumentMoniker": "GraphVisualization\\Algorithms\\AdjacencyListToStr.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Algorithms\\AdjacencyListToStr.cs",
               "RelativeToolTip": "GraphVisualization\\Algorithms\\AdjacencyListToStr.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAYwEkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T07:48:25.657Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "Microsoft.Common.CurrentVersion.targets",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
@@ -112,7 +163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "MaxFlowVertexChoose.xaml.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\MaxFlowVertexChoose.xaml.cs",
               "RelativeDocumentMoniker": "GraphVisualization\\Window\\MaxFlowVertexChoose.xaml.cs",
@@ -124,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\MainWindow.xaml",
               "RelativeDocumentMoniker": "GraphVisualization\\MainWindow.xaml",
@@ -135,18 +186,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 1,
               "Title": "CreateGraphWindow.xaml",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\CreateGraphWindow.xaml",
               "RelativeDocumentMoniker": "GraphVisualization\\Window\\CreateGraphWindow.xaml",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\CreateGraphWindow.xaml",
               "RelativeToolTip": "GraphVisualization\\Window\\CreateGraphWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-23T05:36:40.775Z"
+              "WhenOpened": "2024-12-23T05:36:40.775Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "LoadGraphWindow.xaml",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\LoadGraphWindow.xaml",
               "RelativeDocumentMoniker": "GraphVisualization\\Window\\LoadGraphWindow.xaml",
@@ -157,7 +209,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "MaxFlowVertexChoose.xaml",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\MaxFlowVertexChoose.xaml",
               "RelativeDocumentMoniker": "GraphVisualization\\Window\\MaxFlowVertexChoose.xaml",
@@ -168,7 +220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "GraphListWindow.xaml.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Window\\GraphListWindow.xaml.cs",
               "RelativeDocumentMoniker": "GraphVisualization\\Window\\GraphListWindow.xaml.cs",
@@ -180,13 +232,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
               "Title": "GraphAnalyzer.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphAnalyzer.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphAnalyzer.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphAnalyzer.cs",
               "RelativeToolTip": "GraphProject\\Handlers\\GraphAnalyzer.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAADwvzMAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAkwAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T05:29:32.26Z",
               "EditorCaption": ""
@@ -199,79 +251,79 @@
               "RelativeDocumentMoniker": "GraphVisualization\\MainWindow.xaml.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\MainWindow.xaml.cs",
               "RelativeToolTip": "GraphVisualization\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAE4CAAAAAAAAAAAUwGgCAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAPoBAAAAAAAAAAAMwCgCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T05:17:31.769Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "VertexAnalyzer.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\VertexAnalyzer.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\VertexAnalyzer.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\VertexAnalyzer.cs",
               "RelativeToolTip": "GraphProject\\Handlers\\VertexAnalyzer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T05:13:00.005Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "GraphManager.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphManager.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphManager.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphManager.cs",
               "RelativeToolTip": "GraphProject\\Handlers\\GraphManager.cs",
-              "ViewState": "AgIAAJ4AAAAAAAAAAAAIwIEAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAwwPwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T05:12:28.216Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 0,
               "Title": "Graph.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Structures\\Graph.cs",
               "RelativeDocumentMoniker": "GraphProject\\Structures\\Graph.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Structures\\Graph.cs",
               "RelativeToolTip": "GraphProject\\Structures\\Graph.cs",
-              "ViewState": "AgIAAIYAAAAAAAAAAAAIwIUAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAIwMwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T05:07:53.073Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "MaxFlowAlgorithm.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\MaxFlowAlgorithm.cs",
               "RelativeDocumentMoniker": "GraphProject\\Algorithms\\MaxFlowAlgorithm.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\MaxFlowAlgorithm.cs",
               "RelativeToolTip": "GraphProject\\Algorithms\\MaxFlowAlgorithm.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwJ8AAABwAAAAAAAAAA==",
+              "ViewState": "AgIAAKYAAAAAAAAAAAAcwAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T04:28:53.233Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "GraphSearcher.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphSearcher.cs",
               "RelativeDocumentMoniker": "GraphProject\\Handlers\\GraphSearcher.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Handlers\\GraphSearcher.cs",
               "RelativeToolTip": "GraphProject\\Handlers\\GraphSearcher.cs",
-              "ViewState": "AgIAACIBAAAAAAAAAADwv0gBAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAPkAAAAAAAAAAAAnwBkBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T05:02:04.636Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "GraphConverter.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\Algorithms\\GraphConverter.cs",
               "RelativeDocumentMoniker": "GraphVisualization\\Algorithms\\GraphConverter.cs",
@@ -283,7 +335,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "Edge.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Structures\\Edge.cs",
               "RelativeDocumentMoniker": "GraphProject\\Structures\\Edge.cs",
@@ -295,7 +347,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 3,
               "Title": "GraphVisualization.csproj",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphVisualization\\GraphVisualization.csproj",
               "RelativeDocumentMoniker": "GraphVisualization\\GraphVisualization.csproj",
@@ -303,17 +355,18 @@
               "RelativeToolTip": "GraphVisualization\\GraphVisualization.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-23T04:40:22.594Z"
+              "WhenOpened": "2024-12-23T04:40:22.594Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "KruskalAlgorithm.cs",
               "DocumentMoniker": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\KruskalAlgorithm.cs",
               "RelativeDocumentMoniker": "GraphProject\\Algorithms\\KruskalAlgorithm.cs",
               "ToolTip": "F:\\Study\\\u0422\u0435\u043E\u0440\u0438\u044F \u0433\u0440\u0430\u0444\u043E\u0432\\Graph-project\\GraphProject\\Algorithms\\KruskalAlgorithm.cs",
               "RelativeToolTip": "GraphProject\\Algorithms\\KruskalAlgorithm.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAADwv3MAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAswFUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T04:28:37.374Z",
               "EditorCaption": ""

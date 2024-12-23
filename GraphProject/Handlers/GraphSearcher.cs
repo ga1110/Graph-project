@@ -279,6 +279,7 @@ namespace GraphProject.Handlers
 
             return unreachableVertices.Distinct().ToList();
         }
+
         /// <summary>
         /// Метод поиска вершин на расстоянии меньше или равном N от заданной вершины
         /// </summary>

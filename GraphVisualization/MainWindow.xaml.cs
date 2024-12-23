@@ -537,10 +537,11 @@ namespace GraphVisualization
                     var vertexList = GraphSearcher.FindVerticesDistanceLessOrEqualN(vertexName, _graph, parsedN);
                     if (vertexList == null || vertexList.Count() == 0)
                     {
-                        output += ($"Вершин, расстояние которых от вершины {vertexName}, меньше {parsedN} - нет \n");
+                        output += ($"Вершин, расстояние которых, от вершины {vertexName}, меньше {parsedN} - нет \n");
                     }
                     else
                     {
+                        output += $"Вершины, расстояние которых, от вершины {vertexName}, меньше {parsedN}:\n";
                         int index = 1;
                         vertexList = vertexList.OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
                         foreach (var currentElement in vertexList)
@@ -621,7 +622,8 @@ namespace GraphVisualization
                     }
                     else
                     {
-                        int index = 0;
+                        output += $"N-переферия для вершины {vertexName}, при N = {parsedN} \n";
+                        int index = 1;
                         foreach (var element in periphery)
                         {
                             output += $"{index++}. {element}" + "\n";
@@ -694,12 +696,12 @@ namespace GraphVisualization
         private void ShowHints()
         {
             string hint = "'Q' - Вернуть граф в исходное положение\n" +
-                          "'Esc' - закрыть приложение\n" +
-                          "'Tab' - переключение полноэкранного режима\n";
+                          "'Esc' - Закрыть приложение\n" +
+                          "'Tab' - Переключение полноэкранного режима\n";
             if(_stepByStep)
             {
-                hint += "'[' - предыдущий шаг алгоритма\n" +
-                        "']' - следующий шаг алгоритма\n";
+                hint += "'[' - Предыдущий шаг алгоритма\n" +
+                        "']' - Следующий шаг алгоритма\n";
             }
 
             MessageBox.Show(hint);

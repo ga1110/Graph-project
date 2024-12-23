@@ -1,0 +1,7 @@
+Directed
+C, c: 4
+C, c: 4
+D, c: 4
+F, c: 5
+F, c: 12
+F
